@@ -1,0 +1,23 @@
+//
+//  GameLogic.h
+//  TankFight
+//
+//  Created by Jason Wang on 2014-03-13.
+//  Copyright (c) 2014 Jason Wang. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "GameField.h"
+#import "Tank.h"
+
+
+static const CGPoint homeTankPosition = (CGPoint){100, 200};
+static const CGPoint visitorTankPosition = (CGPoint){500, 200};
+
+@interface GameLogic : NSObject
+
+@property (nonatomic) GameField * gameField;
+@property (nonatomic) Tank * tankHome;
+@property (nonatomic) Tank * tankVisitor;
+
+@end
