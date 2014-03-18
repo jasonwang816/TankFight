@@ -101,4 +101,65 @@
     return NO;
 }
 
+
+// -----------------------------------------------------------------------
+#pragma mark - static functions
+// -----------------------------------------------------------------------
+
++ (CCActionMoveTo *)moveFrom:(CGPoint)startPoint ToPoint:(CGPoint)targetPoint AtSpeed:(CGFloat)speed Distance:(CGFloat)distance{
+    if (speed <= 0)
+        speed = 1;
+    
+    CGFloat totalDistance = distance;
+    
+    CGPoint offset = ccpSub(targetPoint, startPoint);
+    CGFloat offsetDistance = sqrtf(powf(offset.x, 2) + powf(offset.y, 2));
+    
+    if (totalDistance <= 0)
+    {
+        totalDistance = offsetDistance;
+        if (totalDistance <= 0)
+        {
+            totalDistance = 500;
+        }
+    }
+    
+    float ratio = totalDistance / offsetDistance;
+    int targetX   = startPoint.x + offset.x * ratio;
+    int targetY   = startPoint.y + offset.y * ratio;
+    CGPoint targetPosition = ccp(targetX,targetY);
+    
+    
+    CGFloat duration = totalDistance / speed;
+    CCActionMoveTo * action = [CCActionMoveTo actionWithDuration:duration position:targetPosition];
+    
+    return action;
+}
+
++ (CGFloat) findAngleAtLocation:(CGPoint)location ToFacePoint:(CGPoint)target {
+    CGPoint offset = ccpSub(target, location);
+    CGFloat angle = CC_RADIANS_TO_DEGREES(atanf(offset.y / offset.x));
+    return 90 + angle;
+}
+
+///speed degree/second
++ (CCActionRotateBy *)rotateFrom:(CGFloat)startAngle ToAngle:(CGFloat)targetAngle AtSpeed:(CGFloat)speed{
+    if (speed <= 0)
+        speed = 1;
+    
+    CGFloat totalAngle = targetAngle - startAngle;
+    
+    CGFloat duration = totalAngle / speed;
+    CCActionRotateBy* action = [CCActionRotateBy actionWithDuration:duration angle:totalAngle];
+    
+    return action;
+}
+
++ (CCActionRotateBy *)rotateAtLocation:(CGPoint)location From:(CGFloat)startAngle ToFacePoint:(CGPoint)targetPoint AtSpeed:(CGFloat)speed{
+    
+    CGFloat targetAngle = [DisplayManager findAngleAtLocation:location ToFacePoint:targetPoint];
+    
+    return [DisplayManager rotateFrom:startAngle ToAngle:targetAngle AtSpeed:speed];
+}
+
 @end

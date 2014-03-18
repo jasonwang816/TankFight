@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Jason Wang. All rights reserved.
 //
 
-#import "Constants.h"
 #import "GameLogic.h"
 #import "Tank.h"
 
@@ -20,7 +19,7 @@
         //game field
         
         //tanks
-        _tankHome = [[Tank alloc] initWithPosition:homeTankPosition AndAngle:45 AndName:@"Home"];
+        _tankHome = [[Tank alloc] initWithPosition:homeTankPosition AndAngle:90 AndName:@"Home"];
         _tankVisitor = [[Tank alloc] initWithPosition:visitorTankPosition AndAngle:45 AndName:@"visitor"];
     }
     

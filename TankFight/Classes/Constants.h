@@ -45,8 +45,5 @@
 //static const NSString *NewtonSphereCollisionRope = @"rope";
 
 
-//should depends on health too
-static const NSString * tankBodyImages[] = { @"Body.png", @"Body.png"};
-static const NSString * tankRadarImages[] = { @"radar.png", @"radar.png"};
-static const NSString * tankCannonImages[] = { @"cannon.png", @"cannon.png"};
+
 

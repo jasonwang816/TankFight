@@ -69,26 +69,43 @@
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     // 1
     CGPoint touchLocation = [touch locationInNode:self];
-    CCSprite * _player = uiManager.ccTankHome;
-    // 2
-    CGPoint offset    = ccpSub(touchLocation, _player.position);
-    float   ratio     = offset.y/offset.x;
-    int     targetX   = _player.contentSize.width/2 + self.contentSize.width;
-    int     targetY   = (targetX*ratio) + _player.position.y;
-    CGPoint targetPosition = ccp(targetX,targetY);
-//
-//    // 3
-//    CCSprite *projectile = [CCSprite spriteWithImageNamed:@"projectile.png"];
-//    projectile.position = _player.position;
-//    [self addChild:projectile ];
-//    
-//    // 4
-    CCActionMoveTo *actionMove   = [CCActionMoveTo actionWithDuration:5.5f position:targetPosition];
-    CCActionRemove *actionRemove = [CCActionRemove action];
-    [_player runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove]]];
+    CCSprite * _player = uiManager.ccTankHome.ccBody;
+    CCActionRotateBy* actionSpin = [DisplayManager rotateAtLocation:_player.position From:_player.rotation ToFacePoint:touchLocation AtSpeed:90];
+    CCActionMoveTo * actionMove = [DisplayManager moveFrom:_player.position ToPoint:touchLocation AtSpeed:100 Distance:500];
+    [_player stopAllActions];
+    [_player runAction:[CCActionSequence actionWithArray:@[actionSpin, actionMove]]];
+    
+//    CCActionRemove *actionRemove = [CCActionRemove action];
+//    [_player runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove]]];
 }
 
-
+//+ (CCActionMoveTo *)moveFrom:(CGPoint)startPoint ToPoint:(CGPoint)targetPoint AtSpeed:(CGFloat)speed Distance:(CGFloat)distance{
+//    
+//    CGFloat totalDistance = distance;
+//    
+//    CGPoint offset = ccpSub(targetPoint, startPoint);
+//    CGFloat offsetDistance = sqrtf(powf(offset.x, 2) + powf(offset.y, 2));;
+//    
+//    if (totalDistance <= 0)
+//    {
+//        totalDistance = offsetDistance;
+//        if (totalDistance <= 0)
+//        {
+//            totalDistance = 500;
+//        }
+//    }
+//    
+//    float ratio = totalDistance/offsetDistance;
+//    int targetX   = startPoint.x + offset.x * ratio;
+//    int targetY   = startPoint.y + offset.y * ratio;
+//    CGPoint targetPosition = ccp(targetX,targetY);
+//
+//    
+//    CGFloat duration = totalDistance / speed;
+//    CCActionMoveTo * action = [CCActionMoveTo actionWithDuration:duration position:targetPosition];
+//    
+//    return action;
+//}
 
 
 // -----------------------------------------------------------------------

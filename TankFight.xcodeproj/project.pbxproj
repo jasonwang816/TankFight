@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D5AFEF418D8B1BF0039BF07 /* UITank.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5AFEF318D8B1BF0039BF07 /* UITank.m */; };
+		2D5AFEF718D8F5900039BF07 /* UIConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5AFEF618D8F5900039BF07 /* UIConstants.m */; };
 		2DBE87E118D25213003701E4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBE87E018D25213003701E4 /* QuartzCore.framework */; };
 		2DBE87E318D25213003701E4 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBE87E218D25213003701E4 /* OpenGLES.framework */; };
 		2DBE87E518D25213003701E4 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBE87E418D25213003701E4 /* OpenAL.framework */; };
@@ -236,6 +238,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2D5AFEF218D8B1BF0039BF07 /* UITank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UITank.h; path = Classes/UITank.h; sourceTree = "<group>"; };
+		2D5AFEF318D8B1BF0039BF07 /* UITank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UITank.m; path = Classes/UITank.m; sourceTree = "<group>"; };
+		2D5AFEF518D8F5900039BF07 /* UIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIConstants.h; path = Classes/UIConstants.h; sourceTree = "<group>"; };
+		2D5AFEF618D8F5900039BF07 /* UIConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIConstants.m; path = Classes/UIConstants.m; sourceTree = "<group>"; };
 		2DBE87DD18D25213003701E4 /* TankFight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TankFight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DBE87E018D25213003701E4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2DBE87E218D25213003701E4 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1642,6 +1648,10 @@
 				2DBE8A9918D25987003701E4 /* Scenes */,
 				2DBE8AB918D3A0C3003701E4 /* DisplayManager.h */,
 				2DBE8ABA18D3A0C3003701E4 /* DisplayManager.m */,
+				2D5AFEF218D8B1BF0039BF07 /* UITank.h */,
+				2D5AFEF318D8B1BF0039BF07 /* UITank.m */,
+				2D5AFEF518D8F5900039BF07 /* UIConstants.h */,
+				2D5AFEF618D8F5900039BF07 /* UIConstants.m */,
 			);
 			name = UILayer;
 			sourceTree = "<group>";
@@ -1835,6 +1845,7 @@
 				2DBE887918D25214003701E4 /* CCLayout.m in Sources */,
 				2DBE899C18D25215003701E4 /* OALSuspendHandler.m in Sources */,
 				2DBE8AAC18D25E8D003701E4 /* Tank.m in Sources */,
+				2D5AFEF418D8B1BF0039BF07 /* UITank.m in Sources */,
 				2DBE89FB18D25215003701E4 /* vec4.c in Sources */,
 				2DBE890D18D25214003701E4 /* CCDirectorIOS.m in Sources */,
 				2DBE88E418D25214003701E4 /* CCSpriteFrameCache.m in Sources */,
@@ -1845,6 +1856,7 @@
 				2DBE88A818D25214003701E4 /* CCPhysicsShape.m in Sources */,
 				2DBE88B018D25214003701E4 /* CCRenderTexture.m in Sources */,
 				2DBE883618D25213003701E4 /* CCActionManager.m in Sources */,
+				2D5AFEF718D8F5900039BF07 /* UIConstants.m in Sources */,
 				2DBE88DA18D25214003701E4 /* CCSprite9Slice.m in Sources */,
 				2DBE8ABB18D3A0C3003701E4 /* DisplayManager.m in Sources */,
 				2DBE88EC18D25214003701E4 /* CCTextureAtlas.m in Sources */,
@@ -2096,6 +2108,7 @@
 				2DBE8A9518D25216003701E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2DBE8A9618D25216003701E4 /* Build configuration list for PBXNativeTarget "TankFight" */ = {
 			isa = XCConfigurationList;
@@ -2104,6 +2117,7 @@
 				2DBE8A9818D25216003701E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
