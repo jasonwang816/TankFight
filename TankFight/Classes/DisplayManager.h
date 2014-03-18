@@ -11,6 +11,7 @@
 #import "cocos2d-ui.h"
 
 #import "GameLogic.h"
+#import "UITank.h"
 #import "Tank.h"
 #import "GameField.h"
 
@@ -20,7 +21,7 @@
 @property (nonatomic) CCPhysicsNode * physicsWorld;
 
 @property (nonatomic) CCSprite * ccGameField;
-@property (nonatomic) CCSprite * ccTankHome;
-@property (nonatomic) CCSprite * ccTankVisitor;
+@property (nonatomic) UITank * ccTankHome;
+@property (nonatomic) UITank * ccTankVisitor;
 
 @end

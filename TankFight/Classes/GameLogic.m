@@ -20,8 +20,8 @@
         //game field
         
         //tanks
-        _tankHome = [[Tank alloc] initWithPosition:homeTankPosition AndAngle:0];
-        _tankVisitor = [[Tank alloc] initWithPosition:visitorTankPosition AndAngle:0];
+        _tankHome = [[Tank alloc] initWithPosition:homeTankPosition AndAngle:45 AndName:@"Home"];
+        _tankVisitor = [[Tank alloc] initWithPosition:visitorTankPosition AndAngle:45 AndName:@"visitor"];
     }
     
     return self;

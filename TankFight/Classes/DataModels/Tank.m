@@ -22,13 +22,14 @@
 	return self;
 }
 
-- (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle{
+- (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndName:(NSString *) name{
     
     self = [super init];
     
     if (self){
         self.position = pos;
         self.rotation = angle;
+        self.name = name;
     }
     
     return self;

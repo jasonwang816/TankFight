@@ -20,10 +20,8 @@
         _physicsWorld.debugDraw = YES;
         _physicsWorld.collisionDelegate = self;
         
-//        [self addChild:_physicsWorld];
-        
-        _ccTankHome = [self buildTank:_logic.tankHome];
-        _ccTankVisitor = [self buildTank:_logic.tankVisitor];
+        _ccTankHome = [[UITank alloc] initWithTank:_logic.tankHome InWorld:_physicsWorld];
+        _ccTankVisitor = [[UITank alloc] initWithTank:_logic.tankVisitor InWorld:_physicsWorld];
 
     }
     return self;
@@ -33,7 +31,7 @@
 // -----------------------------------------------------------------------
 #pragma mark - Local methods
 // -----------------------------------------------------------------------
-
+//no use.
 - (CCSprite * )buildTank:(Tank *)tank{
     
     CCSprite * sprite = [CCSprite spriteWithImageNamed:@"Body.png"];
@@ -52,9 +50,20 @@
     
     [_physicsWorld addChild:sprite];
     [_physicsWorld addChild:cannon];
+
+//    CCPhysicsJoint * joint = [CCPhysicsJoint connectedDistanceJointWithBodyA:sprite.physicsBody bodyB:cannon.physicsBody anchorA:CGPointMake(30, 30) anchorB:CGPointMake(25, 30)];
+    CCPhysicsJoint * joint = [CCPhysicsJoint connectedPivotJointWithBodyA:sprite.physicsBody bodyB:cannon.physicsBody anchorA:CGPointMake(30, 30)];
+
+    //ChipmunkPinJoint *pinJoint = [ChipmunkPinJoint pinJointWithBodyA:sprite.physicsBody bodyB:sprite.physicsBody anchr1:cpv(30, 30) anchr2:cpv(25, 30)];
     
-    [CCPhysicsJoint connectedPivotJointWithBodyA:sprite.physicsBody bodyB:cannon.physicsBody anchorA:sprite.position];
     
+//    ChipmunkPinJoint *pinJoint = [ChipmunkPinJoint pinJointWithBodyA:(CCPhysicsBody*)(sprite.physicsBody).body bodyB:(CCPhysicsBody*)(cannon.physicsBody).body anchr1:cpv(30, 30) anchr2:cpv(25, 30)];
+//    [pinJoint setDist:40];
+//    [[self space] addConstraint:pinJoint];
+    
+    
+
+    NSLog(@"%@", joint);
     return sprite;
 }
 
@@ -86,10 +95,10 @@
 #pragma mark - collisionDelegate
 // -----------------------------------------------------------------------
 
-- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair monsterCollision:(CCNode *)monster projectileCollision:(CCNode *)projectile {
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair TankBody:(CCNode *)tankA TankBody:(CCNode *)tankB {
 //    [monster removeFromParent];
 //    [projectile removeFromParent];
-    return YES;
+    return NO;
 }
 
 @end

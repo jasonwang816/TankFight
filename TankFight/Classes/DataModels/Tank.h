@@ -11,9 +11,10 @@
 
 @interface Tank : DisplayItem
 
+@property (nonatomic) NSString * name;
 @property (nonatomic) NSInteger level;
 @property (nonatomic) NSInteger health;
 
-- (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle;
+- (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndName:(NSString *) name;
 
 @end
