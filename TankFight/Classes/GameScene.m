@@ -67,16 +67,21 @@
 }
 
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    
+    
     // 1
     CGPoint touchLocation = [touch locationInNode:self];
-    CCSprite * _player = uiManager.ccTankHome.ccBody;
-    CCActionRotateBy* actionSpin = [DisplayManager rotateAtLocation:_player.position From:_player.rotation ToFacePoint:touchLocation AtSpeed:90];
-    CCActionMoveTo * actionMove = [DisplayManager moveFrom:_player.position ToPoint:touchLocation AtSpeed:100 Distance:500];
-    [_player stopAllActions];
-    [_player runAction:[CCActionSequence actionWithArray:@[actionSpin, actionMove]]];
     
-//    CCActionRemove *actionRemove = [CCActionRemove action];
-//    [_player runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove]]];
+    //[uiManager.ccTankHome moveTo:touchLocation];
+    [uiManager.ccTankHome fireAt:touchLocation];
+    
+    
+//    CCSprite * _player = uiManager.ccTankHome.ccBody;
+//    CCActionRotateBy* actionSpin = [DisplayManager rotateAtLocation:_player.position From:_player.rotation ToFacePoint:touchLocation AtSpeed:90];
+//    CCActionMoveTo * actionMove = [DisplayManager moveFrom:_player.position ToPoint:touchLocation AtSpeed:100 Distance:500];
+//    [_player stopAllActions];
+//    [_player runAction:[CCActionSequence actionWithArray:@[actionSpin, actionMove]]];
+
 }
 
 //+ (CCActionMoveTo *)moveFrom:(CGPoint)startPoint ToPoint:(CGPoint)targetPoint AtSpeed:(CGFloat)speed Distance:(CGFloat)distance{

@@ -14,11 +14,12 @@
 @interface UITank : NSObject
 
 @property (nonatomic, weak) Tank * tank;
-
+@property (nonatomic, weak) CCPhysicsNode * physicsWorld;
 @property (nonatomic) CCSprite * ccBody;
 @property (nonatomic) CCSprite * ccCannon;
 @property (nonatomic) CCSprite * ccRadar;
 
 - (id)initWithTank:(Tank *)tank InWorld:(CCPhysicsNode *)world;
-
+- (void)moveTo:(CGPoint)locationPoint;
+- (void)fireAt:(CGPoint)locationPoint;
 @end

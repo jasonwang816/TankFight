@@ -130,7 +130,7 @@
     CGPoint targetPosition = ccp(targetX,targetY);
     
     
-    CGFloat duration = totalDistance / speed;
+    CGFloat duration = fabsf(totalDistance / speed);
     CCActionMoveTo * action = [CCActionMoveTo actionWithDuration:duration position:targetPosition];
     
     return action;
@@ -138,8 +138,11 @@
 
 + (CGFloat) findAngleAtLocation:(CGPoint)location ToFacePoint:(CGPoint)target {
     CGPoint offset = ccpSub(target, location);
-    CGFloat angle = CC_RADIANS_TO_DEGREES(atanf(offset.y / offset.x));
-    return 90 + angle;
+    CGFloat angle = CC_RADIANS_TO_DEGREES(atan2f(offset.y, offset.x));
+    CGFloat resultAngle = 90 - angle;
+    NSLog(@"findAngleAtLocation: %f; resultAngle: %f", angle, resultAngle);
+
+    return resultAngle;
 }
 
 ///speed degree/second
@@ -149,7 +152,13 @@
     
     CGFloat totalAngle = targetAngle - startAngle;
     
-    CGFloat duration = totalAngle / speed;
+    if (totalAngle > 180)
+        totalAngle -= 360;
+    if (totalAngle < -180)
+        totalAngle += 360;
+    
+    NSLog(@"2.findAngleAtLocation: targetAngle:%f; startAngle: %f; totalAngle: %f", targetAngle, startAngle, totalAngle);
+    CGFloat duration = fabsf(totalAngle / speed);
     CCActionRotateBy* action = [CCActionRotateBy actionWithDuration:duration angle:totalAngle];
     
     return action;

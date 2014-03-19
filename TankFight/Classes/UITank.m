@@ -7,6 +7,7 @@
 //
 
 #import "UITank.h"
+#import "DisplayManager.h"
 //#import "Tank.h"
 
 @implementation UITank
@@ -28,6 +29,7 @@
     
     if (self){
         
+        self.physicsWorld = world;
         self.tank = tank;
         
         _ccBody = [CCSprite spriteWithImageNamed:@"Body.png"];
@@ -58,6 +60,35 @@
     return self;
 }
 
+- (void)moveTo:(CGPoint)locationPoint{
+
+    CCSprite * _player = self.ccBody;
+    CCActionRotateBy* actionSpin = [DisplayManager rotateAtLocation:_player.position From:_player.rotation ToFacePoint:locationPoint AtSpeed:90]; //TODO speed constant
+    CCActionMoveTo * actionMove = [DisplayManager moveFrom:_player.position ToPoint:locationPoint AtSpeed:100 Distance:0];
+    [_player stopAllActions];
+    [_player runAction:[CCActionSequence actionWithArray:@[actionSpin, actionMove]]];
+}
+
+- (void)fireAt:(CGPoint)locationPoint{
+    
+    CCSprite * bullet = [CCSprite spriteWithImageNamed:@"ball.gif"];
+    bullet.position  = ccp(_ccBody.position.x, _ccBody.position.y);
+    bullet.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, bullet.contentSize} cornerRadius:0]; // 1
+    bullet.physicsBody.collisionGroup = self.tank.name; //TODO: shoot myself?
+    bullet.physicsBody.collisionType = @"BulletBody";
+    
+    CCActionRotateBy* actionSpin = [DisplayManager rotateAtLocation:_ccBody.position From:(_ccBody.rotation + _ccCannon.rotation) ToFacePoint:locationPoint AtSpeed:90];//TODO speed constant
+    CCActionCallBlock *actionBlock = [CCActionCallBlock actionWithBlock:^{
+        [self.physicsWorld addChild:bullet];
+        CCActionMoveTo * actionMove = [DisplayManager moveFrom:_ccBody.position ToPoint:locationPoint AtSpeed:100 Distance:500];  //TODO: set distance
+        [bullet runAction:[CCActionSequence actionWithArray:@[actionMove]]];
+        NSLog(@"CCActionCallBlock");
+    }];
+
+    [_ccCannon stopAllActions];
+    [_ccCannon runAction:[CCActionSequence actionWithArray:@[actionSpin, actionBlock]]];
+    
+}
 
 
 @end
