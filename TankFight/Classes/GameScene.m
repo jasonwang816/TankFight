@@ -84,34 +84,6 @@
 
 }
 
-//+ (CCActionMoveTo *)moveFrom:(CGPoint)startPoint ToPoint:(CGPoint)targetPoint AtSpeed:(CGFloat)speed Distance:(CGFloat)distance{
-//    
-//    CGFloat totalDistance = distance;
-//    
-//    CGPoint offset = ccpSub(targetPoint, startPoint);
-//    CGFloat offsetDistance = sqrtf(powf(offset.x, 2) + powf(offset.y, 2));;
-//    
-//    if (totalDistance <= 0)
-//    {
-//        totalDistance = offsetDistance;
-//        if (totalDistance <= 0)
-//        {
-//            totalDistance = 500;
-//        }
-//    }
-//    
-//    float ratio = totalDistance/offsetDistance;
-//    int targetX   = startPoint.x + offset.x * ratio;
-//    int targetY   = startPoint.y + offset.y * ratio;
-//    CGPoint targetPosition = ccp(targetX,targetY);
-//
-//    
-//    CGFloat duration = totalDistance / speed;
-//    CCActionMoveTo * action = [CCActionMoveTo actionWithDuration:duration position:targetPosition];
-//    
-//    return action;
-//}
-
 
 // -----------------------------------------------------------------------
 #pragma mark - Enter & Exit

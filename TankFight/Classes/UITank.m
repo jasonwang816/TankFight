@@ -60,6 +60,10 @@
     return self;
 }
 
+- (void)adjustChildSprites{
+    
+}
+
 - (void)moveTo:(CGPoint)locationPoint{
 
     CCSprite * _player = self.ccBody;
@@ -81,7 +85,7 @@
     CCActionCallBlock *actionBlock = [CCActionCallBlock actionWithBlock:^{
         [self.physicsWorld addChild:bullet];
         CCActionMoveTo * actionMove = [DisplayManager moveFrom:_ccBody.position ToPoint:locationPoint AtSpeed:100 Distance:500];  //TODO: set distance
-        [bullet runAction:[CCActionSequence actionWithArray:@[actionMove]]];
+        [bullet runAction:[CCActionSequence actionWithArray:@[actionMove, [CCActionRemove action]]]];
         NSLog(@"CCActionCallBlock");
     }];
 

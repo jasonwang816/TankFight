@@ -16,6 +16,7 @@
 // 
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
 	// This is the only app delegate method you need to implement when inheriting from CCAppDelegate.
 	// This method is a good place to add one time setup code that only runs when your app is first launched.
 	
