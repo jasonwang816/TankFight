@@ -19,6 +19,8 @@
 @property (nonatomic) CCSprite * ccCannon;
 @property (nonatomic) CCSprite * ccRadar;
 
+- (void)adjustRelatedSprites;
+
 - (id)initWithTank:(Tank *)tank InWorld:(CCPhysicsNode *)world;
 - (void)moveTo:(CGPoint)locationPoint;
 - (void)fireAt:(CGPoint)locationPoint;

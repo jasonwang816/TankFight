@@ -24,6 +24,8 @@
 @property (nonatomic) UITank * ccTankHome;
 @property (nonatomic) UITank * ccTankVisitor;
 
+- (void)updateUI;
+
 + (CCActionMoveTo *)moveFrom:(CGPoint)startPoint ToPoint:(CGPoint)targetPoint AtSpeed:(CGFloat)speed Distance:(CGFloat)distance;
 ///speed degree/second
 + (CCActionRotateBy *)rotateFrom:(CGFloat)startAngle ToAngle:(CGFloat)targetAngle AtSpeed:(CGFloat)speed;

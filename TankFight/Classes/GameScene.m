@@ -72,8 +72,10 @@
     // 1
     CGPoint touchLocation = [touch locationInNode:self];
     
-    //[uiManager.ccTankHome moveTo:touchLocation];
-    [uiManager.ccTankHome fireAt:touchLocation];
+    [uiManager.ccTankHome moveTo:touchLocation];
+    
+    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self  selector:@selector(fireAT) userInfo:nil repeats:NO];
+
     
     
 //    CCSprite * _player = uiManager.ccTankHome.ccBody;
@@ -84,6 +86,9 @@
 
 }
 
+-(void)fireAT{
+    [uiManager.ccTankHome fireAt:CGPointMake(400, 200)];
+}
 
 // -----------------------------------------------------------------------
 #pragma mark - Enter & Exit
@@ -106,6 +111,11 @@
 {
     // always call super onExit last
     [super onExit];
+}
+
+- (void) update:(CCTime) time {
+    [uiManager updateUI];
+    //NSLog(@"scene update.");
 }
 
 // -----------------------------------------------------------------------

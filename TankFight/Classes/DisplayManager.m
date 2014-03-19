@@ -31,6 +31,19 @@
 // -----------------------------------------------------------------------
 #pragma mark - Local methods
 // -----------------------------------------------------------------------
+
+- (void)updateUI
+{
+    if (_ccTankHome){
+        [_ccTankHome adjustRelatedSprites];
+    }
+    if (_ccTankVisitor){
+        [_ccTankVisitor adjustRelatedSprites];
+    }
+    
+}
+
+
 //no use.
 - (CCSprite * )buildTank:(Tank *)tank{
     
