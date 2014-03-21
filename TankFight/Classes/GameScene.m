@@ -72,6 +72,26 @@
     // 1
     CGPoint touchLocation = [touch locationInNode:self];
     
+//    CGPoint p = ccpSub(touchLocation, uiManager.ccTankHome.ccBody.position);
+//    
+//    
+//    CGFloat an = 90 - CC_RADIANS_TO_DEGREES(ccpToAngle(p));
+//    
+//    an = fmodf((an + 180) , 360) - 180;
+//    
+//    NSLog(@"CC_RADIANS_TO_DEGREES(ccpToAngle(p)) :%f", an);
+//    
+//    
+//    CGPoint sub = ccpForAngle(CC_DEGREES_TO_RADIANS(an - 90));
+//    
+//    NSLog(@"ccpForAngle(CC_DEGREES_TO_RADIANS(an) :%@", NSStringFromCGPoint(sub));
+//    
+//    
+//    return;
+    
+    //Fire test
+    [uiManager.ccTankHome fireAt:touchLocation]; return;
+    
     [uiManager.ccTankHome moveTo:touchLocation];
     
     [NSTimer scheduledTimerWithTimeInterval:0.1 target:self  selector:@selector(fireAT) userInfo:nil repeats:NO];

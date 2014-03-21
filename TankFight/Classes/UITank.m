@@ -80,15 +80,15 @@
     CCActionRotateBy* actionSpin = [DisplayManager rotateAtLocation:_ccBody.position From:(_ccCannon.rotation) ToFacePoint:locationPoint AtSpeed:180];//TODO speed constant
     CCActionCallBlock *actionBlock = [CCActionCallBlock actionWithBlock:^{
         CCSprite * bullet = [CCSprite spriteWithImageNamed:@"ball.gif"];
-        bullet.position  = ccp(_ccBody.position.x, _ccBody.position.y);
+        bullet.position  = [self getCannonPosition];
         bullet.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, bullet.contentSize} cornerRadius:0]; // 1
         bullet.physicsBody.collisionGroup = self.tank.name; //TODO: shoot myself?
         bullet.physicsBody.collisionType = @"BulletBody";        
         
         [self.physicsWorld addChild:bullet];
-        CCActionMoveTo * actionMove = [DisplayManager moveFrom:_ccBody.position ToPoint:locationPoint AtSpeed:200 Distance:500];  //TODO: set distance
+        
+        CCActionMoveTo * actionMove = [DisplayManager moveFrom:bullet.position ToPoint:locationPoint AtSpeed:200 Distance:500];  //TODO: set distance
         [bullet runAction:[CCActionSequence actionWithArray:@[actionMove, [CCActionRemove action]]]];
-        NSLog(@"CCActionCallBlock");
     }];
 
     [_ccCannon stopAllActions];
@@ -96,14 +96,40 @@
     
 }
 
+
+- (void)scanFrom:(CGPoint)startPoint To:(CGPoint)endPoint{
+    
+    CCActionRotateBy* actionSpin = [DisplayManager rotateAtLocation:_ccBody.position From:(_ccCannon.rotation) ToFacePoint:locationPoint AtSpeed:180];//TODO speed constant
+    CCActionCallBlock *actionBlock = [CCActionCallBlock actionWithBlock:^{
+        CCSprite * bullet = [CCSprite spriteWithImageNamed:@"ball.gif"];
+        bullet.position  = [self getCannonPosition];
+        bullet.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, bullet.contentSize} cornerRadius:0]; // 1
+        bullet.physicsBody.collisionGroup = self.tank.name; //TODO: shoot myself?
+        bullet.physicsBody.collisionType = @"BulletBody";
+        
+        [self.physicsWorld addChild:bullet];
+        
+        CCActionMoveTo * actionMove = [DisplayManager moveFrom:bullet.position ToPoint:locationPoint AtSpeed:200 Distance:500];  //TODO: set distance
+        [bullet runAction:[CCActionSequence actionWithArray:@[actionMove, [CCActionRemove action]]]];
+    }];
+    
+    [_ccCannon stopAllActions];
+    [_ccCannon runAction:[CCActionSequence actionWithArray:@[actionSpin, actionBlock]]];
+    
+}
+
+
 //Private
 ///-------------------------------------
 - (CGPoint)getCannonPosition{
     CGPoint point = _ccCannon.position;
-    CGFloat degree = 90 - _ccCannon.rotation;
-    CGFloat radian = CC_DEGREES_TO_RADIANS(degree);
+    CGFloat angle = _ccCannon.rotation;
+    CGFloat distance = _ccCannon.contentSize.height/2;
     
-    return point;
+    CGPoint result = [DisplayManager getPointFromPoint:point AtAngle:angle WithDistance:distance];
+    
+    NSLog(@"getPointFromPoint: angle:%f; point:%@ ; result:%@", angle, NSStringFromCGPoint(point), NSStringFromCGPoint(result));
+    return result;
 }
 
 @end

@@ -151,7 +151,8 @@
 
 + (CGFloat) findAngleAtLocation:(CGPoint)location ToFacePoint:(CGPoint)target {
     CGPoint offset = ccpSub(target, location);
-    CGFloat angle = CC_RADIANS_TO_DEGREES(atan2f(offset.y, offset.x));
+//    CGFloat angle = CC_RADIANS_TO_DEGREES(atan2f(offset.y, offset.x));
+    CGFloat angle = CC_RADIANS_TO_DEGREES(ccpToAngle(offset));
     CGFloat resultAngle = 90 - angle;
     NSLog(@"findAngleAtLocation: %f; resultAngle: %f", angle, resultAngle);
 
@@ -165,10 +166,11 @@
     
     CGFloat totalAngle = targetAngle - startAngle;
     
-    if (totalAngle > 180)
-        totalAngle -= 360;
-    if (totalAngle < -180)
-        totalAngle += 360;
+//    if (totalAngle > 180)
+//        totalAngle -= 360;
+//    if (totalAngle < -180)
+//        totalAngle += 360;
+    totalAngle = [DisplayManager getNormalizedDegree:totalAngle];
     
     NSLog(@"2.findAngleAtLocation: targetAngle:%f; startAngle: %f; totalAngle: %f", targetAngle, startAngle, totalAngle);
     CGFloat duration = fabsf(totalAngle / speed);
@@ -182,6 +184,18 @@
     CGFloat targetAngle = [DisplayManager findAngleAtLocation:location ToFacePoint:targetPoint];
     
     return [DisplayManager rotateFrom:startAngle ToAngle:targetAngle AtSpeed:speed];
+}
+
+// -180 To 180
++ (CGFloat)getNormalizedDegree:(CGFloat)angle{
+    return fmodf((angle + 180) , 360) - 180;
+}
+
+//angle: degree - ccSprite rotation
++ (CGPoint)getPointFromPoint:(CGPoint)location AtAngle:(CGFloat)angle WithDistance:(CGFloat)distance{
+    CGPoint sub = ccpForAngle(CC_DEGREES_TO_RADIANS(90 - angle));
+    CGPoint result = CGPointMake(location.x + distance * sub.x, location.y + distance * sub.y);
+    return result;
 }
 
 @end
