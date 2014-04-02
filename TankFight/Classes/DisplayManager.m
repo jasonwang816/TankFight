@@ -14,7 +14,13 @@
     self = [super init];
     if (self){
         _logic = [[GameLogic alloc] init];
-
+        
+//        CCTexture *texture = [cctexture]
+//        [[CCTextureCache sharedTextureCache] addImage:@"myatlastexture.png"];
+//        CCSprite *sprite =
+//        [CCSprite spriteWithTexture:texture rect:CGRectMake(0,0,32,32)];
+        
+        
         _physicsWorld = [CCPhysicsNode node];
         _physicsWorld.gravity = ccp(0,0);
         _physicsWorld.debugDraw = YES;
@@ -41,6 +47,7 @@
         [_ccTankVisitor adjustRelatedSprites];
     }
     
+    //TODO: update game data in game logic!!!!!!!!!
 }
 
 
@@ -166,10 +173,7 @@
     
     CGFloat totalAngle = targetAngle - startAngle;
     
-//    if (totalAngle > 180)
-//        totalAngle -= 360;
-//    if (totalAngle < -180)
-//        totalAngle += 360;
+
     totalAngle = [DisplayManager getNormalizedDegree:totalAngle];
     
     NSLog(@"2.findAngleAtLocation: targetAngle:%f; startAngle: %f; totalAngle: %f", targetAngle, startAngle, totalAngle);
@@ -188,7 +192,15 @@
 
 // -180 To 180
 + (CGFloat)getNormalizedDegree:(CGFloat)angle{
-    return fmodf((angle + 180) , 360) - 180;
+    CGFloat totalAngle = angle;
+    
+    if (angle > 180)
+        totalAngle -= 360;
+    if (angle < -180)
+        totalAngle += 360;
+    return totalAngle;
+    
+    //return fmodf((angle + 180) , 360) - 180;
 }
 
 //angle: degree - ccSprite rotation

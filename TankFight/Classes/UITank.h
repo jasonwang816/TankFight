@@ -24,4 +24,5 @@
 - (id)initWithTank:(Tank *)tank InWorld:(CCPhysicsNode *)world;
 - (void)moveTo:(CGPoint)locationPoint;
 - (void)fireAt:(CGPoint)locationPoint;
+- (void)scan:(CGFloat)angle;
 @end

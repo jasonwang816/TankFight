@@ -225,6 +225,7 @@
 		2DBE8AB518D26F3C003701E4 /* DisplayItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8AB418D26F3C003701E4 /* DisplayItem.m */; };
 		2DBE8AB818D380F6003701E4 /* ball.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2DBE8AB718D380F6003701E4 /* ball.gif */; };
 		2DBE8ABB18D3A0C3003701E4 /* DisplayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8ABA18D3A0C3003701E4 /* DisplayManager.m */; };
+		A9533B9C18E2B53600DC9B18 /* darkBlue_350_200.png in Resources */ = {isa = PBXBuildFile; fileRef = A9533B9B18E2B53600DC9B18 /* darkBlue_350_200.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -688,6 +689,7 @@
 		2DBE8AB718D380F6003701E4 /* ball.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ball.gif; sourceTree = "<group>"; };
 		2DBE8AB918D3A0C3003701E4 /* DisplayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisplayManager.h; path = Classes/DisplayManager.h; sourceTree = "<group>"; };
 		2DBE8ABA18D3A0C3003701E4 /* DisplayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisplayManager.m; path = Classes/DisplayManager.m; sourceTree = "<group>"; };
+		A9533B9B18E2B53600DC9B18 /* darkBlue_350_200.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = darkBlue_350_200.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1633,6 +1635,7 @@
 		2DBE8A9D18D25A1A003701E4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A9533B9B18E2B53600DC9B18 /* darkBlue_350_200.png */,
 				2DBE8AB718D380F6003701E4 /* ball.gif */,
 				2DBE8A9E18D25A1A003701E4 /* Body.png */,
 				2DBE8A9F18D25A1A003701E4 /* cannon.gif */,
@@ -1741,6 +1744,7 @@
 				2DBE881418D25213003701E4 /* Icon-Small-50.png in Resources */,
 				2DBE8AA118D25A1A003701E4 /* Body.png in Resources */,
 				2DBE89FD18D25215003701E4 /* LICENSE_Kazmath.txt in Resources */,
+				A9533B9C18E2B53600DC9B18 /* darkBlue_350_200.png in Resources */,
 				2DBE880818D25213003701E4 /* Icon-72.png in Resources */,
 				2DBE895618D25215003701E4 /* LICENSE_cocos2d.txt in Resources */,
 				2DBE87FF18D25213003701E4 /* Default-568h@2x.png in Resources */,

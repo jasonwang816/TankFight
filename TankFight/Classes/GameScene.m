@@ -89,9 +89,11 @@
 //    
 //    return;
     
+    //scan test
+    [uiManager.ccTankHome scan:160];
     //Fire test
-    [uiManager.ccTankHome fireAt:touchLocation]; return;
-    
+    //[uiManager.ccTankHome fireAt:touchLocation]; return;
+    //move test
     [uiManager.ccTankHome moveTo:touchLocation];
     
     [NSTimer scheduledTimerWithTimeInterval:0.1 target:self  selector:@selector(fireAT) userInfo:nil repeats:NO];
