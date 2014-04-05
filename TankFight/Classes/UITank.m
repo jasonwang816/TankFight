@@ -24,6 +24,58 @@
 	return self;
 }
 
+- (id)initWithTank:(Tank *)tank ByManager:(DisplayManager *)manager{
+    
+    self = [super init];
+    
+    if (self){
+        self.manager = manager;
+        self.physicsWorld = manager.physicsWorld;
+        self.tank = tank;
+        
+        _ccBody = [CCSprite spriteWithImageNamed:@"Body.png"];
+        _ccBody.position  = ccp(tank.position.x, tank.position.y);
+        _ccBody.rotation = tank.rotation;
+        
+        _ccBody.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _ccBody.contentSize} cornerRadius:0]; // 1
+        _ccBody.physicsBody.collisionGroup = tank.name;
+        _ccBody.physicsBody.collisionType = @"TankBody";
+        
+        _ccCannon = [CCSprite spriteWithImageNamed:@"cannon.png"];
+        _ccCannon.anchorPoint = ccp(0.25, 0.5);
+        //_ccCannon.anchorPoint = ccp(_ccCannon.contentSize.width / 4, _ccCannon.contentSize.height / 2);
+        _ccCannon.position  = ccp(tank.position.x, tank.position.y);
+        _ccCannon.rotation = 0; //tank.rotation;
+        
+        //laser & radar
+        _ccLaser = [self getLaserSprite];
+        _ccLaser.anchorPoint = CGPointZero;
+        _ccLaser.rotation = 0;
+        _ccLaser.position  = ccp(tank.position.x, tank.position.y); // _ccRadar.position;
+        _ccLaser.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _ccLaser.contentSize} cornerRadius:0]; // 1
+        _ccLaser.physicsBody.collisionGroup = self.tank.name;
+        _ccLaser.physicsBody.collisionType = @"RadarBody";
+        
+        CCSprite * ccRadar = [CCSprite spriteWithImageNamed:@"radar.png"];
+        ccRadar.position  = CGPointZero;
+        ccRadar.rotation = 0; //tank.rotation;
+        
+        [_ccLaser addChild:ccRadar];
+        
+        //        cannon.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, cannon.contentSize} cornerRadius:0]; // 1
+        //        cannon.physicsBody.collisionGroup = @"playerGroup"; // 2
+        
+        [self.physicsWorld addChild:_ccBody];
+        [self.physicsWorld addChild:_ccCannon];
+        [self.physicsWorld addChild:_ccLaser];
+        
+        //[_ccBody schedule:@selector(adjustRelatedSprites) ];
+    }
+    
+    return self;
+    
+}
+
 - (id)initWithTank:(Tank *)tank InWorld:(CCPhysicsNode *)world{
     
     self = [super init];
@@ -41,24 +93,31 @@
         _ccBody.physicsBody.collisionGroup = tank.name;
         _ccBody.physicsBody.collisionType = @"TankBody";
         
-        _ccCannon = [CCSprite spriteWithImageNamed:@"cannon.gif"];
+        _ccCannon = [CCSprite spriteWithImageNamed:@"cannon.png"];
         _ccCannon.position  = ccp(tank.position.x, tank.position.y);
         _ccCannon.rotation = 0; //tank.rotation;
         
-        _ccRadar = [CCSprite spriteWithImageNamed:@"radar.gif"];
-        _ccRadar.position  = ccp(tank.position.x, tank.position.y);
-        _ccRadar.rotation = 0; //tank.rotation;
-
-        _ccRadar.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _ccRadar.contentSize} cornerRadius:0]; // 1
-        _ccRadar.physicsBody.collisionGroup = self.tank.name; //TODO: shoot myself?
-        _ccRadar.physicsBody.collisionType = @"RadarBody";
+        //laser & radar
+        _ccLaser = [self getLaserSprite];
+        _ccLaser.anchorPoint = CGPointZero;
+        _ccLaser.rotation = -90;
+        _ccLaser.position  = ccp(tank.position.x, tank.position.y); // _ccRadar.position;
+        _ccLaser.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _ccLaser.contentSize} cornerRadius:0]; // 1
+        _ccLaser.physicsBody.collisionGroup = self.tank.name;
+        _ccLaser.physicsBody.collisionType = @"RadarBody";
+        
+        CCSprite * ccRadar = [CCSprite spriteWithImageNamed:@"radar.png"];
+        ccRadar.position  = CGPointZero;
+        ccRadar.rotation = 90; //tank.rotation;
+        
+        [_ccLaser addChild:ccRadar];
         
 //        cannon.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, cannon.contentSize} cornerRadius:0]; // 1
 //        cannon.physicsBody.collisionGroup = @"playerGroup"; // 2
         
         [world addChild:_ccBody];
         [world addChild:_ccCannon];
-        [world addChild:_ccRadar];
+        [world addChild:_ccLaser];
 
         //[_ccBody schedule:@selector(adjustRelatedSprites) ];
     }
@@ -68,31 +127,32 @@
 
 - (void)adjustRelatedSprites{
     _ccCannon.position = _ccBody.position;
-    _ccRadar.position = _ccBody.position;
+    _ccLaser.position = _ccBody.position;
 }
 
 - (void)moveTo:(CGPoint)locationPoint{
 
     CCSprite * _player = self.ccBody;
-    CCActionRotateBy* actionSpin = [DisplayManager rotateAtLocation:_player.position From:_player.rotation ToFacePoint:locationPoint AtSpeed:180]; //TODO speed constant
-    CCActionMoveTo * actionMove = [DisplayManager moveFrom:_player.position ToPoint:locationPoint AtSpeed:30 Distance:0];
+    CCActionRotateBy* actionSpin = [self.manager rotateAtLocation:_player.position From:_player.rotation ToFacePoint:locationPoint AtSpeed:180]; //TODO speed constant
+    CCActionMoveTo * actionMove = [self.manager moveFrom:_player.position ToPoint:locationPoint AtSpeed:30 Distance:0];
     [_player stopAllActions];
     [_player runAction:[CCActionSequence actionWithArray:@[actionSpin, actionMove]]];
 }
 
 - (void)fireAt:(CGPoint)locationPoint{
     
-    CCActionRotateBy* actionSpin = [DisplayManager rotateAtLocation:_ccBody.position From:(_ccCannon.rotation) ToFacePoint:locationPoint AtSpeed:180];//TODO speed constant
+    CCActionRotateBy* actionSpin = [self.manager rotateAtLocation:_ccBody.position From:(_ccCannon.rotation) ToFacePoint:locationPoint AtSpeed:180];//TODO speed constant
     CCActionCallBlock *actionBlock = [CCActionCallBlock actionWithBlock:^{
-        CCSprite * bullet = [CCSprite spriteWithImageNamed:@"ball.gif"];
-        bullet.position  = [self getCannonPosition];
+        CCSprite * bullet = [CCSprite spriteWithImageNamed:@"bullet.png"];
+        bullet.position = [self getCannonPosition];
+        bullet.rotation = _ccCannon.rotation;
         bullet.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, bullet.contentSize} cornerRadius:0]; // 1
         bullet.physicsBody.collisionGroup = self.tank.name; //TODO: shoot myself?
         bullet.physicsBody.collisionType = @"BulletBody";        
         
         [self.physicsWorld addChild:bullet];
         
-        CCActionMoveTo * actionMove = [DisplayManager moveFrom:bullet.position ToPoint:locationPoint AtSpeed:200 Distance:500];  //TODO: set distance
+        CCActionMoveTo * actionMove = [self.manager moveFrom:bullet.position ToPoint:locationPoint AtSpeed:200 Distance:500];  //TODO: set distance
         [bullet runAction:[CCActionSequence actionWithArray:@[actionMove, [CCActionRemove action]]]];
     }];
 
@@ -101,73 +161,74 @@
     
 }
 
-
-
 //angle : degree
 - (void)scan:(CGFloat)angle{
-    
-    //radar
-    CGFloat targetAngle = _ccRadar.rotation + angle;
-    CCActionRotateBy* actionSpin =  [DisplayManager rotateFrom:_ccRadar.rotation ToAngle:targetAngle AtSpeed:180];
-    
-    //laser
 
-    CCSprite * laser = [self getLaserSprite];
-    
-    laser.anchorPoint = CGPointZero;
-    laser.position  = CGPointMake(20, 10); // _ccRadar.position;
-//    laser.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, laser.contentSize} cornerRadius:0]; // 1
-//    laser.physicsBody.collisionGroup = self.tank.name; //TODO: shoot myself?
-//    laser.physicsBody.collisionType = @"RadarBody";
-    
-    //[self.physicsWorld addChild:laser];
-    [_ccRadar addChild:laser];
+    CGFloat targetAngle = _ccLaser.rotation + angle;
+    CCActionRotateBy* actionSpin =  [self.manager rotateFrom:_ccLaser.rotation ToAngle:targetAngle AtSpeed:180];
 
-    [_ccRadar stopAllActions];
-    [_ccRadar runAction:[CCActionSequence actionWithArray:@[actionSpin]]];
+    [_ccLaser stopAllActions];
+    [_ccLaser runAction:[CCActionSequence actionWithArray:@[actionSpin]]];
     
 //    CCActionRotateBy* actionSpinL =  [DisplayManager rotateFrom:_ccRadar.rotation ToAngle:targetAngle AtSpeed:90];
 //    [laser runAction:[CCActionSequence actionWithArray:@[actionSpinL, [CCActionRemove action]]]];
     
 }
 
-
-
-- (void)scanFrom:(CGPoint)startPoint To:(CGPoint)endPoint{
-    
-//    CCActionRotateBy* actionSpin = [DisplayManager rotateAtLocation:_ccBody.position From:(_ccCannon.rotation) ToFacePoint:locationPoint AtSpeed:180];//TODO speed constant
-//    CCActionCallBlock *actionBlock = [CCActionCallBlock actionWithBlock:^{
-//        CCSprite * bullet = [CCSprite spriteWithImageNamed:@"ball.gif"];
-//        bullet.position  = [self getCannonPosition];
-//        bullet.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, bullet.contentSize} cornerRadius:0]; // 1
-//        bullet.physicsBody.collisionGroup = self.tank.name; //TODO: shoot myself?
-//        bullet.physicsBody.collisionType = @"BulletBody";
-//        
-//        [self.physicsWorld addChild:bullet];
-//        
-//        CCActionMoveTo * actionMove = [DisplayManager moveFrom:bullet.position ToPoint:locationPoint AtSpeed:200 Distance:500];  //TODO: set distance
-//        [bullet runAction:[CCActionSequence actionWithArray:@[actionMove, [CCActionRemove action]]]];
-//    }];
-//    
-//    [_ccCannon stopAllActions];
-//    [_ccCannon runAction:[CCActionSequence actionWithArray:@[actionSpin, actionBlock]]];
-    
-}
-
-
 //Private
 ///-------------------------------------
 - (CGPoint)getCannonPosition{
     CGPoint point = _ccCannon.position;
     CGFloat angle = _ccCannon.rotation;
-    CGFloat distance = _ccCannon.contentSize.height/2;
+    CGFloat distance = _ccCannon.contentSize.width * 0.75;
     
-    CGPoint result = [DisplayManager getPointFromPoint:point AtAngle:angle WithDistance:distance];
+    CGPoint result = [self.manager getPointFromPoint:point AtAngle:angle WithDistance:distance];
     
     NSLog(@"getPointFromPoint: angle:%f; point:%@ ; result:%@", angle, NSStringFromCGPoint(point), NSStringFromCGPoint(result));
     return result;
 }
 
+
+- (CCSprite *) getLaserSprite
+{
+    CCSprite * sprite = [CCSprite spriteWithImageNamed:@"darkBlue_350_200.png"];
+    
+    CGFloat range = [self.tank getRadarRange];
+    sprite.textureRect = CGRectMake(0, 0, range, 0.3);
+    
+//    CCSprite *sprite = [self createSpriteRectangleWithSize:CGSizeMake(250,2)];
+//    sprite.color = [CCColor blueColor];
+    
+    return sprite;
+}
+
+//No use code:
+//----------------------------------------------
+
+//no use
+- (void)scanFrom:(CGPoint)startPoint To:(CGPoint)endPoint{
+    
+    //    CCActionRotateBy* actionSpin = [DisplayManager rotateAtLocation:_ccBody.position From:(_ccCannon.rotation) ToFacePoint:locationPoint AtSpeed:180];//TODO speed constant
+    //    CCActionCallBlock *actionBlock = [CCActionCallBlock actionWithBlock:^{
+    //        CCSprite * bullet = [CCSprite spriteWithImageNamed:@"ball.gif"];
+    //        bullet.position  = [self getCannonPosition];
+    //        bullet.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, bullet.contentSize} cornerRadius:0]; // 1
+    //        bullet.physicsBody.collisionGroup = self.tank.name; //TODO: shoot myself?
+    //        bullet.physicsBody.collisionType = @"BulletBody";
+    //
+    //        [self.physicsWorld addChild:bullet];
+    //
+    //        CCActionMoveTo * actionMove = [DisplayManager moveFrom:bullet.position ToPoint:locationPoint AtSpeed:200 Distance:500];  //TODO: set distance
+    //        [bullet runAction:[CCActionSequence actionWithArray:@[actionMove, [CCActionRemove action]]]];
+    //    }];
+    //
+    //    [_ccCannon stopAllActions];
+    //    [_ccCannon runAction:[CCActionSequence actionWithArray:@[actionSpin, actionBlock]]];
+    
+}
+
+
+//no use
 - (CCSprite*) createSpriteRectangleWithSize:(CGSize)size
 {
     CCSprite *sprite = [CCSprite node];
@@ -178,17 +239,6 @@
     [sprite setTexture:tex];
     [sprite setTextureRect:CGRectMake(0, 0, size.width, size.height)];
     free(buffer);
-    return sprite;
-}
-
-- (CCSprite *) getLaserSprite
-{
-    CCSprite * sprite = [CCSprite spriteWithImageNamed:@"darkBlue_350_200.png"];
-    sprite.textureRect = CGRectMake(0, 0, 350, 0);
-    
-//    CCSprite *sprite = [self createSpriteRectangleWithSize:CGSizeMake(250,2)];
-//    sprite.color = [CCColor blueColor];
-    
     return sprite;
 }
 @end

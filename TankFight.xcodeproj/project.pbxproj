@@ -215,16 +215,16 @@
 		2DBE8A8D18D25216003701E4 /* HelloWorldScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8A8C18D25216003701E4 /* HelloWorldScene.m */; };
 		2DBE8A9018D25216003701E4 /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8A8F18D25216003701E4 /* IntroScene.m */; };
 		2DBE8AA118D25A1A003701E4 /* Body.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DBE8A9E18D25A1A003701E4 /* Body.png */; };
-		2DBE8AA218D25A1A003701E4 /* cannon.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2DBE8A9F18D25A1A003701E4 /* cannon.gif */; };
-		2DBE8AA318D25A1A003701E4 /* radar.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2DBE8AA018D25A1A003701E4 /* radar.gif */; };
 		2DBE8AA618D25AA2003701E4 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8AA518D25AA2003701E4 /* GameScene.m */; };
 		2DBE8AA918D25D98003701E4 /* GameField.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8AA818D25D98003701E4 /* GameField.m */; };
 		2DBE8AAC18D25E8D003701E4 /* Tank.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8AAB18D25E8D003701E4 /* Tank.m */; };
 		2DBE8AAF18D25ED5003701E4 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8AAE18D25ED5003701E4 /* Constants.m */; };
 		2DBE8AB218D265E4003701E4 /* GameLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8AB118D265E4003701E4 /* GameLogic.m */; };
 		2DBE8AB518D26F3C003701E4 /* DisplayItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8AB418D26F3C003701E4 /* DisplayItem.m */; };
-		2DBE8AB818D380F6003701E4 /* ball.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2DBE8AB718D380F6003701E4 /* ball.gif */; };
 		2DBE8ABB18D3A0C3003701E4 /* DisplayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8ABA18D3A0C3003701E4 /* DisplayManager.m */; };
+		6ACCF56D18EFF5A70056D9F7 /* bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ACCF56A18EFF5A70056D9F7 /* bullet.png */; };
+		6ACCF56E18EFF5A70056D9F7 /* cannon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ACCF56B18EFF5A70056D9F7 /* cannon.png */; };
+		6ACCF56F18EFF5A70056D9F7 /* radar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ACCF56C18EFF5A70056D9F7 /* radar.png */; };
 		A9533B9C18E2B53600DC9B18 /* darkBlue_350_200.png in Resources */ = {isa = PBXBuildFile; fileRef = A9533B9B18E2B53600DC9B18 /* darkBlue_350_200.png */; };
 /* End PBXBuildFile section */
 
@@ -672,8 +672,6 @@
 		2DBE8A8E18D25216003701E4 /* IntroScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IntroScene.h; path = Classes/IntroScene.h; sourceTree = "<group>"; };
 		2DBE8A8F18D25216003701E4 /* IntroScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = IntroScene.m; path = Classes/IntroScene.m; sourceTree = "<group>"; };
 		2DBE8A9E18D25A1A003701E4 /* Body.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Body.png; sourceTree = "<group>"; };
-		2DBE8A9F18D25A1A003701E4 /* cannon.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = cannon.gif; sourceTree = "<group>"; };
-		2DBE8AA018D25A1A003701E4 /* radar.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = radar.gif; sourceTree = "<group>"; };
 		2DBE8AA418D25AA2003701E4 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameScene.h; path = Classes/GameScene.h; sourceTree = "<group>"; };
 		2DBE8AA518D25AA2003701E4 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameScene.m; path = Classes/GameScene.m; sourceTree = "<group>"; };
 		2DBE8AA718D25D98003701E4 /* GameField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameField.h; path = Classes/DataModels/GameField.h; sourceTree = "<group>"; };
@@ -686,9 +684,11 @@
 		2DBE8AB118D265E4003701E4 /* GameLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameLogic.m; path = Classes/GameLogic.m; sourceTree = "<group>"; };
 		2DBE8AB318D26F3C003701E4 /* DisplayItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisplayItem.h; path = Classes/DataModels/DisplayItem.h; sourceTree = "<group>"; };
 		2DBE8AB418D26F3C003701E4 /* DisplayItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisplayItem.m; path = Classes/DataModels/DisplayItem.m; sourceTree = "<group>"; };
-		2DBE8AB718D380F6003701E4 /* ball.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ball.gif; sourceTree = "<group>"; };
 		2DBE8AB918D3A0C3003701E4 /* DisplayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisplayManager.h; path = Classes/DisplayManager.h; sourceTree = "<group>"; };
 		2DBE8ABA18D3A0C3003701E4 /* DisplayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisplayManager.m; path = Classes/DisplayManager.m; sourceTree = "<group>"; };
+		6ACCF56A18EFF5A70056D9F7 /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
+		6ACCF56B18EFF5A70056D9F7 /* cannon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cannon.png; sourceTree = "<group>"; };
+		6ACCF56C18EFF5A70056D9F7 /* radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radar.png; sourceTree = "<group>"; };
 		A9533B9B18E2B53600DC9B18 /* darkBlue_350_200.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = darkBlue_350_200.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1635,11 +1635,11 @@
 		2DBE8A9D18D25A1A003701E4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6ACCF56A18EFF5A70056D9F7 /* bullet.png */,
+				6ACCF56B18EFF5A70056D9F7 /* cannon.png */,
+				6ACCF56C18EFF5A70056D9F7 /* radar.png */,
 				A9533B9B18E2B53600DC9B18 /* darkBlue_350_200.png */,
-				2DBE8AB718D380F6003701E4 /* ball.gif */,
 				2DBE8A9E18D25A1A003701E4 /* Body.png */,
-				2DBE8A9F18D25A1A003701E4 /* cannon.gif */,
-				2DBE8AA018D25A1A003701E4 /* radar.gif */,
 			);
 			name = Images;
 			path = Resources/Images;
@@ -1728,18 +1728,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DBE87FD18D25213003701E4 /* Default@2x.png in Resources */,
-				2DBE8AA318D25A1A003701E4 /* radar.gif in Resources */,
 				2DBE881018D25213003701E4 /* Icon-120.png in Resources */,
 				2DBE8A1418D25216003701E4 /* LICENSE_CCBReader.txt in Resources */,
-				2DBE8AA218D25A1A003701E4 /* cannon.gif in Resources */,
 				2DBE880618D25213003701E4 /* Icon@2x.png in Resources */,
 				2DBE881818D25213003701E4 /* Icon-Small@2x.png in Resources */,
 				2DBE880A18D25213003701E4 /* Icon-72@2x.png in Resources */,
 				2DBE87FB18D25213003701E4 /* Default.png in Resources */,
 				2DBE880418D25213003701E4 /* Icon.png in Resources */,
 				2DBE881218D25213003701E4 /* Icon-iPad-Spotlight-iOS7@2x.png in Resources */,
-				2DBE8AB818D380F6003701E4 /* ball.gif in Resources */,
 				2DBE880118D25213003701E4 /* Default-Landscape~ipad.png in Resources */,
+				6ACCF56D18EFF5A70056D9F7 /* bullet.png in Resources */,
 				2DBE881618D25213003701E4 /* Icon-Small.png in Resources */,
 				2DBE881418D25213003701E4 /* Icon-Small-50.png in Resources */,
 				2DBE8AA118D25A1A003701E4 /* Body.png in Resources */,
@@ -1751,11 +1749,13 @@
 				2DBE881F18D25213003701E4 /* iTunesArtwork in Resources */,
 				2DBE881A18D25213003701E4 /* Icon-Spotlight-iOS7.png in Resources */,
 				2DBE880E18D25213003701E4 /* Icon-76@2x.png in Resources */,
+				6ACCF56E18EFF5A70056D9F7 /* cannon.png in Resources */,
 				2DBE8A8218D25216003701E4 /* LICENSE_Chipmunk.txt in Resources */,
 				2DBE881C18D25213003701E4 /* Icon-Spotlight-iOS7@2x.png in Resources */,
 				2DBE880C18D25213003701E4 /* Icon-76.png in Resources */,
 				2DBE89E218D25215003701E4 /* ChangeLog in Resources */,
 				2DBE882118D25213003701E4 /* iTunesArtwork@2x in Resources */,
+				6ACCF56F18EFF5A70056D9F7 /* radar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

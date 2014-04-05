@@ -15,7 +15,11 @@
 #import "Tank.h"
 #import "GameField.h"
 
+@class UITank;
+
 @interface DisplayManager : NSObject<CCPhysicsCollisionDelegate>
+
+@property (nonatomic) CGFloat adjustAngle;
 
 @property (nonatomic) GameLogic * logic;
 @property (nonatomic) CCPhysicsNode * physicsWorld;
@@ -26,14 +30,14 @@
 
 - (void)updateUI;
 
-+ (CCActionMoveTo *)moveFrom:(CGPoint)startPoint ToPoint:(CGPoint)targetPoint AtSpeed:(CGFloat)speed Distance:(CGFloat)distance;
+- (CCActionMoveTo *)moveFrom:(CGPoint)startPoint ToPoint:(CGPoint)targetPoint AtSpeed:(CGFloat)speed Distance:(CGFloat)distance;
 ///speed degree/second
-+ (CCActionRotateBy *)rotateFrom:(CGFloat)startAngle ToAngle:(CGFloat)targetAngle AtSpeed:(CGFloat)speed;
+- (CCActionRotateBy *)rotateFrom:(CGFloat)startAngle ToAngle:(CGFloat)targetAngle AtSpeed:(CGFloat)speed;
 
-+ (CCActionRotateBy *)rotateAtLocation:(CGPoint)location From:(CGFloat)startAngle ToFacePoint:(CGPoint)targetPoint AtSpeed:(CGFloat)speed;
+- (CCActionRotateBy *)rotateAtLocation:(CGPoint)location From:(CGFloat)startAngle ToFacePoint:(CGPoint)targetPoint AtSpeed:(CGFloat)speed;
 
-+ (CGFloat)getNormalizedDegree:(CGFloat)angle;
+- (CGFloat)getNormalizedDegree:(CGFloat)angle;
 
 //angle: degree - ccSprite rotation
-+ (CGPoint)getPointFromPoint:(CGPoint)location AtAngle:(CGFloat)angle WithDistance:(CGFloat)distance;
+- (CGPoint)getPointFromPoint:(CGPoint)location AtAngle:(CGFloat)angle WithDistance:(CGFloat)distance;
 @end

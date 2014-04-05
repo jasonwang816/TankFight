@@ -35,4 +35,9 @@
     return self;
 }
 
+//Should based on level
+- (CGFloat)getRadarRange{
+    return 250;
+}
+
 @end

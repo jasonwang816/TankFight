@@ -15,6 +15,8 @@
 @property (nonatomic) NSInteger level;
 @property (nonatomic) NSInteger health;
 
+
 - (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndName:(NSString *) name;
 
+- (CGFloat)getRadarRange;
 @end

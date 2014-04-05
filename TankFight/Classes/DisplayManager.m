@@ -13,6 +13,8 @@
 - (id)init{
     self = [super init];
     if (self){
+        _adjustAngle = 0;
+        
         _logic = [[GameLogic alloc] init];
         
 //        CCTexture *texture = [cctexture]
@@ -23,11 +25,11 @@
         
         _physicsWorld = [CCPhysicsNode node];
         _physicsWorld.gravity = ccp(0,0);
-        _physicsWorld.debugDraw = YES;
+        //_physicsWorld.debugDraw = YES;
         _physicsWorld.collisionDelegate = self;
         
-        _ccTankHome = [[UITank alloc] initWithTank:_logic.tankHome InWorld:_physicsWorld];
-        _ccTankVisitor = [[UITank alloc] initWithTank:_logic.tankVisitor InWorld:_physicsWorld];
+        _ccTankHome = [[UITank alloc] initWithTank:_logic.tankHome ByManager:self];
+        _ccTankVisitor = [[UITank alloc] initWithTank:_logic.tankVisitor ByManager:self];
 
     }
     return self;
@@ -87,27 +89,7 @@
     return sprite;
 }
 
-- (void)fire:(CCSprite *)player At:(CGPoint)targetPos{
-    
-    //    CCSprite * player = home;
-    
-//    CGPoint offset    = ccpSub(targetPos, player.position);
-//    float   ratio     = offset.y/offset.x;
-//    int     targetX   = player.contentSize.width/2 + self.contentSize.width;
-//    int     targetY   = (targetX*ratio) + player.position.y;
-//    CGPoint targetPosition = ccp(targetX,targetY);
-//    
-//    // 3
-//    CCSprite *bullet = [CCSprite spriteWithImageNamed:@"ball.gif"];
-//    bullet.position = player.position;
-//    [self addChild:bullet ];
-//    
-//    // 4
-//    CCActionMoveTo *actionMove   = [CCActionMoveTo actionWithDuration:1.5f position:targetPosition];
-//    CCActionRemove *actionRemove = [CCActionRemove action];
-//    [bullet runAction:[CCActionSequence actionWithArray:@[actionMove,actionRemove]]];
-    
-}
+
 
 // -----------------------------------------------------------------------
 
@@ -126,7 +108,7 @@
 #pragma mark - static functions
 // -----------------------------------------------------------------------
 
-+ (CCActionMoveTo *)moveFrom:(CGPoint)startPoint ToPoint:(CGPoint)targetPoint AtSpeed:(CGFloat)speed Distance:(CGFloat)distance{
+- (CCActionMoveTo *)moveFrom:(CGPoint)startPoint ToPoint:(CGPoint)targetPoint AtSpeed:(CGFloat)speed Distance:(CGFloat)distance{
     if (speed <= 0)
         speed = 1;
     
@@ -156,42 +138,42 @@
     return action;
 }
 
-+ (CGFloat) findAngleAtLocation:(CGPoint)location ToFacePoint:(CGPoint)target {
+- (CGFloat) findAngleAtLocation:(CGPoint)location ToFacePoint:(CGPoint)target {
     CGPoint offset = ccpSub(target, location);
 //    CGFloat angle = CC_RADIANS_TO_DEGREES(atan2f(offset.y, offset.x));
     CGFloat angle = CC_RADIANS_TO_DEGREES(ccpToAngle(offset));
-    CGFloat resultAngle = 90 - angle;
-    NSLog(@"findAngleAtLocation: %f; resultAngle: %f", angle, resultAngle);
+    CGFloat resultAngle = _adjustAngle - angle;
+//    NSLog(@"findAngleAtLocation: %f; resultAngle: %f", angle, resultAngle);
 
     return resultAngle;
 }
 
 ///speed degree/second
-+ (CCActionRotateBy *)rotateFrom:(CGFloat)startAngle ToAngle:(CGFloat)targetAngle AtSpeed:(CGFloat)speed{
+- (CCActionRotateBy *)rotateFrom:(CGFloat)startAngle ToAngle:(CGFloat)targetAngle AtSpeed:(CGFloat)speed{
     if (speed <= 0)
         speed = 1;
     
     CGFloat totalAngle = targetAngle - startAngle;
     
 
-    totalAngle = [DisplayManager getNormalizedDegree:totalAngle];
-    
-    NSLog(@"2.findAngleAtLocation: targetAngle:%f; startAngle: %f; totalAngle: %f", targetAngle, startAngle, totalAngle);
+    totalAngle = [self getNormalizedDegree:totalAngle];
+
+//    NSLog(@"2.findAngleAtLocation: targetAngle:%f; startAngle: %f; totalAngle: %f", targetAngle, startAngle, totalAngle);
     CGFloat duration = fabsf(totalAngle / speed);
     CCActionRotateBy* action = [CCActionRotateBy actionWithDuration:duration angle:totalAngle];
     
     return action;
 }
 
-+ (CCActionRotateBy *)rotateAtLocation:(CGPoint)location From:(CGFloat)startAngle ToFacePoint:(CGPoint)targetPoint AtSpeed:(CGFloat)speed{
+- (CCActionRotateBy *)rotateAtLocation:(CGPoint)location From:(CGFloat)startAngle ToFacePoint:(CGPoint)targetPoint AtSpeed:(CGFloat)speed{
     
-    CGFloat targetAngle = [DisplayManager findAngleAtLocation:location ToFacePoint:targetPoint];
+    CGFloat targetAngle = [self findAngleAtLocation:location ToFacePoint:targetPoint];
     
-    return [DisplayManager rotateFrom:startAngle ToAngle:targetAngle AtSpeed:speed];
+    return [self rotateFrom:startAngle ToAngle:targetAngle AtSpeed:speed];
 }
 
 // -180 To 180
-+ (CGFloat)getNormalizedDegree:(CGFloat)angle{
+- (CGFloat)getNormalizedDegree:(CGFloat)angle{
     CGFloat totalAngle = angle;
     
     if (angle > 180)
@@ -204,8 +186,8 @@
 }
 
 //angle: degree - ccSprite rotation
-+ (CGPoint)getPointFromPoint:(CGPoint)location AtAngle:(CGFloat)angle WithDistance:(CGFloat)distance{
-    CGPoint sub = ccpForAngle(CC_DEGREES_TO_RADIANS(90 - angle));
+- (CGPoint)getPointFromPoint:(CGPoint)location AtAngle:(CGFloat)angle WithDistance:(CGFloat)distance{
+    CGPoint sub = ccpForAngle(CC_DEGREES_TO_RADIANS(_adjustAngle - angle));
     CGPoint result = CGPointMake(location.x + distance * sub.x, location.y + distance * sub.y);
     return result;
 }

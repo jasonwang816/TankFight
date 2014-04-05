@@ -44,6 +44,12 @@
 //static const NSString *NewtonSphereCollisionOutline = @"outline";
 //static const NSString *NewtonSphereCollisionRope = @"rope";
 
-
-
+static const float CONST_BODY_WIDTH = 68.0f;
+static const float CONST_BODY_HEIGHT = 37.0f;
+static const float CONST_CANNON_WIDTH = 25.0f;
+static const float CONST_CANNON_HEIGHT = 49.0f;
+static const float CONST_BULLET_WIDTH = 6.0f;
+static const float CONST_BULLET_HEIGHT = 12.0f;
+static const float CONST_RADAR_WIDTH = 11.0f;
+static const float CONST_RADAR_HEIGHT = 14.0f;
 
