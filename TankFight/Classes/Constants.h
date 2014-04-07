@@ -40,9 +40,17 @@
 //static const float NewtonSphereMargin = 3;
 //static const float NewtonSphereSpacing = 3;
 //
-//static const NSString *NewtonSphereCollisionSphere = @"sphere";
-//static const NSString *NewtonSphereCollisionOutline = @"outline";
-//static const NSString *NewtonSphereCollisionRope = @"rope";
+
+static NSString * CT_TankBody = @"Default";
+static NSString * CT_FieldBody = @"Default";
+static NSString * CT_RadarBody = @"Default";
+static NSString * CT_BulletBody = @"Default";
+
+
+//static NSString * CT_TankBody = @"TankBody";
+//static NSString * CT_FieldBody = @"FieldBody";
+//static NSString * CT_RadarBody = @"RadarBody";
+//static NSString * CT_BulletBody = @"BulletBody";
 
 static const float CONST_BODY_WIDTH = 68.0f;
 static const float CONST_BODY_HEIGHT = 37.0f;
@@ -52,4 +60,12 @@ static const float CONST_BULLET_WIDTH = 6.0f;
 static const float CONST_BULLET_HEIGHT = 12.0f;
 static const float CONST_RADAR_WIDTH = 11.0f;
 static const float CONST_RADAR_HEIGHT = 14.0f;
+
+typedef enum {
+    UserObjectType_Field,
+    UserObjectType_Tank,
+    UserObjectType_Radar,
+    UserObjectType_Bullet
+} CCUserObjectType;
+
 

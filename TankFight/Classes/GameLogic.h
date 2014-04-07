@@ -12,7 +12,7 @@
 
 
 static const CGPoint homeTankPosition = (CGPoint){100, 200};
-static const CGPoint visitorTankPosition = (CGPoint){500, 200};
+static const CGPoint visitorTankPosition = (CGPoint){350, 200};
 
 @interface GameLogic : NSObject
 

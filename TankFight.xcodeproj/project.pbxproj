@@ -222,6 +222,8 @@
 		2DBE8AB218D265E4003701E4 /* GameLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8AB118D265E4003701E4 /* GameLogic.m */; };
 		2DBE8AB518D26F3C003701E4 /* DisplayItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8AB418D26F3C003701E4 /* DisplayItem.m */; };
 		2DBE8ABB18D3A0C3003701E4 /* DisplayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8ABA18D3A0C3003701E4 /* DisplayManager.m */; };
+		6A2EF0F918F2711A0023885F /* field.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6A2EF0F818F2711A0023885F /* field.jpg */; };
+		6A2EF10618F289C60023885F /* ItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EF10518F289C60023885F /* ItemInfo.m */; };
 		6ACCF56D18EFF5A70056D9F7 /* bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ACCF56A18EFF5A70056D9F7 /* bullet.png */; };
 		6ACCF56E18EFF5A70056D9F7 /* cannon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ACCF56B18EFF5A70056D9F7 /* cannon.png */; };
 		6ACCF56F18EFF5A70056D9F7 /* radar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ACCF56C18EFF5A70056D9F7 /* radar.png */; };
@@ -686,6 +688,9 @@
 		2DBE8AB418D26F3C003701E4 /* DisplayItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisplayItem.m; path = Classes/DataModels/DisplayItem.m; sourceTree = "<group>"; };
 		2DBE8AB918D3A0C3003701E4 /* DisplayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisplayManager.h; path = Classes/DisplayManager.h; sourceTree = "<group>"; };
 		2DBE8ABA18D3A0C3003701E4 /* DisplayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisplayManager.m; path = Classes/DisplayManager.m; sourceTree = "<group>"; };
+		6A2EF0F818F2711A0023885F /* field.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = field.jpg; sourceTree = "<group>"; };
+		6A2EF10418F289C60023885F /* ItemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemInfo.h; path = Classes/DataModels/ItemInfo.h; sourceTree = "<group>"; };
+		6A2EF10518F289C60023885F /* ItemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemInfo.m; path = Classes/DataModels/ItemInfo.m; sourceTree = "<group>"; };
 		6ACCF56A18EFF5A70056D9F7 /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
 		6ACCF56B18EFF5A70056D9F7 /* cannon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cannon.png; sourceTree = "<group>"; };
 		6ACCF56C18EFF5A70056D9F7 /* radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radar.png; sourceTree = "<group>"; };
@@ -1611,6 +1616,8 @@
 				2DBE8AAB18D25E8D003701E4 /* Tank.m */,
 				2DBE8AB318D26F3C003701E4 /* DisplayItem.h */,
 				2DBE8AB418D26F3C003701E4 /* DisplayItem.m */,
+				6A2EF10418F289C60023885F /* ItemInfo.h */,
+				6A2EF10518F289C60023885F /* ItemInfo.m */,
 			);
 			name = DataModels;
 			sourceTree = "<group>";
@@ -1635,6 +1642,7 @@
 		2DBE8A9D18D25A1A003701E4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6A2EF0F818F2711A0023885F /* field.jpg */,
 				6ACCF56A18EFF5A70056D9F7 /* bullet.png */,
 				6ACCF56B18EFF5A70056D9F7 /* cannon.png */,
 				6ACCF56C18EFF5A70056D9F7 /* radar.png */,
@@ -1733,6 +1741,7 @@
 				2DBE880618D25213003701E4 /* Icon@2x.png in Resources */,
 				2DBE881818D25213003701E4 /* Icon-Small@2x.png in Resources */,
 				2DBE880A18D25213003701E4 /* Icon-72@2x.png in Resources */,
+				6A2EF0F918F2711A0023885F /* field.jpg in Resources */,
 				2DBE87FB18D25213003701E4 /* Default.png in Resources */,
 				2DBE880418D25213003701E4 /* Icon.png in Resources */,
 				2DBE881218D25213003701E4 /* Icon-iPad-Spotlight-iOS7@2x.png in Resources */,
@@ -1874,6 +1883,7 @@
 				2DBE892718D25215003701E4 /* NSEvent+CC.m in Sources */,
 				2DBE898418D25215003701E4 /* ALDevice.m in Sources */,
 				2DBE89F718D25215003701E4 /* vec2.c in Sources */,
+				6A2EF10618F289C60023885F /* ItemInfo.m in Sources */,
 				2DBE882718D25213003701E4 /* CCAction.m in Sources */,
 				2DBE888B18D25214003701E4 /* CCParallaxNode.m in Sources */,
 				2DBE89F318D25215003701E4 /* ray2.c in Sources */,

@@ -5,8 +5,9 @@
 //  Created by Jason Wang on 2014-03-14.
 //  Copyright (c) 2014 Jason Wang. All rights reserved.
 //
-
+#import "Constants.h"
 #import "DisplayManager.h"
+#import "ItemInfo.h"
 
 @implementation DisplayManager
 
@@ -25,14 +26,51 @@
         
         _physicsWorld = [CCPhysicsNode node];
         _physicsWorld.gravity = ccp(0,0);
-        //_physicsWorld.debugDraw = YES;
+        _physicsWorld.debugDraw = YES;
         _physicsWorld.collisionDelegate = self;
+        
+        //game field
+        GameField * field = _logic.gameField;
+        _ccGameField = [CCSprite spriteWithImageNamed:@"field.jpg"];
+        _ccGameField.anchorPoint = CGPointZero;
+        _ccGameField.textureRect = CGRectMake(0, 0, field.fieldSize.width, field.fieldSize.height);
+        _ccGameField.position  = ccp(field.position.x, field.position.y);
+        _ccGameField.rotation = field.rotation;
+        
+        CCSprite * edge;
+        edge = [self buildEdgeAtPoint:CGPointMake(0, 0) WithSize:CGSizeMake(field.fieldSize.width, 0.1)];  //top
+        [_ccGameField addChild:edge];
+        edge = [self buildEdgeAtPoint:CGPointMake(0, 0) WithSize:CGSizeMake(0.1, field.fieldSize.height)];  //left
+        [_ccGameField addChild:edge];
+        edge = [self buildEdgeAtPoint:CGPointMake(field.fieldSize.width, 0) WithSize:CGSizeMake(0.1, field.fieldSize.height)];  //right
+        [_ccGameField addChild:edge];
+        edge = [self buildEdgeAtPoint:CGPointMake(0, field.fieldSize.height) WithSize:CGSizeMake(field.fieldSize.width, 0.1)];  //right
+        [_ccGameField addChild:edge];
+        
+        [_physicsWorld addChild:_ccGameField];
         
         _ccTankHome = [[UITank alloc] initWithTank:_logic.tankHome ByManager:self];
         _ccTankVisitor = [[UITank alloc] initWithTank:_logic.tankVisitor ByManager:self];
 
     }
     return self;
+}
+
+- (CCSprite * )buildEdgeAtPoint:(CGPoint)point WithSize:(CGSize )size{
+    
+    CCSprite * sprite = [CCSprite spriteWithImageNamed:@"field.jpg"];
+    sprite.anchorPoint = CGPointZero;
+    sprite.textureRect = (CGRect){CGPointZero, size};
+    sprite.position = point;
+    sprite.userObject = [[ItemInfo alloc] initWithTank:nil AndType:UserObjectType_Field];
+    
+    NSString * collisionGroup = @"Field";
+    sprite.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, size} cornerRadius:0]; // 1
+    sprite.physicsBody.type = CCPhysicsBodyTypeStatic;
+    sprite.physicsBody.collisionGroup = collisionGroup;
+    sprite.physicsBody.collisionType = CT_FieldBody;
+    
+    return sprite;
 }
 
 
@@ -82,8 +120,6 @@
 //    ChipmunkPinJoint *pinJoint = [ChipmunkPinJoint pinJointWithBodyA:(CCPhysicsBody*)(sprite.physicsBody).body bodyB:(CCPhysicsBody*)(cannon.physicsBody).body anchr1:cpv(30, 30) anchr2:cpv(25, 30)];
 //    [pinJoint setDist:40];
 //    [[self space] addConstraint:pinJoint];
-    
-    
 
     NSLog(@"%@", joint);
     return sprite;
@@ -100,6 +136,19 @@
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair TankBody:(CCNode *)tankA TankBody:(CCNode *)tankB {
 //    [monster removeFromParent];
 //    [projectile removeFromParent];
+    NSLog(@"TankBody:(CCNode *)tankA TankBody");
+    return NO;
+}
+
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Default:(CCNode *)itemA Default:(CCNode *)itemB {
+    //    [monster removeFromParent];
+    //    [projectile removeFromParent];
+    
+    
+    
+    
+    
+    NSLog(@"\n itemA : %@ \n itemB : %@ \n ----------------------------------------------------------- ", (ItemInfo * )itemA.userObject, (ItemInfo * )itemB.userObject);
     return NO;
 }
 

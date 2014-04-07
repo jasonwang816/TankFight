@@ -10,4 +10,16 @@
 
 @implementation GameField
 
+- (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndSize:(CGSize) size{
+    
+    self = [super init];
+    
+    if (self){
+        self.position = pos;
+        self.rotation = angle;
+        self.fieldSize = size;
+    }
+    
+    return self;
+}
 @end

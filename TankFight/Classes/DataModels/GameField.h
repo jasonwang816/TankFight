@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DisplayItem.h"
 
-@interface GameField : NSObject
+@interface GameField : DisplayItem
+
+@property (nonatomic) CGSize fieldSize;
+
+- (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndSize:(CGSize) size;
 
 @end

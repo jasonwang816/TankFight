@@ -16,9 +16,10 @@
 
 @interface UITank : NSObject
 
+@property (nonatomic, weak) DisplayManager * manager;
 @property (nonatomic, weak) Tank * tank;
 @property (nonatomic, weak) CCPhysicsNode * physicsWorld;
-@property (nonatomic, weak) DisplayManager * manager;
+
 @property (nonatomic) CCSprite * ccBody;
 @property (nonatomic) CCSprite * ccCannon;
 @property (nonatomic) CCSprite * ccLaser;

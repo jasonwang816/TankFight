@@ -6,9 +6,12 @@
 //  Copyright (c) 2014 Jason Wang. All rights reserved.
 //
 
+#import "Constants.h"
 #import "UITank.h"
 #import "DisplayManager.h"
 #import "CCTexture.h"
+#import "ItemInfo.h"
+
 //#import "Tank.h"
 
 @implementation UITank
@@ -36,25 +39,28 @@
         _ccBody = [CCSprite spriteWithImageNamed:@"Body.png"];
         _ccBody.position  = ccp(tank.position.x, tank.position.y);
         _ccBody.rotation = tank.rotation;
+        _ccBody.userObject = [[ItemInfo alloc] initWithTank:self.tank AndType:UserObjectType_Tank];
         
         _ccBody.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _ccBody.contentSize} cornerRadius:0]; // 1
         _ccBody.physicsBody.collisionGroup = tank.name;
-        _ccBody.physicsBody.collisionType = @"TankBody";
+        _ccBody.physicsBody.collisionType = CT_TankBody;
         
         _ccCannon = [CCSprite spriteWithImageNamed:@"cannon.png"];
         _ccCannon.anchorPoint = ccp(0.25, 0.5);
         //_ccCannon.anchorPoint = ccp(_ccCannon.contentSize.width / 4, _ccCannon.contentSize.height / 2);
         _ccCannon.position  = ccp(tank.position.x, tank.position.y);
-        _ccCannon.rotation = 0; //tank.rotation;
+        _ccCannon.rotation = tank.rotation; //tank.rotation;
         
         //laser & radar
         _ccLaser = [self getLaserSprite];
         _ccLaser.anchorPoint = CGPointZero;
-        _ccLaser.rotation = 0;
+        _ccLaser.rotation = tank.rotation;
         _ccLaser.position  = ccp(tank.position.x, tank.position.y); // _ccRadar.position;
+        _ccLaser.userObject = [[ItemInfo alloc] initWithTank:self.tank AndType:UserObjectType_Radar];
+
         _ccLaser.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _ccLaser.contentSize} cornerRadius:0]; // 1
         _ccLaser.physicsBody.collisionGroup = self.tank.name;
-        _ccLaser.physicsBody.collisionType = @"RadarBody";
+        _ccLaser.physicsBody.collisionType = CT_RadarBody;
         
         CCSprite * ccRadar = [CCSprite spriteWithImageNamed:@"radar.png"];
         ccRadar.position  = CGPointZero;
@@ -62,13 +68,14 @@
         
         [_ccLaser addChild:ccRadar];
         
-        //        cannon.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, cannon.contentSize} cornerRadius:0]; // 1
-        //        cannon.physicsBody.collisionGroup = @"playerGroup"; // 2
+//        [self.physicsWorld addChild:_ccBody];
+//        [self.physicsWorld addChild:_ccCannon];
+//        [self.physicsWorld addChild:_ccLaser];
         
-        [self.physicsWorld addChild:_ccBody];
-        [self.physicsWorld addChild:_ccCannon];
-        [self.physicsWorld addChild:_ccLaser];
-        
+        CCSprite * ccGameField = manager.ccGameField;
+        [ccGameField addChild:_ccBody];
+        [ccGameField addChild:_ccCannon];
+        [ccGameField addChild:_ccLaser];
         //[_ccBody schedule:@selector(adjustRelatedSprites) ];
     }
     
@@ -76,54 +83,54 @@
     
 }
 
-- (id)initWithTank:(Tank *)tank InWorld:(CCPhysicsNode *)world{
-    
-    self = [super init];
-    
-    if (self){
-        
-        self.physicsWorld = world;
-        self.tank = tank;
-        
-        _ccBody = [CCSprite spriteWithImageNamed:@"Body.png"];
-        _ccBody.position  = ccp(tank.position.x, tank.position.y);
-        _ccBody.rotation = tank.rotation;
-        
-        _ccBody.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _ccBody.contentSize} cornerRadius:0]; // 1
-        _ccBody.physicsBody.collisionGroup = tank.name;
-        _ccBody.physicsBody.collisionType = @"TankBody";
-        
-        _ccCannon = [CCSprite spriteWithImageNamed:@"cannon.png"];
-        _ccCannon.position  = ccp(tank.position.x, tank.position.y);
-        _ccCannon.rotation = 0; //tank.rotation;
-        
-        //laser & radar
-        _ccLaser = [self getLaserSprite];
-        _ccLaser.anchorPoint = CGPointZero;
-        _ccLaser.rotation = -90;
-        _ccLaser.position  = ccp(tank.position.x, tank.position.y); // _ccRadar.position;
-        _ccLaser.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _ccLaser.contentSize} cornerRadius:0]; // 1
-        _ccLaser.physicsBody.collisionGroup = self.tank.name;
-        _ccLaser.physicsBody.collisionType = @"RadarBody";
-        
-        CCSprite * ccRadar = [CCSprite spriteWithImageNamed:@"radar.png"];
-        ccRadar.position  = CGPointZero;
-        ccRadar.rotation = 90; //tank.rotation;
-        
-        [_ccLaser addChild:ccRadar];
-        
-//        cannon.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, cannon.contentSize} cornerRadius:0]; // 1
-//        cannon.physicsBody.collisionGroup = @"playerGroup"; // 2
-        
-        [world addChild:_ccBody];
-        [world addChild:_ccCannon];
-        [world addChild:_ccLaser];
-
-        //[_ccBody schedule:@selector(adjustRelatedSprites) ];
-    }
-    
-    return self;
-}
+//- (id)initWithTank:(Tank *)tank InWorld:(CCPhysicsNode *)world{
+//    
+//    self = [super init];
+//    
+//    if (self){
+//        
+//        self.physicsWorld = world;
+//        self.tank = tank;
+//        
+//        _ccBody = [CCSprite spriteWithImageNamed:@"Body.png"];
+//        _ccBody.position  = ccp(tank.position.x, tank.position.y);
+//        _ccBody.rotation = tank.rotation;
+//        
+//        _ccBody.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _ccBody.contentSize} cornerRadius:0]; // 1
+//        _ccBody.physicsBody.collisionGroup = tank.name;
+//        _ccBody.physicsBody.collisionType = @"TankBody";
+//        
+//        _ccCannon = [CCSprite spriteWithImageNamed:@"cannon.png"];
+//        _ccCannon.position  = ccp(tank.position.x, tank.position.y);
+//        _ccCannon.rotation = 0; //tank.rotation;
+//        
+//        //laser & radar
+//        _ccLaser = [self getLaserSprite];
+//        _ccLaser.anchorPoint = CGPointZero;
+//        _ccLaser.rotation = -90;
+//        _ccLaser.position  = ccp(tank.position.x, tank.position.y); // _ccRadar.position;
+//        _ccLaser.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _ccLaser.contentSize} cornerRadius:0]; // 1
+//        _ccLaser.physicsBody.collisionGroup = self.tank.name;
+//        _ccLaser.physicsBody.collisionType = @"RadarBody";
+//        
+//        CCSprite * ccRadar = [CCSprite spriteWithImageNamed:@"radar.png"];
+//        ccRadar.position  = CGPointZero;
+//        ccRadar.rotation = 90; //tank.rotation;
+//        
+//        [_ccLaser addChild:ccRadar];
+//        
+////        cannon.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, cannon.contentSize} cornerRadius:0]; // 1
+////        cannon.physicsBody.collisionGroup = @"playerGroup"; // 2
+//        
+//        [world addChild:_ccBody];
+//        [world addChild:_ccCannon];
+//        [world addChild:_ccLaser];
+//
+//        //[_ccBody schedule:@selector(adjustRelatedSprites) ];
+//    }
+//    
+//    return self;
+//}
 
 - (void)adjustRelatedSprites{
     _ccCannon.position = _ccBody.position;
@@ -146,11 +153,13 @@
         CCSprite * bullet = [CCSprite spriteWithImageNamed:@"bullet.png"];
         bullet.position = [self getCannonPosition];
         bullet.rotation = _ccCannon.rotation;
-        bullet.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, bullet.contentSize} cornerRadius:0]; // 1
-        bullet.physicsBody.collisionGroup = self.tank.name; //TODO: shoot myself?
-        bullet.physicsBody.collisionType = @"BulletBody";        
+        bullet.userObject = [[ItemInfo alloc] initWithTank:self.tank AndType:UserObjectType_Bullet];
         
-        [self.physicsWorld addChild:bullet];
+        bullet.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, bullet.contentSize} cornerRadius:0]; // 1
+        bullet.physicsBody.collisionGroup = self.tank.name; //TODO: shoot itself?
+        bullet.physicsBody.collisionType = CT_BulletBody;
+        
+        [self.manager.ccGameField addChild:bullet];
         
         CCActionMoveTo * actionMove = [self.manager moveFrom:bullet.position ToPoint:locationPoint AtSpeed:200 Distance:500];  //TODO: set distance
         [bullet runAction:[CCActionSequence actionWithArray:@[actionMove, [CCActionRemove action]]]];
@@ -177,6 +186,7 @@
 
 //Private
 ///-------------------------------------
+//get the position of where the bullet should start.
 - (CGPoint)getCannonPosition{
     CGPoint point = _ccCannon.position;
     CGFloat angle = _ccCannon.rotation;
@@ -184,7 +194,7 @@
     
     CGPoint result = [self.manager getPointFromPoint:point AtAngle:angle WithDistance:distance];
     
-    NSLog(@"getPointFromPoint: angle:%f; point:%@ ; result:%@", angle, NSStringFromCGPoint(point), NSStringFromCGPoint(result));
+//    NSLog(@"getPointFromPoint: angle:%f; point:%@ ; result:%@", angle, NSStringFromCGPoint(point), NSStringFromCGPoint(result));
     return result;
 }
 
@@ -195,9 +205,6 @@
     
     CGFloat range = [self.tank getRadarRange];
     sprite.textureRect = CGRectMake(0, 0, range, 0.3);
-    
-//    CCSprite *sprite = [self createSpriteRectangleWithSize:CGSizeMake(250,2)];
-//    sprite.color = [CCColor blueColor];
     
     return sprite;
 }

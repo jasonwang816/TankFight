@@ -17,10 +17,10 @@
     
     if (self){
         //game field
-        
+        _gameField = [[GameField alloc] initWithPosition:CGPointMake(40, 0) AndAngle:0 AndSize:CGSizeMake(480, 320)];
         //tanks
-        _tankHome = [[Tank alloc] initWithPosition:homeTankPosition AndAngle:0 AndName:@"Home"];
-        _tankVisitor = [[Tank alloc] initWithPosition:visitorTankPosition AndAngle:0 AndName:@"visitor"];
+        _tankHome = [[Tank alloc] initWithPosition:homeTankPosition AndAngle:90 AndName:@"Home"];
+        _tankVisitor = [[Tank alloc] initWithPosition:visitorTankPosition AndAngle:90 AndName:@"visitor"];
     }
     
     return self;
