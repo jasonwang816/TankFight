@@ -14,12 +14,13 @@
 #import "UITank.h"
 #import "Tank.h"
 #import "GameField.h"
+#import "UIItem.h"
 
 @class UITank;
 
 @interface DisplayManager : NSObject<CCPhysicsCollisionDelegate>{
     CCPhysicsNode * _physicsWorld;
-    CCSprite * _ccGameField;
+    UIItem * _ccGameField;
 }
 
 @property (nonatomic) GameLogic * logic;

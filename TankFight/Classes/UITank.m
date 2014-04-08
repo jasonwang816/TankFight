@@ -36,12 +36,12 @@
 //        self.physicsWorld = manager.physicsWorld;
         self.tank = tank;
         
-        _ccBody = [CCSprite spriteWithImageNamed:@"Body.png"];
+        _ccBody = [UIItem spriteWithImageNamed:@"Body.png"];
         _ccBody.position  = ccp(tank.body.position.x, tank.body.position.y);
         _ccBody.rotation = tank.body.rotation;
         _ccBody.userObject = [[ItemInfo alloc] initWithTank:self.tank AndType:UserObjectType_Tank];
         
-        _ccCannon = [CCSprite spriteWithImageNamed:@"cannon.png"];
+        _ccCannon = [UIItem spriteWithImageNamed:@"cannon.png"];
         _ccCannon.anchorPoint = ccp(0.25, 0.5);
         //_ccCannon.anchorPoint = ccp(_ccCannon.contentSize.width / 4, _ccCannon.contentSize.height / 2);
         _ccCannon.position  = ccp(tank.cannon.position.x, tank.cannon.position.y);
@@ -54,7 +54,7 @@
         _ccLaser.position  = ccp(tank.radar.position.x, tank.radar.position.y); // _ccRadar.position;
         _ccLaser.userObject = [[ItemInfo alloc] initWithTank:self.tank AndType:UserObjectType_Radar];
         
-        CCSprite * ccRadar = [CCSprite spriteWithImageNamed:@"radar.png"];
+        UIItem * ccRadar = [UIItem spriteWithImageNamed:@"radar.png"];
         ccRadar.position  = CGPointZero;
         ccRadar.rotation = 0; //tank.rotation;
         
@@ -144,7 +144,7 @@
 
 - (void)moveTo:(CGPoint)locationPoint{
 
-    CCSprite * _player = self.ccBody;
+    UIItem * _player = self.ccBody;
     CCActionRotateBy* actionSpin = [self.manager rotateAtLocation:_player.position From:_player.rotation ToFacePoint:locationPoint AtSpeed:180]; //TODO speed constant
     CCActionMoveTo * actionMove = [self.manager moveFrom:_player.position ToPoint:locationPoint AtSpeed:30 Distance:0];
     [_player stopAllActions];
@@ -155,7 +155,7 @@
     
     CCActionRotateBy* actionSpin = [self.manager rotateAtLocation:_ccBody.position From:(_ccCannon.rotation) ToFacePoint:locationPoint AtSpeed:180];//TODO speed constant
     CCActionCallBlock *actionBlock = [CCActionCallBlock actionWithBlock:^{
-        CCSprite * bullet = [CCSprite spriteWithImageNamed:@"bullet.png"];
+        UIItem * bullet = [UIItem spriteWithImageNamed:@"bullet.png"];
         bullet.position = [self getCannonPosition];
         bullet.rotation = _ccCannon.rotation;
         bullet.userObject = [[ItemInfo alloc] initWithTank:self.tank AndType:UserObjectType_Bullet];
@@ -204,9 +204,9 @@
 }
 
 
-- (CCSprite *) getLaserSprite
+- (UIItem *) getLaserSprite
 {
-    CCSprite * sprite = [CCSprite spriteWithImageNamed:@"darkBlue_350_200.png"];
+    UIItem * sprite = [UIItem spriteWithImageNamed:@"darkBlue_350_200.png"];
     
     CGFloat range = [self.tank getRadarRange];
     sprite.textureRect = CGRectMake(0, 0, range, 0.3);
@@ -241,9 +241,9 @@
 
 
 //no use
-- (CCSprite*) createSpriteRectangleWithSize:(CGSize)size
+- (UIItem *) createSpriteRectangleWithSize:(CGSize)size
 {
-    CCSprite *sprite = [CCSprite node];
+    UIItem *sprite = [UIItem node];
     GLubyte *buffer = malloc(sizeof(GLubyte)*4);
     for (int i=0;i<4;i++) {buffer=255;}
     CCTexture *tex = [[CCTexture alloc] initWithData:buffer pixelFormat:CCTexturePixelFormat_RGB5A1 pixelsWide:1 pixelsHigh:1 contentSizeInPixels:size contentScale:1];

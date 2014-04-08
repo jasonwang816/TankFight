@@ -81,13 +81,6 @@
     
     [NSTimer scheduledTimerWithTimeInterval:0.1 target:self  selector:@selector(fireAT) userInfo:nil repeats:NO];
 
-    
-    
-//    CCSprite * _player = uiManager.ccTankHome.ccBody;
-//    CCActionRotateBy* actionSpin = [DisplayManager rotateAtLocation:_player.position From:_player.rotation ToFacePoint:touchLocation AtSpeed:90];
-//    CCActionMoveTo * actionMove = [DisplayManager moveFrom:_player.position ToPoint:touchLocation AtSpeed:100 Distance:500];
-//    [_player stopAllActions];
-//    [_player runAction:[CCActionSequence actionWithArray:@[actionSpin, actionMove]]];
 
 }
 

@@ -11,6 +11,7 @@
 #import "cocos2d-ui.h"
 #import "Tank.h"
 #import "DisplayManager.h"
+#import "UIItem.h"
 
 @class DisplayManager;
 
@@ -20,9 +21,9 @@
 @property (nonatomic, weak) Tank * tank;
 @property (nonatomic, weak) CCPhysicsNode * physicsWorld;
 
-@property (nonatomic) CCSprite * ccBody;
-@property (nonatomic) CCSprite * ccCannon;
-@property (nonatomic) CCSprite * ccLaser;
+@property (nonatomic) UIItem * ccBody;
+@property (nonatomic) UIItem * ccCannon;
+@property (nonatomic) UIItem * ccLaser;
 
 - (void)adjustRelatedSprites;
 

@@ -222,6 +222,7 @@
 		2DBE8AB218D265E4003701E4 /* GameLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8AB118D265E4003701E4 /* GameLogic.m */; };
 		2DBE8AB518D26F3C003701E4 /* DisplayItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8AB418D26F3C003701E4 /* DisplayItem.m */; };
 		2DBE8ABB18D3A0C3003701E4 /* DisplayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8ABA18D3A0C3003701E4 /* DisplayManager.m */; };
+		2DF6F06518F476E40057147D /* UIItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6F06418F476E40057147D /* UIItem.m */; };
 		6A2EF0F918F2711A0023885F /* field.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6A2EF0F818F2711A0023885F /* field.jpg */; };
 		6A2EF10618F289C60023885F /* ItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EF10518F289C60023885F /* ItemInfo.m */; };
 		6ACCF56D18EFF5A70056D9F7 /* bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ACCF56A18EFF5A70056D9F7 /* bullet.png */; };
@@ -688,6 +689,8 @@
 		2DBE8AB418D26F3C003701E4 /* DisplayItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisplayItem.m; path = Classes/DataModels/DisplayItem.m; sourceTree = "<group>"; };
 		2DBE8AB918D3A0C3003701E4 /* DisplayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisplayManager.h; path = Classes/DisplayManager.h; sourceTree = "<group>"; };
 		2DBE8ABA18D3A0C3003701E4 /* DisplayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisplayManager.m; path = Classes/DisplayManager.m; sourceTree = "<group>"; };
+		2DF6F06318F476E40057147D /* UIItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIItem.h; path = Classes/UIItem.h; sourceTree = "<group>"; };
+		2DF6F06418F476E40057147D /* UIItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIItem.m; path = Classes/UIItem.m; sourceTree = "<group>"; };
 		6A2EF0F818F2711A0023885F /* field.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = field.jpg; sourceTree = "<group>"; };
 		6A2EF10418F289C60023885F /* ItemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemInfo.h; path = Classes/DataModels/ItemInfo.h; sourceTree = "<group>"; };
 		6A2EF10518F289C60023885F /* ItemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemInfo.m; path = Classes/DataModels/ItemInfo.m; sourceTree = "<group>"; };
@@ -1663,6 +1666,8 @@
 				2D5AFEF318D8B1BF0039BF07 /* UITank.m */,
 				2D5AFEF518D8F5900039BF07 /* UIConstants.h */,
 				2D5AFEF618D8F5900039BF07 /* UIConstants.m */,
+				2DF6F06318F476E40057147D /* UIItem.h */,
+				2DF6F06418F476E40057147D /* UIItem.m */,
 			);
 			name = UILayer;
 			sourceTree = "<group>";
@@ -1905,6 +1910,7 @@
 				2DBE885A18D25214003701E4 /* CCDrawingPrimitives.m in Sources */,
 				2DBE894B18D25215003701E4 /* TGAlib.m in Sources */,
 				2DBE891718D25214003701E4 /* UITouch+CC.m in Sources */,
+				2DF6F06518F476E40057147D /* UIItem.m in Sources */,
 				2DBE89F518D25215003701E4 /* utility.c in Sources */,
 				2DBE895418D25215003701E4 /* ZipUtils.m in Sources */,
 				2DBE896518D25215003701E4 /* OALUtilityActions.m in Sources */,

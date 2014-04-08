@@ -61,7 +61,7 @@
     _physicsWorld.collisionDelegate = self;
     
     GameField * field = _logic.gameField;
-    CCSprite * edge;
+    UIItem * edge;
     edge = [self buildEdgeAtPoint:CGPointMake(0, 0) WithSize:CGSizeMake(field.fieldSize.width, 0.1)];  //top
     [_ccGameField addChild:edge];
     edge = [self buildEdgeAtPoint:CGPointMake(0, 0) WithSize:CGSizeMake(0.1, field.fieldSize.height)];  //left
@@ -72,9 +72,9 @@
     [_ccGameField addChild:edge];    
 }
 
-- (CCSprite * )buildEdgeAtPoint:(CGPoint)point WithSize:(CGSize )size{
+- (UIItem * )buildEdgeAtPoint:(CGPoint)point WithSize:(CGSize )size{
     
-    CCSprite * sprite = [CCSprite spriteWithImageNamed:@"field.jpg"];
+    UIItem * sprite = [CCSprite spriteWithImageNamed:@"field.jpg"];
     sprite.anchorPoint = CGPointZero;
     sprite.textureRect = (CGRect){CGPointZero, size};
     sprite.position = point;
