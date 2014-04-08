@@ -11,49 +11,65 @@
 
 @implementation DisplayManager
 
-- (id)init{
+- (id)initWithGameLogic:(GameLogic *)logic AtOrigin:(CGPoint)originPoint WithPhysics:(BOOL)enabled{
     self = [super init];
     if (self){
-        _adjustAngle = 0;
+        _logic = logic;
+        _origin = originPoint;
+        _isPhysicsEnable = enabled;
         
-        _logic = [[GameLogic alloc] init];
+        _adjustAngle = 0;
         
 //        CCTexture *texture = [cctexture]
 //        [[CCTextureCache sharedTextureCache] addImage:@"myatlastexture.png"];
 //        CCSprite *sprite =
 //        [CCSprite spriteWithTexture:texture rect:CGRectMake(0,0,32,32)];
         
+        [self setupGameFieldSprites];
+        self.rootNode = _ccGameField;
         
-        _physicsWorld = [CCPhysicsNode node];
-        _physicsWorld.gravity = ccp(0,0);
-        _physicsWorld.debugDraw = YES;
-        _physicsWorld.collisionDelegate = self;
-        
-        //game field
-        GameField * field = _logic.gameField;
-        _ccGameField = [CCSprite spriteWithImageNamed:@"field.jpg"];
-        _ccGameField.anchorPoint = CGPointZero;
-        _ccGameField.textureRect = CGRectMake(0, 0, field.fieldSize.width, field.fieldSize.height);
-        _ccGameField.position  = ccp(field.position.x, field.position.y);
-        _ccGameField.rotation = field.rotation;
-        
-        CCSprite * edge;
-        edge = [self buildEdgeAtPoint:CGPointMake(0, 0) WithSize:CGSizeMake(field.fieldSize.width, 0.1)];  //top
-        [_ccGameField addChild:edge];
-        edge = [self buildEdgeAtPoint:CGPointMake(0, 0) WithSize:CGSizeMake(0.1, field.fieldSize.height)];  //left
-        [_ccGameField addChild:edge];
-        edge = [self buildEdgeAtPoint:CGPointMake(field.fieldSize.width, 0) WithSize:CGSizeMake(0.1, field.fieldSize.height)];  //right
-        [_ccGameField addChild:edge];
-        edge = [self buildEdgeAtPoint:CGPointMake(0, field.fieldSize.height) WithSize:CGSizeMake(field.fieldSize.width, 0.1)];  //right
-        [_ccGameField addChild:edge];
-        
-        [_physicsWorld addChild:_ccGameField];
-        
+        if (_isPhysicsEnable) {
+            [self setupGameFieldPhysics];
+            [_physicsWorld addChild:_ccGameField];
+            self.rootNode = _physicsWorld;
+        }
+
         _ccTankHome = [[UITank alloc] initWithTank:_logic.tankHome ByManager:self];
-        _ccTankVisitor = [[UITank alloc] initWithTank:_logic.tankVisitor ByManager:self];
+        _ccTankVisitor = [[UITank alloc] initWithTank:_logic.tankVisitor ByManager:self];  
 
     }
     return self;
+}
+
+- (void)setupGameFieldSprites{
+    
+    //game field
+    GameField * field = _logic.gameField;
+    _ccGameField = [CCSprite spriteWithImageNamed:@"field.jpg"];
+    _ccGameField.anchorPoint = CGPointZero;
+    _ccGameField.textureRect = CGRectMake(0, 0, field.fieldSize.width, field.fieldSize.height);
+    _ccGameField.position  = ccpAdd(field.position, self.origin);
+    _ccGameField.rotation = field.rotation;
+    
+}
+
+- (void)setupGameFieldPhysics{
+    
+    _physicsWorld = [CCPhysicsNode node];
+    _physicsWorld.gravity = ccp(0,0);
+    _physicsWorld.debugDraw = YES;
+    _physicsWorld.collisionDelegate = self;
+    
+    GameField * field = _logic.gameField;
+    CCSprite * edge;
+    edge = [self buildEdgeAtPoint:CGPointMake(0, 0) WithSize:CGSizeMake(field.fieldSize.width, 0.1)];  //top
+    [_ccGameField addChild:edge];
+    edge = [self buildEdgeAtPoint:CGPointMake(0, 0) WithSize:CGSizeMake(0.1, field.fieldSize.height)];  //left
+    [_ccGameField addChild:edge];
+    edge = [self buildEdgeAtPoint:CGPointMake(field.fieldSize.width, 0) WithSize:CGSizeMake(0.1, field.fieldSize.height)];  //right
+    [_ccGameField addChild:edge];
+    edge = [self buildEdgeAtPoint:CGPointMake(0, field.fieldSize.height) WithSize:CGSizeMake(field.fieldSize.width, 0.1)];  //right
+    [_ccGameField addChild:edge];    
 }
 
 - (CCSprite * )buildEdgeAtPoint:(CGPoint)point WithSize:(CGSize )size{
@@ -80,52 +96,59 @@
 
 - (void)updateUI
 {
-    if (_ccTankHome){
-        [_ccTankHome adjustRelatedSprites];
+    if (_isPhysicsEnable){
+        if (_ccTankHome){
+            [_ccTankHome adjustRelatedSprites];
+        }
+        if (_ccTankVisitor){
+            [_ccTankVisitor adjustRelatedSprites];
+        }
+        [self updateLogicDataFromUI];
+    }else
+    {
+        [self updateUIDataFromLogic];
     }
-    if (_ccTankVisitor){
-        [_ccTankVisitor adjustRelatedSprites];
-    }
+    //_logic.tankHome.position = _ccTankHome.bo
     
     //TODO: update game data in game logic!!!!!!!!!
 }
 
+- (void) updateLogicTank:(Tank *) logicTank FromUITank:(UITank *)uiTank{
+    
+    logicTank.body.position = uiTank.ccBody.position;
+    logicTank.body.rotation = uiTank.ccBody.rotation;
+    logicTank.cannon.position = uiTank.ccCannon.position;
+    logicTank.cannon.rotation = uiTank.ccCannon.rotation;
+    logicTank.radar.position = uiTank.ccLaser.position;
+    logicTank.cannon.rotation = uiTank.ccLaser.rotation;
 
-//no use.
-- (CCSprite * )buildTank:(Tank *)tank{
-    
-    CCSprite * sprite = [CCSprite spriteWithImageNamed:@"Body.png"];
-    sprite.position  = ccp(tank.position.x, tank.position.y);
-    sprite.rotation = tank.rotation;
-    
-    sprite.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, sprite.contentSize} cornerRadius:0]; // 1
-    sprite.physicsBody.collisionGroup = @"playerGroup"; // 2
-    
-    CCSprite * cannon = [CCSprite spriteWithImageNamed:@"cannon.gif"];
-    cannon.position  = ccp(tank.position.x, tank.position.y);
-    cannon.rotation = tank.rotation;
-    
-    cannon.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, cannon.contentSize} cornerRadius:0]; // 1
-    cannon.physicsBody.collisionGroup = @"playerGroup"; // 2
-    
-    [_physicsWorld addChild:sprite];
-    [_physicsWorld addChild:cannon];
+}
 
-//    CCPhysicsJoint * joint = [CCPhysicsJoint connectedDistanceJointWithBodyA:sprite.physicsBody bodyB:cannon.physicsBody anchorA:CGPointMake(30, 30) anchorB:CGPointMake(25, 30)];
-    CCPhysicsJoint * joint = [CCPhysicsJoint connectedPivotJointWithBodyA:sprite.physicsBody bodyB:cannon.physicsBody anchorA:CGPointMake(30, 30)];
-
-    //ChipmunkPinJoint *pinJoint = [ChipmunkPinJoint pinJointWithBodyA:sprite.physicsBody bodyB:sprite.physicsBody anchr1:cpv(30, 30) anchr2:cpv(25, 30)];
+- (void) updateLogicDataFromUI{
     
-    
-//    ChipmunkPinJoint *pinJoint = [ChipmunkPinJoint pinJointWithBodyA:(CCPhysicsBody*)(sprite.physicsBody).body bodyB:(CCPhysicsBody*)(cannon.physicsBody).body anchr1:cpv(30, 30) anchr2:cpv(25, 30)];
-//    [pinJoint setDist:40];
-//    [[self space] addConstraint:pinJoint];
+    [self updateLogicTank:_logic.tankHome FromUITank:_ccTankHome];
+    [self updateLogicTank:_logic.tankVisitor FromUITank:_ccTankVisitor];
 
-    NSLog(@"%@", joint);
-    return sprite;
 }
 
 
+- (void) updateUITank:(UITank *)uiTank FromLogicTank:(Tank *)logicTank{
+    
+    uiTank.ccBody.position = logicTank.body.position;
+    uiTank.ccBody.rotation = logicTank.body.rotation;
+    uiTank.ccCannon.position = logicTank.cannon.position;
+    uiTank.ccCannon.rotation = logicTank.cannon.rotation;
+    uiTank.ccLaser.position = logicTank.radar.position;
+    uiTank.ccLaser.rotation = logicTank.cannon.rotation;
+    
+}
+
+- (void) updateUIDataFromLogic{
+    
+    [self updateUITank:_ccTankHome FromLogicTank:_logic.tankHome];
+    [self updateUITank:_ccTankVisitor FromLogicTank:_logic.tankVisitor];
+    
+}
 
 // -----------------------------------------------------------------------
 
@@ -149,7 +172,7 @@
     
     
     NSLog(@"\n itemA : %@ \n itemB : %@ \n ----------------------------------------------------------- ", (ItemInfo * )itemA.userObject, (ItemInfo * )itemB.userObject);
-    return NO;
+    return YES;
 }
 
 

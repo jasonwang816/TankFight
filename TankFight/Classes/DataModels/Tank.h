@@ -9,12 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "DisplayItem.h"
 
-@interface Tank : DisplayItem
+@interface Tank :NSObject
 
 @property (nonatomic) NSString * name;
 @property (nonatomic) NSInteger level;
 @property (nonatomic) NSInteger health;
 
+@property (nonatomic) DisplayItem * body;
+@property (nonatomic) DisplayItem * cannon;
+@property (nonatomic) DisplayItem * radar;
 
 - (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndName:(NSString *) name;
 

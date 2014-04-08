@@ -15,8 +15,7 @@
     self = [super init];
     
     if (self){
-        _level = 0;
-        _health = 100;
+
     }
     
 	return self;
@@ -27,9 +26,14 @@
     self = [super init];
     
     if (self){
-        self.position = pos;
-        self.rotation = angle;
+        _level = 0;
+        _health = 100;        
         self.name = name;
+        
+        self.body = [[DisplayItem alloc] initWithPosition:pos AndAngle:angle];
+        self.cannon = [[DisplayItem alloc] initWithPosition:pos AndAngle:angle];
+        self.radar = [[DisplayItem alloc] initWithPosition:pos AndAngle:angle];
+
     }
     
     return self;

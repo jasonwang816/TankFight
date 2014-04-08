@@ -17,17 +17,23 @@
 
 @class UITank;
 
-@interface DisplayManager : NSObject<CCPhysicsCollisionDelegate>
+@interface DisplayManager : NSObject<CCPhysicsCollisionDelegate>{
+    CCPhysicsNode * _physicsWorld;
+    CCSprite * _ccGameField;
+}
+
+@property (nonatomic) GameLogic * logic;
+@property (nonatomic) CGPoint origin;
+@property (nonatomic) BOOL isPhysicsEnable;
 
 @property (nonatomic) CGFloat adjustAngle;
 
-@property (nonatomic) GameLogic * logic;
-@property (nonatomic) CCPhysicsNode * physicsWorld;
+@property (nonatomic) CCNode * rootNode;
 
-@property (nonatomic) CCSprite * ccGameField;
 @property (nonatomic) UITank * ccTankHome;
 @property (nonatomic) UITank * ccTankVisitor;
 
+- (id)initWithGameLogic:(GameLogic *)logic AtOrigin:(CGPoint)originPoint WithPhysics:(BOOL)enabled;
 - (void)updateUI;
 
 - (CCActionMoveTo *)moveFrom:(CGPoint)startPoint ToPoint:(CGPoint)targetPoint AtSpeed:(CGFloat)speed Distance:(CGFloat)distance;

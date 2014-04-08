@@ -12,7 +12,9 @@
 
 @implementation GameScene
 {
+    DisplayManager * physicsManager;
     DisplayManager * uiManager;
+
 }
 
 // -----------------------------------------------------------------------
@@ -38,15 +40,13 @@
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.6f green:0.6f blue:0.6f alpha:1.0f]];
     [self addChild:background];
 
-    uiManager = [[DisplayManager alloc] init];
-    [self addChild:uiManager.physicsWorld];
-
-//    [self addChild:uiManager.ccTankHome];
-//    [self addChild:uiManager.ccTankVisitor];
+    GameLogic * logic = [[GameLogic alloc] init];
     
-    // Animate sprite with action
-//    CCActionRotateBy* actionSpin = [CCActionRotateBy actionWithDuration:1.5f angle:360];
-//    [_sprite runAction:[CCActionRepeatForever actionWithAction:actionSpin]];
+    physicsManager = [[DisplayManager alloc] initWithGameLogic:logic AtOrigin:CGPointZero WithPhysics:YES];
+    [self addChild:physicsManager.rootNode];
+    
+    uiManager = [[DisplayManager alloc] initWithGameLogic:logic AtOrigin:CGPointMake(500, 0) WithPhysics:NO];
+    [self addChild:uiManager.rootNode];
     
     // Create a back button
     CCButton *backButton = [CCButton buttonWithTitle:@"[ Menu ]" fontName:@"Verdana-Bold" fontSize:18.0f];
@@ -73,11 +73,11 @@
     CGPoint touchLocation = [touch locationInNode:self];
     
     //scan test
-    [uiManager.ccTankHome scan:160];
+    [physicsManager.ccTankHome scan:160];
     //Fire test
     //[uiManager.ccTankHome fireAt:touchLocation]; return;
     //move test
-    [uiManager.ccTankHome moveTo:touchLocation];
+    [physicsManager.ccTankHome moveTo:touchLocation];
     
     [NSTimer scheduledTimerWithTimeInterval:0.1 target:self  selector:@selector(fireAT) userInfo:nil repeats:NO];
 
@@ -92,7 +92,7 @@
 }
 
 -(void)fireAT{
-    [uiManager.ccTankHome fireAt:CGPointMake(400, 200)];
+    [physicsManager.ccTankHome fireAt:CGPointMake(400, 200)];
 }
 
 // -----------------------------------------------------------------------
@@ -119,8 +119,9 @@
 }
 
 - (void) update:(CCTime) time {
-    [uiManager updateUI];
+    [physicsManager updateUI];
     //NSLog(@"scene update.");
+    [uiManager updateUI];
 }
 
 // -----------------------------------------------------------------------
