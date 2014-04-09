@@ -225,6 +225,7 @@
 		2DF6F06518F476E40057147D /* UIItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6F06418F476E40057147D /* UIItem.m */; };
 		6A2EF0F918F2711A0023885F /* field.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6A2EF0F818F2711A0023885F /* field.jpg */; };
 		6A2EF10618F289C60023885F /* ItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EF10518F289C60023885F /* ItemInfo.m */; };
+		6A7D1BC418F5195800F4A0A7 /* UIItemBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7D1BC318F5195800F4A0A7 /* UIItemBuilder.m */; };
 		6ACCF56D18EFF5A70056D9F7 /* bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ACCF56A18EFF5A70056D9F7 /* bullet.png */; };
 		6ACCF56E18EFF5A70056D9F7 /* cannon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ACCF56B18EFF5A70056D9F7 /* cannon.png */; };
 		6ACCF56F18EFF5A70056D9F7 /* radar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ACCF56C18EFF5A70056D9F7 /* radar.png */; };
@@ -694,6 +695,8 @@
 		6A2EF0F818F2711A0023885F /* field.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = field.jpg; sourceTree = "<group>"; };
 		6A2EF10418F289C60023885F /* ItemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemInfo.h; path = Classes/DataModels/ItemInfo.h; sourceTree = "<group>"; };
 		6A2EF10518F289C60023885F /* ItemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemInfo.m; path = Classes/DataModels/ItemInfo.m; sourceTree = "<group>"; };
+		6A7D1BC218F5195800F4A0A7 /* UIItemBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIItemBuilder.h; path = Classes/UIItemBuilder.h; sourceTree = "<group>"; };
+		6A7D1BC318F5195800F4A0A7 /* UIItemBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIItemBuilder.m; path = Classes/UIItemBuilder.m; sourceTree = "<group>"; };
 		6ACCF56A18EFF5A70056D9F7 /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
 		6ACCF56B18EFF5A70056D9F7 /* cannon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cannon.png; sourceTree = "<group>"; };
 		6ACCF56C18EFF5A70056D9F7 /* radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radar.png; sourceTree = "<group>"; };
@@ -1668,6 +1671,8 @@
 				2D5AFEF618D8F5900039BF07 /* UIConstants.m */,
 				2DF6F06318F476E40057147D /* UIItem.h */,
 				2DF6F06418F476E40057147D /* UIItem.m */,
+				6A7D1BC218F5195800F4A0A7 /* UIItemBuilder.h */,
+				6A7D1BC318F5195800F4A0A7 /* UIItemBuilder.m */,
 			);
 			name = UILayer;
 			sourceTree = "<group>";
@@ -1814,6 +1819,7 @@
 				2DBE889218D25214003701E4 /* CCParticleExamples.m in Sources */,
 				2DBE89C418D25215003701E4 /* CCSlider.m in Sources */,
 				2DBE8AA918D25D98003701E4 /* GameField.m in Sources */,
+				6A7D1BC418F5195800F4A0A7 /* UIItemBuilder.m in Sources */,
 				2DBE88FF18D25214003701E4 /* CCTMXXMLParser.m in Sources */,
 				2DBE893F18D25215003701E4 /* CGPointExtension.m in Sources */,
 				2DBE89CA18D25215003701E4 /* CCTextField.m in Sources */,

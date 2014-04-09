@@ -18,12 +18,31 @@
     if (self){
         //game field
         _gameField = [[GameField alloc] initWithPosition:CGPointMake(0, 0) AndAngle:0 AndSize:CGSizeMake(480, 320)];
+        
         //tanks
-        _tankHome = [[Tank alloc] initWithPosition:homeTankPosition AndAngle:90 AndName:@"Home"];
-        _tankVisitor = [[Tank alloc] initWithPosition:visitorTankPosition AndAngle:90 AndName:@"visitor"];
+        Tank * tank;
+        self.tanks = [[NSMutableArray alloc] init];
+        
+        tank = [[Tank alloc] initWithPosition:homeTankPosition AndAngle:90 AndName:@"Home"];
+        [_tanks addObject:tank];
+        
+        tank = [[Tank alloc] initWithPosition:visitorTankPosition AndAngle:90 AndName:@"visitor"];
+        [_tanks addObject:tank];
+        
+        //displayItems
+        _displayItems = [[NSMutableSet alloc] init];
+        
     }
     
     return self;
+}
+
+- (void)addDisplayItem:(DisplayItem *)item{
+    [_displayItems addObject:item];
+}
+
+- (void)removeDisplayItem:(DisplayItem *)item{
+    [_displayItems removeObject:item];
 }
 
 @end

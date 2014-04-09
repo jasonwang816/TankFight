@@ -13,9 +13,15 @@
 
 @implementation UIItem
 
-+(id)spriteWithImageNamed:(NSString*)imageName
++(id)spriteWithImageNamed:(NSString*)imageName LinkToLogicItem:(DisplayItem *)logicItem
 {
     UIItem * sprite = [[self alloc] initWithImageNamed:imageName];
+    sprite.logicItem = logicItem;
+    
+    if (logicItem){
+        sprite.position = logicItem.position;
+        sprite.rotation = logicItem.rotation;
+    }
     //sprite.scale = 0.5;
     return sprite;
 }
@@ -34,15 +40,25 @@
 //    return trans;
 //}
 
-- (void)syncToDisplayItem:(DisplayItem *) display{
-    display.position = self.position;
-    display.rotation = self.rotation;
+- (void)syncToDisplayItem{
+    self.logicItem.position = self.position;
+    self.logicItem.rotation = self.rotation;
 }
 
-- (void)syncFromDisplayItem:(DisplayItem *) display{
-    self.position = display.position;
-    self.rotation = display.rotation;
+- (void)syncFromDisplayItem{
+    self.position = self.logicItem.position;
+    self.rotation = self.logicItem.rotation;
 }
+
+//- (void)syncToDisplayItem:(DisplayItem *) display{
+//    display.position = self.position;
+//    display.rotation = self.rotation;
+//}
+//
+//- (void)syncFromDisplayItem:(DisplayItem *) display{
+//    self.position = display.position;
+//    self.rotation = display.rotation;
+//}
 
 
 @end

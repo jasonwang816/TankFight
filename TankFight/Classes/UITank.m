@@ -36,22 +36,24 @@
 //        self.physicsWorld = manager.physicsWorld;
         self.tank = tank;
         
-        _ccBody = [UIItem spriteWithImageNamed:@"Body.png"];
-        _ccBody.position  = ccp(tank.body.position.x, tank.body.position.y);
-        _ccBody.rotation = tank.body.rotation;
+        _ccBody = [UIItem spriteWithImageNamed:@"Body.png" LinkToLogicItem:tank.body];
+//        _ccBody.position  = ccp(tank.body.position.x, tank.body.position.y);
+//        _ccBody.rotation = tank.body.rotation;
         _ccBody.userObject = [[ItemInfo alloc] initWithTank:self.tank AndType:UserObjectType_Tank];
         
-        _ccCannon = [UIItem spriteWithImageNamed:@"cannon.png"];
+        _ccCannon = [UIItem spriteWithImageNamed:@"cannon.png" LinkToLogicItem:tank.cannon];
         _ccCannon.anchorPoint = ccp(0.25, 0.5);
-        //_ccCannon.anchorPoint = ccp(_ccCannon.contentSize.width / 4, _ccCannon.contentSize.height / 2);
-        _ccCannon.position  = ccp(tank.cannon.position.x, tank.cannon.position.y);
-        _ccCannon.rotation = tank.cannon.rotation; //tank.rotation;
+//        _ccCannon.position  = ccp(tank.cannon.position.x, tank.cannon.position.y);
+//        _ccCannon.rotation = tank.cannon.rotation; //tank.rotation;
         
         //laser & radar
-        _ccLaser = [self getLaserSprite];
+        _ccLaser = [UIItem spriteWithImageNamed:@"darkBlue_350_200.png" LinkToLogicItem:tank.radar];
+        CGFloat range = tank.getRadarRange;
+        _ccLaser.textureRect = CGRectMake(0, 0, range, 0.3);
+        
         _ccLaser.anchorPoint = CGPointZero;
-        _ccLaser.rotation = tank.radar.rotation;
-        _ccLaser.position  = ccp(tank.radar.position.x, tank.radar.position.y); // _ccRadar.position;
+//        _ccLaser.rotation = tank.radar.rotation;
+//        _ccLaser.position  = tank.radar.position; // _ccRadar.position;
         _ccLaser.userObject = [[ItemInfo alloc] initWithTank:self.tank AndType:UserObjectType_Radar];
         
         UIItem * ccRadar = [UIItem spriteWithImageNamed:@"radar.png"];
@@ -155,9 +157,10 @@
     
     CCActionRotateBy* actionSpin = [self.manager rotateAtLocation:_ccBody.position From:(_ccCannon.rotation) ToFacePoint:locationPoint AtSpeed:180];//TODO speed constant
     CCActionCallBlock *actionBlock = [CCActionCallBlock actionWithBlock:^{
-        UIItem * bullet = [UIItem spriteWithImageNamed:@"bullet.png"];
-        bullet.position = [self getCannonPosition];
-        bullet.rotation = _ccCannon.rotation;
+        DisplayItem * logicBullet = [[DisplayItem alloc] initWithPosition:[self getCannonPosition] AndAngle:_ccCannon.rotation];
+        UIItem * bullet = [UIItem spriteWithImageNamed:@"bullet.png" LinkToLogicItem:logicBullet];
+//        bullet.position = [self getCannonPosition];
+//        bullet.rotation = _ccCannon.rotation;
         bullet.userObject = [[ItemInfo alloc] initWithTank:self.tank AndType:UserObjectType_Bullet];
         
         bullet.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, bullet.contentSize} cornerRadius:0]; // 1
@@ -204,30 +207,30 @@
 }
 
 
-- (UIItem *) getLaserSprite
-{
-    UIItem * sprite = [UIItem spriteWithImageNamed:@"darkBlue_350_200.png"];
-    
-    CGFloat range = [self.tank getRadarRange];
-    sprite.textureRect = CGRectMake(0, 0, range, 0.3);
-    
-    return sprite;
-}
+//- (UIItem *) getLaserSprite
+//{
+//    UIItem * sprite = [UIItem spriteWithImageNamed:@"darkBlue_350_200.png"];
+//    
+//    CGFloat range = [self.tank getRadarRange];
+//    sprite.textureRect = CGRectMake(0, 0, range, 0.3);
+//    
+//    return sprite;
+//}
 
 - (void) syncToLogicTank:(Tank *) logicTank{
     
-    [self.ccBody syncToDisplayItem:logicTank.body];
-    [self.ccCannon syncToDisplayItem:logicTank.cannon];
-    [self.ccLaser syncToDisplayItem:logicTank.radar];
+    [self.ccBody syncToDisplayItem];
+    [self.ccCannon syncToDisplayItem];
+    [self.ccLaser syncToDisplayItem];
    
 }
 
 
 - (void) syncFromLogicTank:(Tank *) logicTank{
     
-    [self.ccBody syncFromDisplayItem:logicTank.body];
-    [self.ccCannon syncFromDisplayItem:logicTank.cannon];
-    [self.ccLaser syncFromDisplayItem:logicTank.radar];
+    [self.ccBody syncFromDisplayItem];
+    [self.ccCannon syncFromDisplayItem];
+    [self.ccLaser syncFromDisplayItem];
     
 }
 

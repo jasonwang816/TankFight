@@ -35,11 +35,14 @@
 //if isPhysicsEnable is true, root is physics world; otherwise is game field.
 @property (nonatomic) CCNode * rootNode;
 
-@property (nonatomic) UITank * ccTankHome;
-@property (nonatomic) UITank * ccTankVisitor;
+@property (nonatomic) NSMutableArray * ccTanks;
+@property (nonatomic) NSMutableSet * uiItems;
 
 - (id)initWithGameLogic:(GameLogic *)logic AtOrigin:(CGPoint)originPoint WithPhysics:(BOOL)enabled;
 - (void)updateUI;
+- (void)addUIItem:(UIItem *)item;
+- (void)removeUIItem:(UIItem *)item;
+
 
 - (CCActionMoveTo *)moveFrom:(CGPoint)startPoint ToPoint:(CGPoint)targetPoint AtSpeed:(CGFloat)speed Distance:(CGFloat)distance;
 ///speed degree/second

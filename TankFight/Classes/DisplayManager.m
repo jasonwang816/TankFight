@@ -33,10 +33,18 @@
             [_physicsWorld addChild:_ccGameField];
             self.rootNode = _physicsWorld;
         }
-
-        _ccTankHome = [[UITank alloc] initWithTank:_logic.tankHome ByManager:self];
-        _ccTankVisitor = [[UITank alloc] initWithTank:_logic.tankVisitor ByManager:self];  
-
+        
+        //uitanks
+        UITank * uiTank;
+        self.ccTanks = [[NSMutableArray alloc] init];
+        for (int i=0; i<_logic.tanks.count; i++) {
+            
+            uiTank = [[UITank alloc] initWithTank:_logic.tanks[i] ByManager:self];
+            [_ccTanks addObject:uiTank];
+        }
+        
+        //uiitems
+        _uiItems = [[NSMutableSet alloc] init];
     }
     return self;
 }
@@ -101,12 +109,10 @@
 - (void)updateUI
 {
     if (_isPhysicsEnable){
-        if (_ccTankHome){
-            [_ccTankHome adjustRelatedSprites];
+        for (int i=0; i<self.ccTanks.count; i++) {
+            [self.ccTanks[i] adjustRelatedSprites];
         }
-        if (_ccTankVisitor){
-            [_ccTankVisitor adjustRelatedSprites];
-        }
+
         [self updateLogicDataFromUI];
     }else
     {
@@ -118,17 +124,39 @@
 }
 
 - (void) updateLogicDataFromUI{
-    
-    [_ccTankHome syncToLogicTank:_logic.tankHome];
-    [_ccTankVisitor syncToLogicTank:_logic.tankVisitor];
-    
+    for (int i=0; i<self.ccTanks.count; i++) {
+        [self.ccTanks[i] syncToLogicTank:_logic.tanks[i]];
+    }
+    for (UIItem * uiitem in _uiItems) {
+        [uiitem syncToDisplayItem];
+    }
 }
 
+//Note! It is possible displaymanager.uiItems doesn't have the uiitem in Logic.displayitems
 - (void) updateUIDataFromLogic{
+    for (int i=0; i<self.ccTanks.count; i++) {
+        [self.ccTanks[i] syncFromLogicTank:_logic.tanks[i]];
+    }
     
-    [_ccTankHome syncFromLogicTank:_logic.tankHome];
-    [_ccTankVisitor syncFromLogicTank:_logic.tankVisitor];
+    for (DisplayItem * logicItem in _logic.displayItems) {
+        if
+    }
     
+    for (UIItem * uiitem in _uiItems) {
+        [uiitem syncToDisplayItem];
+    }
+}
+
+-(void) addUIItem:(UIItem *)item{
+    [self.rootNode addChild:item];
+    [_uiItems addObject:item];
+    [_logic addDisplayItem:item.logicItem];
+}
+
+-(void) removeUIItem:(UIItem *)item{
+    [item removeFromParent];
+    [_uiItems removeObject:item];
+    [_logic removeDisplayItem:item.logicItem];
 }
 
 // -----------------------------------------------------------------------

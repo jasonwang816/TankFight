@@ -73,11 +73,11 @@
     CGPoint touchLocation = [touch locationInNode:self];
     
     //scan test
-    [physicsManager.ccTankHome scan:160];
+    [physicsManager.ccTanks[0] scan:160];
     //Fire test
     //[uiManager.ccTankHome fireAt:touchLocation]; return;
     //move test
-    [physicsManager.ccTankHome moveTo:touchLocation];
+    [physicsManager.ccTanks[0] moveTo:touchLocation];
     
     [NSTimer scheduledTimerWithTimeInterval:0.1 target:self  selector:@selector(fireAT) userInfo:nil repeats:NO];
 
@@ -85,7 +85,7 @@
 }
 
 -(void)fireAT{
-    [physicsManager.ccTankHome fireAt:CGPointMake(400, 200)];
+    [physicsManager.ccTanks[0] fireAt:CGPointMake(400, 200)];
 }
 
 // -----------------------------------------------------------------------
