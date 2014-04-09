@@ -25,10 +25,14 @@
 
 @property (nonatomic) GameLogic * logic;
 @property (nonatomic) CGPoint origin;
+
+//if true, this dinstance is for real game physics logic;
+//oterwise is just for display, no physics bodys for sprites.
 @property (nonatomic) BOOL isPhysicsEnable;
 
 @property (nonatomic) CGFloat adjustAngle;
 
+//if isPhysicsEnable is true, root is physics world; otherwise is game field.
 @property (nonatomic) CCNode * rootNode;
 
 @property (nonatomic) UITank * ccTankHome;

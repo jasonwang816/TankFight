@@ -214,6 +214,41 @@
     return sprite;
 }
 
+- (void) syncToLogicTank:(Tank *) logicTank{
+    
+    [self.ccBody syncToDisplayItem:logicTank.body];
+    [self.ccCannon syncToDisplayItem:logicTank.cannon];
+    [self.ccLaser syncToDisplayItem:logicTank.radar];
+   
+}
+
+
+- (void) syncFromLogicTank:(Tank *) logicTank{
+    
+    [self.ccBody syncFromDisplayItem:logicTank.body];
+    [self.ccCannon syncFromDisplayItem:logicTank.cannon];
+    [self.ccLaser syncFromDisplayItem:logicTank.radar];
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// -----------------------------------------------------------------------
+
+#pragma mark - No use code
 //No use code:
 //----------------------------------------------
 

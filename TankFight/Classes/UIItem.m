@@ -21,21 +21,28 @@
 }
 
 
--(CGAffineTransform) nodeToParentTransform
-{
-    ItemInfo * info = self.userObject;
-    
-    if (info.itemType == UserObjectType_Tank) {
-        NSLog(@"nodeToParentTransform");
-    }
-    
-    CGAffineTransform trans = [super nodeToParentTransform];
-    
-    return trans;
+//-(CGAffineTransform) nodeToParentTransform
+//{
+//    ItemInfo * info = self.userObject;
+//    
+//    if (info.itemType == UserObjectType_Tank) {
+//        NSLog(@"nodeToParentTransform");
+//    }
+//    
+//    CGAffineTransform trans = [super nodeToParentTransform];
+//    
+//    return trans;
+//}
+
+- (void)syncToDisplayItem:(DisplayItem *) display{
+    display.position = self.position;
+    display.rotation = self.rotation;
 }
 
-
-
+- (void)syncFromDisplayItem:(DisplayItem *) display{
+    self.position = display.position;
+    self.rotation = display.rotation;
+}
 
 
 @end

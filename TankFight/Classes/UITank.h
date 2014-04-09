@@ -29,6 +29,12 @@
 
 - (id)initWithTank:(Tank *)tank ByManager:(DisplayManager *)manager;
 //- (id)initWithTank:(Tank *)tank InWorld:(CCPhysicsNode *)world;
+
+//Sync data
+- (void) syncToLogicTank:(Tank *) logicTank;
+- (void) syncFromLogicTank:(Tank *) logicTank;
+
+//Actions
 - (void)moveTo:(CGPoint)locationPoint;
 - (void)fireAt:(CGPoint)locationPoint;
 - (void)scan:(CGFloat)angle;

@@ -93,6 +93,10 @@
 // -----------------------------------------------------------------------
 #pragma mark - Local methods
 // -----------------------------------------------------------------------
+//start game
+- (void)start{
+    
+}
 
 - (void)updateUI
 {
@@ -113,40 +117,17 @@
     //TODO: update game data in game logic!!!!!!!!!
 }
 
-- (void) updateLogicTank:(Tank *) logicTank FromUITank:(UITank *)uiTank{
-    
-    logicTank.body.position = uiTank.ccBody.position;
-    logicTank.body.rotation = uiTank.ccBody.rotation;
-    logicTank.cannon.position = uiTank.ccCannon.position;
-    logicTank.cannon.rotation = uiTank.ccCannon.rotation;
-    logicTank.radar.position = uiTank.ccLaser.position;
-    logicTank.cannon.rotation = uiTank.ccLaser.rotation;
-
-}
-
 - (void) updateLogicDataFromUI{
     
-    [self updateLogicTank:_logic.tankHome FromUITank:_ccTankHome];
-    [self updateLogicTank:_logic.tankVisitor FromUITank:_ccTankVisitor];
-
-}
-
-
-- (void) updateUITank:(UITank *)uiTank FromLogicTank:(Tank *)logicTank{
-    
-    uiTank.ccBody.position = logicTank.body.position;
-    uiTank.ccBody.rotation = logicTank.body.rotation;
-    uiTank.ccCannon.position = logicTank.cannon.position;
-    uiTank.ccCannon.rotation = logicTank.cannon.rotation;
-    uiTank.ccLaser.position = logicTank.radar.position;
-    uiTank.ccLaser.rotation = logicTank.cannon.rotation;
+    [_ccTankHome syncToLogicTank:_logic.tankHome];
+    [_ccTankVisitor syncToLogicTank:_logic.tankVisitor];
     
 }
 
 - (void) updateUIDataFromLogic{
     
-    [self updateUITank:_ccTankHome FromLogicTank:_logic.tankHome];
-    [self updateUITank:_ccTankVisitor FromLogicTank:_logic.tankVisitor];
+    [_ccTankHome syncFromLogicTank:_logic.tankHome];
+    [_ccTankVisitor syncFromLogicTank:_logic.tankVisitor];
     
 }
 

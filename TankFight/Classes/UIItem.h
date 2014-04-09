@@ -9,7 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "cocos2d-ui.h"
+#import "DisplayItem.h"
 
 @interface UIItem : CCSprite
+
+- (void)syncToDisplayItem:(DisplayItem *) display;
+- (void)syncFromDisplayItem:(DisplayItem *) display;
 
 @end
