@@ -70,7 +70,7 @@
     _physicsWorld.collisionDelegate = self;
     
     GameField * field = _logic.gameField;
-    CCSprite * edge;
+    UIItem * edge;
     edge = [self buildEdgeAtPoint:CGPointMake(0, 0) WithSize:CGSizeMake(field.fieldSize.width, 0.1)];  //top
     [_ccGameField addChild:edge];
     edge = [self buildEdgeAtPoint:CGPointMake(0, 0) WithSize:CGSizeMake(0.1, field.fieldSize.height)];  //left
@@ -81,9 +81,9 @@
     [_ccGameField addChild:edge];    
 }
 
-- (CCSprite * )buildEdgeAtPoint:(CGPoint)point WithSize:(CGSize )size{
+- (UIItem * )buildEdgeAtPoint:(CGPoint)point WithSize:(CGSize )size{
     
-    CCSprite * sprite = [CCSprite spriteWithImageNamed:@"field.jpg"];
+    UIItem * sprite = [UIItem spriteWithImageNamed:@"field.jpg"];
     sprite.anchorPoint = CGPointZero;
     sprite.textureRect = (CGRect){CGPointZero, size};
     sprite.position = point;
@@ -124,6 +124,7 @@
     //TODO: update game data in game logic!!!!!!!!!
 }
 
+//Used for update logic data from Physics manager
 - (void) updateLogicDataFromUI{
     for (int i=0; i<self.ccTanks.count; i++) {
         [self.ccTanks[i] syncToLogicTank:_logic.tanks[i]];
@@ -134,6 +135,7 @@
     }
 }
 
+//Used fro update UI display from logic data.
 //Note! It is possible displaymanager.uiItems doesn't have the uiitem in Logic.displayitems
 - (void) updateUIDataFromLogic{
     for (int i=0; i<self.ccTanks.count; i++) {
@@ -150,10 +152,7 @@
         }
         [uiItem syncFromLogicDisplayItem];
     }
-    
-//    for (UIItem * uiitem in _uiItems) {
-//        [uiitem syncToLogicDisplayItem];
-//    }
+
 }
 
 -(void) addUIItem:(UIItem *)item{
@@ -184,11 +183,78 @@
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Default:(CCNode *)itemA Default:(CCNode *)itemB {
     //    [monster removeFromParent];
     //    [projectile removeFromParent];
+    NSArray * items = [NSArray arrayWithObjects:itemA, itemB, nil];
     
-    NSLog(@"\n itemA : %@ \n itemB : %@ \n ----------------------------------------------------------- ", (ItemInfo * )itemA.userObject, (ItemInfo * )itemB.userObject);
+    UIItem * theOne;  //the item with checking CCUnitType
+    UIItem * theOther; //the other item
+    
+    //check field border
+    NSInteger index = [self indexOfType:CCUnitType_Field InArray:items];
+    if ( index >= 0) {
+        theOne = items[index];
+        theOther = items[1-index];
+        
+        if (theOther.userObjectType == CCUnitType_Bullet) //bullet hit border
+        {
+            [self removeUIItem:theOther];
+            return NO;
+        }
+        
+        if (theOther.userObjectType == CCUnitType_RadarLaser) //laser hit border
+        {
+            return NO;
+        }
+        
+        //for tank body/cannon
+        return YES;
+    }
+    
+    //bullet
+    index = [self indexOfType:CCUnitType_Bullet InArray:items];
+    if ( index >= 0) {
+        theOne = items[index]; //bullet
+        theOther = items[1-index];
+        
+        if (theOther.userObjectType == CCUnitType_Tank) //bullet hit tank
+        {
+            [theOther.logicItem.owner physicsCollisionWith:theOne.logicItem];
+            [self removeUIItem:theOne]; //remove bullet
+            //
+        }
+        return NO;
+    }
+    
+    //radar laser
+    index = [self indexOfType:CCUnitType_RadarLaser InArray:items];
+    if ( index >= 0) {
+        theOne = items[index]; //radar laser
+        theOther = items[1-index];
+        
+        if (theOther.userObjectType == CCUnitType_Tank) //bullet hit tank
+        {
+            //update tank intel: found other tank.
+            [theOne.logicItem.owner physicsCollisionWith:theOther.logicItem];
+        }
+        return NO;
+    }
+    
+    //Tank to Tank
+    
+    NSLog(@"\n itemA : %@ \n itemB : %@ \n ----------------------------------------------------------- ", (ItemInfo *)itemA.userObject, (ItemInfo *)itemB.userObject);
     return YES;
 }
 
+//returns: -1 : none; otherwise the index of item with checking type
+- (NSInteger)indexOfType:(CCUnitType)type InArray:(NSArray *)infoArray{
+    
+    for (int i=0; i<infoArray.count; i++) {
+        UIItem * uiItem = infoArray[i];
+        if (uiItem.userObjectType == type) {
+            return i;
+        }
+    }
+    return -1;
+}
 
 // -----------------------------------------------------------------------
 #pragma mark - static functions

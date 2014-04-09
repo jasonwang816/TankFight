@@ -21,6 +21,8 @@
 //- (void)syncToLogicDisplayItem:(LogicDisplayItem *) display;
 //- (void)syncFromLogicDisplayItem:(LogicDisplayItem *) display;
 
+- (CCUnitType)userObjectType;
+
 +(id)spriteWithImageNamed:(NSString*)imageName LinkToLogicItem:(LogicDisplayItem *)logicItem;
 
 @end

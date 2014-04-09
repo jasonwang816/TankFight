@@ -40,6 +40,23 @@
     return self;
 }
 
+//update from physics
+- (void)physicsCollisionWith:(LogicDisplayItem *)item
+{
+    //bullet
+    if (item.itemType == CCUnitType_Bullet) {
+        self.health -= 10;
+        NSLog(@"physicsCollisionWith: %@ hit by bullet. [health:%d]", self.name, self.health);
+    }
+    
+    //other tank;
+    if (item.itemType == CCUnitType_Tank) {
+        NSLog(@"physicsCollisionWith: %@ Found : %@", self.name, item.owner.name);
+    }
+    //update intel
+}
+
+
 //Should based on level
 - (CGFloat)getRadarRange{
     return 150;

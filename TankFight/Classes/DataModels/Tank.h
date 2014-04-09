@@ -23,5 +23,7 @@
 
 - (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndName:(NSString *) name;
 
+- (void)physicsCollisionWith:(LogicDisplayItem *)item;
+
 - (CGFloat)getRadarRange;
 @end

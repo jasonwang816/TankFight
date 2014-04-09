@@ -43,6 +43,10 @@
 //    return trans;
 //}
 
+- (CCUnitType)userObjectType{
+    return ((ItemInfo *)self.userObject).itemType;
+}
+
 - (void)syncToLogicDisplayItem{
     self.logicItem.position = self.position;
     self.logicItem.rotation = self.rotation;

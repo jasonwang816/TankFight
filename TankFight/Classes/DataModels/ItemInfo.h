@@ -16,6 +16,7 @@
 @interface ItemInfo : NSObject
 
 @property (nonatomic, weak) Tank * tank;
+
 @property (nonatomic) CCUnitType itemType;
 
 - (id)initWithTank:(Tank *)tank AndType:(CCUnitType *)type;
