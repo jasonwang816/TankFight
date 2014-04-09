@@ -10,7 +10,7 @@
 
 @implementation ItemInfo
 
-- (id)initWithTank:(Tank *)tank AndType:(CCUserObjectType *)type{
+- (id)initWithTank:(Tank *)tank AndType:(CCUnitType *)type{
     
     self = [super init];
     
@@ -27,22 +27,28 @@
     return [NSString stringWithFormat:@"%@ %@", _tank.name, [self formatTypeToString:_itemType]];
 }
 
-- (NSString*)formatTypeToString:(CCUserObjectType)formatType {
+- (NSString*)formatTypeToString:(CCUnitType)formatType {
     
     NSString *result = @"unknow";
     
     switch(formatType) {
-        case UserObjectType_Field:
-            result = @"UserObjectType_Field";
+        case CCUnitType_Field:
+            result = @"CCUnitType_Field";
             break;
-        case UserObjectType_Bullet:
-            result = @"UserObjectType_Bullet";
+        case CCUnitType_Bullet:
+            result = @"CCUnitType_Bullet";
             break;
-        case UserObjectType_Radar:
-            result = @"UserObjectType_Radar";
+        case CCUnitType_Laser:
+            result = @"CCUnitType_Laser";
             break;
-        case UserObjectType_Tank:
-            result = @"UserObjectType_Tank";
+        case CCUnitType_Cannon:
+            result = @"CCUnitType_Cannon";
+            break;
+        case CCUnitType_Radar:
+            result = @"CCUnitType_Radar";
+            break;
+        case CCUnitType_Tank:
+            result = @"CCUnitType_Tank";
             break;
         default:
             [NSException raise:NSGenericException format:@"Unexpected FormatType."];

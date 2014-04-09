@@ -61,11 +61,18 @@ static const float CONST_BULLET_HEIGHT = 12.0f;
 static const float CONST_RADAR_WIDTH = 11.0f;
 static const float CONST_RADAR_HEIGHT = 14.0f;
 
+//typedef enum {
+//    UserObjectType_Field,
+//    UserObjectType_Tank,
+//    UserObjectType_Radar,
+//    UserObjectType_Bullet
+//} CCUserObjectType;
+
 typedef enum {
-    UserObjectType_Field,
-    UserObjectType_Tank,
-    UserObjectType_Radar,
-    UserObjectType_Bullet
-} CCUserObjectType;
-
-
+    CCUnitType_Field,
+    CCUnitType_Tank,
+    CCUnitType_Cannon,
+    CCUnitType_Laser,
+    CCUnitType_Radar,
+    CCUnitType_Bullet
+} CCUnitType;

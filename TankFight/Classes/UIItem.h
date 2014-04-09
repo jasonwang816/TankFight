@@ -13,6 +13,7 @@
 
 @interface UIItem : CCSprite
 
+@property (nonatomic) NSUInteger itemID;
 @property (nonatomic, weak) LogicDisplayItem * logicItem;
 
 - (void)syncToLogicDisplayItem;

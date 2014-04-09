@@ -31,7 +31,7 @@
 //{
 //    ItemInfo * info = self.userObject;
 //    
-//    if (info.itemType == UserObjectType_Tank) {
+//    if (info.itemType == CCUnitType_Tank) {
 //        NSLog(@"nodeToParentTransform");
 //    }
 //    

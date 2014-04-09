@@ -11,6 +11,13 @@
 
 @implementation GameLogic
 
+static NSUInteger nextUIItemID = 0;
+
++ (NSUInteger)getNextUIItemID{
+    return nextUIItemID++;
+}
+
+
 - (id) init
 {
     self = [super init];

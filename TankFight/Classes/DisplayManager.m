@@ -86,7 +86,7 @@
     sprite.anchorPoint = CGPointZero;
     sprite.textureRect = (CGRect){CGPointZero, size};
     sprite.position = point;
-    sprite.userObject = [[ItemInfo alloc] initWithTank:nil AndType:UserObjectType_Field];
+    sprite.userObject = [[ItemInfo alloc] initWithTank:nil AndType:CCUnitType_Field];
     
     NSString * collisionGroup = @"Field";
     sprite.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, size} cornerRadius:0]; // 1
