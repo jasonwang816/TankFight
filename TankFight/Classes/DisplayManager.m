@@ -128,7 +128,7 @@
         [self.ccTanks[i] syncToLogicTank:_logic.tanks[i]];
     }
     for (UIItem * uiitem in _uiItems) {
-        [uiitem syncToDisplayItem];
+        [uiitem syncToLogicDisplayItem];
     }
 }
 
@@ -138,25 +138,25 @@
         [self.ccTanks[i] syncFromLogicTank:_logic.tanks[i]];
     }
     
-    for (DisplayItem * logicItem in _logic.displayItems) {
-        if
-    }
+//    for (LogicDisplayItem * logicItem in _logic.displayItems) {
+//        if
+//    }
     
     for (UIItem * uiitem in _uiItems) {
-        [uiitem syncToDisplayItem];
+        [uiitem syncToLogicDisplayItem];
     }
 }
 
 -(void) addUIItem:(UIItem *)item{
     [self.rootNode addChild:item];
     [_uiItems addObject:item];
-    [_logic addDisplayItem:item.logicItem];
+    [_logic addLogicDisplayItem:item.logicItem];
 }
 
 -(void) removeUIItem:(UIItem *)item{
     [item removeFromParent];
     [_uiItems removeObject:item];
-    [_logic removeDisplayItem:item.logicItem];
+    [_logic removeLogicDisplayItem:item.logicItem];
 }
 
 // -----------------------------------------------------------------------

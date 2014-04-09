@@ -13,13 +13,13 @@
 
 @interface UIItem : CCSprite
 
-@property (nonatomic, weak) DisplayItem * logicItem;
+@property (nonatomic, weak) LogicDisplayItem * logicItem;
 
-- (void)syncToDisplayItem;
-- (void)syncFromDisplayItem;
-//- (void)syncToDisplayItem:(DisplayItem *) display;
-//- (void)syncFromDisplayItem:(DisplayItem *) display;
+- (void)syncToLogicDisplayItem;
+- (void)syncFromLogicDisplayItem;
+//- (void)syncToLogicDisplayItem:(LogicDisplayItem *) display;
+//- (void)syncFromLogicDisplayItem:(LogicDisplayItem *) display;
 
-+(id)spriteWithImageNamed:(NSString*)imageName LinkToLogicItem:(DisplayItem *)logicItem;
++(id)spriteWithImageNamed:(NSString*)imageName LinkToLogicItem:(LogicDisplayItem *)logicItem;
 
 @end

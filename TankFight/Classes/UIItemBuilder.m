@@ -12,11 +12,11 @@
 
 @implementation UIItemBuilder
 
-+ (void)addDisplayItem:(DisplayItem *)display ToParentNode:(CCNode *)parent{
++ (void)addLogicDisplayItem:(LogicDisplayItem *)logicItem ToParentNode:(CCNode *)parent{
     
 }
 
-+ (UIItem *)buildUIItem:(DisplayItem *)display{
++ (UIItem *)buildUIItem:(LogicDisplayItem *)logicItem{
     
 }
 

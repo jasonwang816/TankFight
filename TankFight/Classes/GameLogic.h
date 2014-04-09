@@ -19,9 +19,9 @@ static const CGPoint visitorTankPosition = (CGPoint){350, 200};
 @property (nonatomic) GameField * gameField;
 
 @property (nonatomic) NSMutableArray * tanks;
-@property (nonatomic) NSMutableSet * displayItems;
+@property (nonatomic) NSMutableSet * logicDisplayItems;
 
-- (void)addDisplayItem:(DisplayItem *)item;
-- (void)removeDisplayItem:(DisplayItem *)item;
+- (void)addLogicDisplayItem:(LogicDisplayItem *)item;
+- (void)removeLogicDisplayItem:(LogicDisplayItem *)item;
 
 @end

@@ -1,5 +1,5 @@
 //
-//  DisplayItem.h
+//  LogicDisplayItem.h
 //  TankFight
 //
 //  Created by Jason Wang on 2014-03-13.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DisplayItem : NSObject
+@interface LogicDisplayItem : NSObject
 
 @property (nonatomic) CGPoint position;
 @property (nonatomic) float rotation;

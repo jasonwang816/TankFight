@@ -1,5 +1,5 @@
 //
-//  DisplayItem.m
+//  LogicDisplayItem.m
 //  TankFight
 //
 //  Created by Jason Wang on 2014-03-13.
@@ -8,7 +8,7 @@
 
 #import "DisplayItem.h"
 
-@implementation DisplayItem
+@implementation LogicDisplayItem
 
 - (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle{
     

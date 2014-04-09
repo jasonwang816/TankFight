@@ -157,7 +157,7 @@
     
     CCActionRotateBy* actionSpin = [self.manager rotateAtLocation:_ccBody.position From:(_ccCannon.rotation) ToFacePoint:locationPoint AtSpeed:180];//TODO speed constant
     CCActionCallBlock *actionBlock = [CCActionCallBlock actionWithBlock:^{
-        DisplayItem * logicBullet = [[DisplayItem alloc] initWithPosition:[self getCannonPosition] AndAngle:_ccCannon.rotation];
+        LogicDisplayItem * logicBullet = [[LogicDisplayItem alloc] initWithPosition:[self getCannonPosition] AndAngle:_ccCannon.rotation];
         UIItem * bullet = [UIItem spriteWithImageNamed:@"bullet.png" LinkToLogicItem:logicBullet];
 //        bullet.position = [self getCannonPosition];
 //        bullet.rotation = _ccCannon.rotation;
@@ -219,18 +219,18 @@
 
 - (void) syncToLogicTank:(Tank *) logicTank{
     
-    [self.ccBody syncToDisplayItem];
-    [self.ccCannon syncToDisplayItem];
-    [self.ccLaser syncToDisplayItem];
+    [self.ccBody syncToLogicDisplayItem];
+    [self.ccCannon syncToLogicDisplayItem];
+    [self.ccLaser syncToLogicDisplayItem];
    
 }
 
 
 - (void) syncFromLogicTank:(Tank *) logicTank{
     
-    [self.ccBody syncFromDisplayItem];
-    [self.ccCannon syncFromDisplayItem];
-    [self.ccLaser syncFromDisplayItem];
+    [self.ccBody syncFromLogicDisplayItem];
+    [self.ccCannon syncFromLogicDisplayItem];
+    [self.ccLaser syncFromLogicDisplayItem];
     
 }
 

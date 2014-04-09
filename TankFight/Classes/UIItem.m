@@ -13,7 +13,7 @@
 
 @implementation UIItem
 
-+(id)spriteWithImageNamed:(NSString*)imageName LinkToLogicItem:(DisplayItem *)logicItem
++(id)spriteWithImageNamed:(NSString*)imageName LinkToLogicItem:(LogicDisplayItem *)logicItem
 {
     UIItem * sprite = [[self alloc] initWithImageNamed:imageName];
     sprite.logicItem = logicItem;
@@ -40,24 +40,24 @@
 //    return trans;
 //}
 
-- (void)syncToDisplayItem{
+- (void)syncToLogicDisplayItem{
     self.logicItem.position = self.position;
     self.logicItem.rotation = self.rotation;
 }
 
-- (void)syncFromDisplayItem{
+- (void)syncFromLogicDisplayItem{
     self.position = self.logicItem.position;
     self.rotation = self.logicItem.rotation;
 }
 
-//- (void)syncToDisplayItem:(DisplayItem *) display{
-//    display.position = self.position;
-//    display.rotation = self.rotation;
+//- (void)syncToLogicDisplayItem:(LogicDisplayItem *) logic{
+//    logic.position = self.position;
+//    logic.rotation = self.rotation;
 //}
 //
-//- (void)syncFromDisplayItem:(DisplayItem *) display{
-//    self.position = display.position;
-//    self.rotation = display.rotation;
+//- (void)syncFromLogicDisplayItem:(LogicDisplayItem *) logic{
+//    self.position = logic.position;
+//    self.rotation = logic.rotation;
 //}
 
 

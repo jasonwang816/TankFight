@@ -29,20 +29,20 @@
         tank = [[Tank alloc] initWithPosition:visitorTankPosition AndAngle:90 AndName:@"visitor"];
         [_tanks addObject:tank];
         
-        //displayItems
-        _displayItems = [[NSMutableSet alloc] init];
+        //logicDisplayItems
+        _logicDisplayItems = [[NSMutableSet alloc] init];
         
     }
     
     return self;
 }
 
-- (void)addDisplayItem:(DisplayItem *)item{
-    [_displayItems addObject:item];
+- (void)addLogicDisplayItem:(LogicDisplayItem *)item{
+    [_logicDisplayItems addObject:item];
 }
 
-- (void)removeDisplayItem:(DisplayItem *)item{
-    [_displayItems removeObject:item];
+- (void)removeLogicDisplayItem:(LogicDisplayItem *)item{
+    [_logicDisplayItems removeObject:item];
 }
 
 @end

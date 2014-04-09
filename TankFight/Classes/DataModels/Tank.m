@@ -30,9 +30,9 @@
         _health = 100;        
         self.name = name;
         
-        self.body = [[DisplayItem alloc] initWithPosition:pos AndAngle:angle];
-        self.cannon = [[DisplayItem alloc] initWithPosition:pos AndAngle:angle];
-        self.radar = [[DisplayItem alloc] initWithPosition:pos AndAngle:angle];
+        self.body = [[LogicDisplayItem alloc] initWithPosition:pos AndAngle:angle];
+        self.cannon = [[LogicDisplayItem alloc] initWithPosition:pos AndAngle:angle];
+        self.radar = [[LogicDisplayItem alloc] initWithPosition:pos AndAngle:angle];
 
     }
     

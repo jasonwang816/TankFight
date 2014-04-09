@@ -15,9 +15,9 @@
 @property (nonatomic) NSInteger level;
 @property (nonatomic) NSInteger health;
 
-@property (nonatomic) DisplayItem * body;
-@property (nonatomic) DisplayItem * cannon;
-@property (nonatomic) DisplayItem * radar;
+@property (nonatomic) LogicDisplayItem * body;
+@property (nonatomic) LogicDisplayItem * cannon;
+@property (nonatomic) LogicDisplayItem * radar;
 
 - (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndName:(NSString *) name;
 
