@@ -36,7 +36,7 @@
 @property (nonatomic) CCNode * rootNode;
 
 @property (nonatomic) NSMutableArray * ccTanks;
-@property (nonatomic) NSMutableSet * uiItems;
+@property (nonatomic) NSMutableDictionary * uiItems;
 
 - (id)initWithGameLogic:(GameLogic *)logic AtOrigin:(CGPoint)originPoint WithPhysics:(BOOL)enabled;
 - (void)updateUI;

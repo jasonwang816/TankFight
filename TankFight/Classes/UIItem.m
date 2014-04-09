@@ -16,11 +16,14 @@
 +(id)spriteWithImageNamed:(NSString*)imageName LinkToLogicItem:(LogicDisplayItem *)logicItem
 {
     UIItem * sprite = [[self alloc] initWithImageNamed:imageName];
+    sprite.itemID = logicItem.itemID;
     sprite.logicItem = logicItem;
     
     if (logicItem){
         sprite.position = logicItem.position;
         sprite.rotation = logicItem.rotation;
+        ItemInfo * info = [[ItemInfo alloc] initWithTank:logicItem.owner AndType:logicItem.itemType];
+        sprite.userObject = info;
     }
     //sprite.scale = 0.5;
     return sprite;

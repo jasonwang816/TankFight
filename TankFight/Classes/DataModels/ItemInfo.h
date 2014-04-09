@@ -11,9 +11,11 @@
 #import "Constants.h"
 #import "Tank.h"
 
+@class Tank;
+//used for user object for an ccsprite.
 @interface ItemInfo : NSObject
 
-@property (nonatomic) Tank * tank;
+@property (nonatomic, weak) Tank * tank;
 @property (nonatomic) CCUnitType itemType;
 
 - (id)initWithTank:(Tank *)tank AndType:(CCUnitType *)type;

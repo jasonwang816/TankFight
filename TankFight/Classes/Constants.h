@@ -69,10 +69,10 @@ static const float CONST_RADAR_HEIGHT = 14.0f;
 //} CCUserObjectType;
 
 typedef enum {
-    CCUnitType_Field,
+    CCUnitType_Field = 0,
     CCUnitType_Tank,
     CCUnitType_Cannon,
-    CCUnitType_Laser,
-    CCUnitType_Radar,
+    CCUnitType_RadarLaser,
+//    CCUnitType_Radar,
     CCUnitType_Bullet
 } CCUnitType;

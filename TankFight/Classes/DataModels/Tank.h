@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "DisplayItem.h"
 
+@class LogicDisplayItem;
+
 @interface Tank :NSObject
 
 @property (nonatomic) NSString * name;
@@ -17,7 +19,7 @@
 
 @property (nonatomic) LogicDisplayItem * body;
 @property (nonatomic) LogicDisplayItem * cannon;
-@property (nonatomic) LogicDisplayItem * radar;
+@property (nonatomic) LogicDisplayItem * radarLaser;
 
 - (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndName:(NSString *) name;
 

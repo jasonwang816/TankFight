@@ -7,16 +7,21 @@
 //
 
 #import "DisplayItem.h"
+#import "Constants.h"
+#import "GameLogic.h"
 
 @implementation LogicDisplayItem
 
-- (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle{
+- (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndType:(CCUnitType)type AndOwner:(Tank *)owner{
     
     self = [super init];
     
     if (self){
         _position = pos;
-        _rotation = angle;        
+        _rotation = angle;
+        _itemType = type;
+        _owner = owner;
+        _itemID = [GameLogic getNextUIItemID];
     }
     
     return self;

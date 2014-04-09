@@ -7,6 +7,7 @@
 //
 
 #import "Tank.h"
+#import "Constants.h"
 
 @implementation Tank
 
@@ -30,9 +31,9 @@
         _health = 100;        
         self.name = name;
         
-        self.body = [[LogicDisplayItem alloc] initWithPosition:pos AndAngle:angle];
-        self.cannon = [[LogicDisplayItem alloc] initWithPosition:pos AndAngle:angle];
-        self.radar = [[LogicDisplayItem alloc] initWithPosition:pos AndAngle:angle];
+        self.body = [[LogicDisplayItem alloc] initWithPosition:pos AndAngle:angle AndType:CCUnitType_Tank AndOwner:self];
+        self.cannon = [[LogicDisplayItem alloc] initWithPosition:pos AndAngle:angle AndType:CCUnitType_Cannon AndOwner:self];
+        self.radarLaser = [[LogicDisplayItem alloc] initWithPosition:pos AndAngle:angle AndType:CCUnitType_RadarLaser AndOwner:self];
 
     }
     

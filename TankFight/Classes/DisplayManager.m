@@ -8,6 +8,7 @@
 #import "Constants.h"
 #import "DisplayManager.h"
 #import "ItemInfo.h"
+#import "UIItemBuilder.h"
 
 @implementation DisplayManager
 
@@ -44,7 +45,7 @@
         }
         
         //uiitems
-        _uiItems = [[NSMutableSet alloc] init];
+        _uiItems = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -69,7 +70,7 @@
     _physicsWorld.collisionDelegate = self;
     
     GameField * field = _logic.gameField;
-    UIItem * edge;
+    CCSprite * edge;
     edge = [self buildEdgeAtPoint:CGPointMake(0, 0) WithSize:CGSizeMake(field.fieldSize.width, 0.1)];  //top
     [_ccGameField addChild:edge];
     edge = [self buildEdgeAtPoint:CGPointMake(0, 0) WithSize:CGSizeMake(0.1, field.fieldSize.height)];  //left
@@ -80,9 +81,9 @@
     [_ccGameField addChild:edge];    
 }
 
-- (UIItem * )buildEdgeAtPoint:(CGPoint)point WithSize:(CGSize )size{
+- (CCSprite * )buildEdgeAtPoint:(CGPoint)point WithSize:(CGSize )size{
     
-    UIItem * sprite = [CCSprite spriteWithImageNamed:@"field.jpg"];
+    CCSprite * sprite = [CCSprite spriteWithImageNamed:@"field.jpg"];
     sprite.anchorPoint = CGPointZero;
     sprite.textureRect = (CGRect){CGPointZero, size};
     sprite.position = point;
@@ -127,8 +128,9 @@
     for (int i=0; i<self.ccTanks.count; i++) {
         [self.ccTanks[i] syncToLogicTank:_logic.tanks[i]];
     }
-    for (UIItem * uiitem in _uiItems) {
-        [uiitem syncToLogicDisplayItem];
+    for (id uiItemID in _uiItems) {
+        UIItem * uiItem = [_uiItems objectForKey:uiItemID];
+        [uiItem syncToLogicDisplayItem];
     }
 }
 
@@ -138,24 +140,31 @@
         [self.ccTanks[i] syncFromLogicTank:_logic.tanks[i]];
     }
     
-//    for (LogicDisplayItem * logicItem in _logic.displayItems) {
-//        if
-//    }
-    
-    for (UIItem * uiitem in _uiItems) {
-        [uiitem syncToLogicDisplayItem];
+    for (id logicItemID in _logic.logicDisplayItems) {
+        LogicDisplayItem * logicItem = [_logic.logicDisplayItems objectForKey:logicItemID];
+        UIItem * uiItem = [_uiItems objectForKey:@(logicItem.itemID)];
+        if (!uiItem) { //create uiItem if not exist.
+            uiItem = [UIItemBuilder buildUIItem:logicItem];
+            [self.rootNode addChild:uiItem];  //add to scene;
+            [_uiItems setObject:uiItem forKey:@(uiItem.itemID)];
+        }
+        [uiItem syncFromLogicDisplayItem];
     }
+    
+//    for (UIItem * uiitem in _uiItems) {
+//        [uiitem syncToLogicDisplayItem];
+//    }
 }
 
 -(void) addUIItem:(UIItem *)item{
     [self.rootNode addChild:item];
-    [_uiItems addObject:item];
+    [_uiItems setObject:item forKey:@(item.itemID)];
     [_logic addLogicDisplayItem:item.logicItem];
 }
 
 -(void) removeUIItem:(UIItem *)item{
     [item removeFromParent];
-    [_uiItems removeObject:item];
+    [_uiItems removeObjectForKey:@(item.itemID)];
     [_logic removeLogicDisplayItem:item.logicItem];
 }
 
@@ -175,10 +184,6 @@
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Default:(CCNode *)itemA Default:(CCNode *)itemB {
     //    [monster removeFromParent];
     //    [projectile removeFromParent];
-    
-    
-    
-    
     
     NSLog(@"\n itemA : %@ \n itemB : %@ \n ----------------------------------------------------------- ", (ItemInfo * )itemA.userObject, (ItemInfo * )itemB.userObject);
     return YES;

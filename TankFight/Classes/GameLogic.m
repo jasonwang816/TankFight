@@ -11,10 +11,12 @@
 
 @implementation GameLogic
 
-static NSUInteger nextUIItemID = 0;
+static NSUInteger nextUIItemID = 1; //start with 1.
 
 + (NSUInteger)getNextUIItemID{
-    return nextUIItemID++;
+    NSUInteger num = nextUIItemID++;
+    NSLog(@"getNextUIItemID : %d", num);
+    return num;
 }
 
 
@@ -37,19 +39,23 @@ static NSUInteger nextUIItemID = 0;
         [_tanks addObject:tank];
         
         //logicDisplayItems
-        _logicDisplayItems = [[NSMutableSet alloc] init];
+        _logicDisplayItems = [[NSMutableDictionary alloc] init];
         
     }
     
     return self;
 }
 
+//- (LogicDisplayItem *)buildLogicDisplayItem:(LogicDisplayItem *)item{
+//    [_logicDisplayItems addObject:item];
+//}
+
 - (void)addLogicDisplayItem:(LogicDisplayItem *)item{
-    [_logicDisplayItems addObject:item];
+    [_logicDisplayItems setObject:item forKey:@(item.itemID)];
 }
 
 - (void)removeLogicDisplayItem:(LogicDisplayItem *)item{
-    [_logicDisplayItems removeObject:item];
+    [_logicDisplayItems removeObjectForKey:@(item.itemID)];
 }
 
 @end

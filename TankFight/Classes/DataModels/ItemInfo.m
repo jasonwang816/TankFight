@@ -38,15 +38,15 @@
         case CCUnitType_Bullet:
             result = @"CCUnitType_Bullet";
             break;
-        case CCUnitType_Laser:
-            result = @"CCUnitType_Laser";
+        case CCUnitType_RadarLaser:
+            result = @"CCUnitType_RadarLaser";
             break;
         case CCUnitType_Cannon:
             result = @"CCUnitType_Cannon";
             break;
-        case CCUnitType_Radar:
-            result = @"CCUnitType_Radar";
-            break;
+//        case CCUnitType_Radar:
+//            result = @"CCUnitType_Radar";
+//            break;
         case CCUnitType_Tank:
             result = @"CCUnitType_Tank";
             break;

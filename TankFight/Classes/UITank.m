@@ -11,6 +11,7 @@
 #import "DisplayManager.h"
 #import "CCTexture.h"
 #import "ItemInfo.h"
+#import "UIItemBuilder.h"
 
 //#import "Tank.h"
 
@@ -36,31 +37,9 @@
 //        self.physicsWorld = manager.physicsWorld;
         self.tank = tank;
         
-        _ccBody = [UIItem spriteWithImageNamed:@"Body.png" LinkToLogicItem:tank.body];
-//        _ccBody.position  = ccp(tank.body.position.x, tank.body.position.y);
-//        _ccBody.rotation = tank.body.rotation;
-        _ccBody.userObject = [[ItemInfo alloc] initWithTank:self.tank AndType:CCUnitType_Tank];
-        
-        _ccCannon = [UIItem spriteWithImageNamed:@"cannon.png" LinkToLogicItem:tank.cannon];
-        _ccCannon.anchorPoint = ccp(0.25, 0.5);
-//        _ccCannon.position  = ccp(tank.cannon.position.x, tank.cannon.position.y);
-//        _ccCannon.rotation = tank.cannon.rotation; //tank.rotation;
-        
-        //laser & radar
-        _ccLaser = [UIItem spriteWithImageNamed:@"darkBlue_350_200.png" LinkToLogicItem:tank.radar];
-        CGFloat range = tank.getRadarRange;
-        _ccLaser.textureRect = CGRectMake(0, 0, range, 0.3);
-        
-        _ccLaser.anchorPoint = CGPointZero;
-//        _ccLaser.rotation = tank.radar.rotation;
-//        _ccLaser.position  = tank.radar.position; // _ccRadar.position;
-        _ccLaser.userObject = [[ItemInfo alloc] initWithTank:self.tank AndType:CCUnitType_Radar];
-        
-        UIItem * ccRadar = [UIItem spriteWithImageNamed:@"radar.png"];
-        ccRadar.position  = CGPointZero;
-        ccRadar.rotation = 0; //tank.rotation;
-        
-        [_ccLaser addChild:ccRadar];
+        _ccBody = [UIItemBuilder buildUIItem:tank.body];
+        _ccCannon = [UIItemBuilder buildUIItem:tank.cannon];
+        _ccLaser = [UIItemBuilder buildUIItem:tank.radarLaser];
         
         if (manager.isPhysicsEnable) {
             [self setupPhysics];
@@ -157,17 +136,14 @@
     
     CCActionRotateBy* actionSpin = [self.manager rotateAtLocation:_ccBody.position From:(_ccCannon.rotation) ToFacePoint:locationPoint AtSpeed:180];//TODO speed constant
     CCActionCallBlock *actionBlock = [CCActionCallBlock actionWithBlock:^{
-        LogicDisplayItem * logicBullet = [[LogicDisplayItem alloc] initWithPosition:[self getCannonPosition] AndAngle:_ccCannon.rotation];
-        UIItem * bullet = [UIItem spriteWithImageNamed:@"bullet.png" LinkToLogicItem:logicBullet];
-//        bullet.position = [self getCannonPosition];
-//        bullet.rotation = _ccCannon.rotation;
-        bullet.userObject = [[ItemInfo alloc] initWithTank:self.tank AndType:CCUnitType_Bullet];
+        LogicDisplayItem * logicBullet = [[LogicDisplayItem alloc] initWithPosition:[self getCannonPosition] AndAngle:_ccCannon.rotation AndType:CCUnitType_Bullet AndOwner:self.tank];
+        UIItem * bullet = [UIItemBuilder buildUIItem:logicBullet];
         
         bullet.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, bullet.contentSize} cornerRadius:0]; // 1
         bullet.physicsBody.collisionGroup = self.tank.name; //TODO: shoot itself?
         bullet.physicsBody.collisionType = CT_BulletBody;
         
-        [self.manager.rootNode addChild:bullet];
+        [self.manager addUIItem:bullet];
         
         CCActionMoveTo * actionMove = [self.manager moveFrom:bullet.position ToPoint:locationPoint AtSpeed:200 Distance:500];  //TODO: set distance
         [bullet runAction:[CCActionSequence actionWithArray:@[actionMove, [CCActionRemove action]]]];

@@ -12,11 +12,9 @@
 
 - (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndSize:(CGSize) size{
     
-    self = [super init];
+    self = [self initWithPosition:pos AndAngle:angle AndType:CCUnitType_Field AndOwner:nil];
     
     if (self){
-        self.position = pos;
-        self.rotation = angle;
         self.fieldSize = size;
     }
     

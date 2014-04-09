@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UIItem.h"
 
 @interface UIItemBuilder : NSObject
+
++ (UIItem *)buildUIItem:(LogicDisplayItem *)logicItem;
 
 @end
