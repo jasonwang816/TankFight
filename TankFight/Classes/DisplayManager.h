@@ -18,7 +18,7 @@
 
 @class UITank;
 
-@interface DisplayManager : NSObject<CCPhysicsCollisionDelegate>{
+@interface DisplayManager : NSObject<CCPhysicsCollisionDelegate, GameLogicDelegate>{
     CCPhysicsNode * _physicsWorld;
     UIItem * _ccGameField;
 }

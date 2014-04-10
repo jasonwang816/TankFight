@@ -33,6 +33,10 @@
             [self setupGameFieldPhysics];
             [_physicsWorld addChild:_ccGameField];
             self.rootNode = _physicsWorld;
+        }else{
+            //setup delegate only when this is not physics manager.
+            //since UI manager need to be update when logic item changed.
+            _logic.delegate = self;
         }
         
         //uitanks
@@ -129,6 +133,7 @@
     for (int i=0; i<self.ccTanks.count; i++) {
         [self.ccTanks[i] syncToLogicTank:_logic.tanks[i]];
     }
+    
     for (id uiItemID in _uiItems) {
         UIItem * uiItem = [_uiItems objectForKey:uiItemID];
         [uiItem syncToLogicDisplayItem];
@@ -141,17 +146,31 @@
     for (int i=0; i<self.ccTanks.count; i++) {
         [self.ccTanks[i] syncFromLogicTank:_logic.tanks[i]];
     }
-    
-    for (id logicItemID in _logic.logicDisplayItems) {
-        LogicDisplayItem * logicItem = [_logic.logicDisplayItems objectForKey:logicItemID];
-        UIItem * uiItem = [_uiItems objectForKey:@(logicItem.itemID)];
-        if (!uiItem) { //create uiItem if not exist.
-            uiItem = [UIItemBuilder buildUIItem:logicItem];
-            [self.rootNode addChild:uiItem];  //add to scene;
-            [_uiItems setObject:uiItem forKey:@(uiItem.itemID)];
-        }
+
+    for (id uiItemID in _uiItems) {
+        UIItem * uiItem = [_uiItems objectForKey:uiItemID];
         [uiItem syncFromLogicDisplayItem];
     }
+//no use: use delegate instead.
+//    for (id logicItemID in _logic.logicDisplayItems) {
+//        LogicDisplayItem * logicItem = [_logic.logicDisplayItems objectForKey:logicItemID];
+//        UIItem * uiItem = [_uiItems objectForKey:@(logicItem.itemID)];
+//        if (!uiItem) { //create uiItem if not exist.
+//            uiItem = [UIItemBuilder buildUIItem:logicItem];
+//            [self.rootNode addChild:uiItem];  //add to scene;
+//            [_uiItems setObject:uiItem forKey:@(uiItem.itemID)];
+//        }
+//        [uiItem syncFromLogicDisplayItem];
+//    }
+//    //check if uiItem has been removed.
+//    for (id uiItemID in _uiItems) {
+//        UIItem * uiItem = [_uiItems objectForKey:uiItemID];
+//        LogicDisplayItem * logicItem = [_logic.logicDisplayItems objectForKey:uiItemID];
+//        if (!logicItem) {
+//            [uiItem removeFromParent];
+//            [_uiItems removeObjectForKey:@(uiItem.itemID)];
+//        }
+//    }
 
 }
 
@@ -168,6 +187,23 @@
 }
 
 // -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
+#pragma mark - GameLogicDelegate
+// -----------------------------------------------------------------------
+- (void)addedLogicDisplayItem:(LogicDisplayItem *)logicItem{
+    UIItem * uiItem = [UIItemBuilder buildUIItem:logicItem];
+    [self.rootNode addChild:uiItem];  //add to scene;
+    [_uiItems setObject:uiItem forKey:@(uiItem.itemID)];
+}
+
+- (void)removedLogicDisplayItem:(LogicDisplayItem *)logicItem{
+    UIItem * uiItem = [_uiItems objectForKey:@(logicItem.itemID)];
+    if (uiItem)
+    {
+        [uiItem removeFromParent];
+        [_uiItems removeObjectForKey:@(uiItem.itemID)];
+    }
+}
 
 // -----------------------------------------------------------------------
 #pragma mark - collisionDelegate
@@ -217,6 +253,14 @@
         
         if (theOther.userObjectType == CCUnitType_Tank) //bullet hit tank
         {
+            //explode
+            CCActionScaleBy* scaleAction = [CCActionScaleBy actionWithDuration:1 scale:5.0];
+            [theOne stopAllActions];
+            [theOne runAction:[CCActionSequence actionWithArray:@[scaleAction, [CCActionRemove action]]]];
+            
+            call the following after the action
+            
+            //update
             [theOther.logicItem.owner physicsCollisionWith:theOne.logicItem];
             [self removeUIItem:theOne]; //remove bullet
             //

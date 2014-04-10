@@ -14,10 +14,17 @@
 static const CGPoint homeTankPosition = (CGPoint){100, 200};
 static const CGPoint visitorTankPosition = (CGPoint){350, 200};
 
+@protocol GameLogicDelegate <NSObject>
+@optional
+- (void)addedLogicDisplayItem:(LogicDisplayItem *)logicItem;
+- (void)removedLogicDisplayItem:(LogicDisplayItem *)logicItem;
+@end
+
 @interface GameLogic : NSObject
 
-@property (nonatomic) GameField * gameField;
+@property (nonatomic, weak) id <GameLogicDelegate> delegate;
 
+@property (nonatomic) GameField * gameField;
 @property (nonatomic) NSMutableArray * tanks;
 @property (nonatomic) NSMutableDictionary * logicDisplayItems;
 

@@ -15,7 +15,7 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 
 + (NSUInteger)getNextUIItemID{
     NSUInteger num = nextUIItemID++;
-    NSLog(@"getNextUIItemID : %d", num);
+    NSLog(@"getNextUIItemID : %lu", (unsigned long)num);
     return num;
 }
 
@@ -52,10 +52,12 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 
 - (void)addLogicDisplayItem:(LogicDisplayItem *)item{
     [_logicDisplayItems setObject:item forKey:@(item.itemID)];
+    [self.delegate addedLogicDisplayItem:item];
 }
 
 - (void)removeLogicDisplayItem:(LogicDisplayItem *)item{
     [_logicDisplayItems removeObjectForKey:@(item.itemID)];
+    [self.delegate removedLogicDisplayItem:item];
 }
 
 @end

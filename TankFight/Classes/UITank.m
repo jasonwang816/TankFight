@@ -146,7 +146,7 @@
         [self.manager addUIItem:bullet];
         
         CCActionMoveTo * actionMove = [self.manager moveFrom:bullet.position ToPoint:locationPoint AtSpeed:200 Distance:500];  //TODO: set distance
-        [bullet runAction:[CCActionSequence actionWithArray:@[actionMove, [CCActionRemove action]]]];
+        [bullet runAction:[CCActionSequence actionWithArray:@[actionMove]]];
     }];
 
     [_ccCannon stopAllActions];
@@ -182,17 +182,6 @@
     return result;
 }
 
-
-//- (UIItem *) getLaserSprite
-//{
-//    UIItem * sprite = [UIItem spriteWithImageNamed:@"darkBlue_350_200.png"];
-//    
-//    CGFloat range = [self.tank getRadarRange];
-//    sprite.textureRect = CGRectMake(0, 0, range, 0.3);
-//    
-//    return sprite;
-//}
-
 - (void) syncToLogicTank:(Tank *) logicTank{
     
     [self.ccBody syncToLogicDisplayItem];
@@ -209,20 +198,6 @@
     [self.ccLaser syncFromLogicDisplayItem];
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // -----------------------------------------------------------------------

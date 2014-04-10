@@ -46,7 +46,7 @@
     //bullet
     if (item.itemType == CCUnitType_Bullet) {
         self.health -= 10;
-        NSLog(@"physicsCollisionWith: %@ hit by bullet. [health:%d]", self.name, self.health);
+        NSLog(@"physicsCollisionWith: %@ hit by bullet. [health:%ld]", self.name, (long)self.health);
     }
     
     //other tank;
