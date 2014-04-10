@@ -18,6 +18,7 @@ static const CGPoint visitorTankPosition = (CGPoint){350, 200};
 @optional
 - (void)addedLogicDisplayItem:(LogicDisplayItem *)logicItem;
 - (void)removedLogicDisplayItem:(LogicDisplayItem *)logicItem;
+- (void)explodedAt:(CGPoint)position;
 @end
 
 @interface GameLogic : NSObject
@@ -30,6 +31,7 @@ static const CGPoint visitorTankPosition = (CGPoint){350, 200};
 
 - (void)addLogicDisplayItem:(LogicDisplayItem *)item;
 - (void)removeLogicDisplayItem:(LogicDisplayItem *)item;
+- (void)explodeAt:(CGPoint)position;
 
 + (NSUInteger)getNextUIItemID;
 @end

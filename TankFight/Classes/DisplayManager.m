@@ -188,6 +188,20 @@
 
 // -----------------------------------------------------------------------
 // -----------------------------------------------------------------------
+#pragma mark - For UI manager
+// -----------------------------------------------------------------------
+- (void)explodedAt:(CGPoint)position{
+    CCSprite * expl = [CCSprite spriteWithImageNamed:@"explosion.png"];
+    expl.position  = position;
+    expl.scale = 0.5;
+    [self.rootNode addChild:expl];
+    
+    CCActionScaleBy* scaleAction = [CCActionScaleBy actionWithDuration:0.15 scale:1.0];
+    [expl runAction:[CCActionSequence actionWithArray:@[scaleAction, [CCActionRemove action]]]];
+}
+
+// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 #pragma mark - GameLogicDelegate
 // -----------------------------------------------------------------------
 - (void)addedLogicDisplayItem:(LogicDisplayItem *)logicItem{
@@ -217,6 +231,9 @@
 }
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Default:(CCNode *)itemA Default:(CCNode *)itemB {
+    
+    NSLog(@"\n itemA : %@ \n itemB : %@ \n ----------------------------------------------------------- ", (ItemInfo *)itemA.userObject, (ItemInfo *)itemB.userObject);
+    //return YES;
     //    [monster removeFromParent];
     //    [projectile removeFromParent];
     NSArray * items = [NSArray arrayWithObjects:itemA, itemB, nil];
@@ -254,16 +271,13 @@
         if (theOther.userObjectType == CCUnitType_Tank) //bullet hit tank
         {
             //explode
-            CCActionScaleBy* scaleAction = [CCActionScaleBy actionWithDuration:1 scale:5.0];
-            [theOne stopAllActions];
-            [theOne runAction:[CCActionSequence actionWithArray:@[scaleAction, [CCActionRemove action]]]];
-            
-            call the following after the action
+            [self.logic explodeAt:theOne.position];
             
             //update
             [theOther.logicItem.owner physicsCollisionWith:theOne.logicItem];
             [self removeUIItem:theOne]; //remove bullet
             //
+            return YES;
         }
         return NO;
     }
@@ -284,7 +298,6 @@
     
     //Tank to Tank
     
-    NSLog(@"\n itemA : %@ \n itemB : %@ \n ----------------------------------------------------------- ", (ItemInfo *)itemA.userObject, (ItemInfo *)itemB.userObject);
     return YES;
 }
 
@@ -312,7 +325,7 @@
     
     CGPoint offset = ccpSub(targetPoint, startPoint);
     CGFloat offsetDistance = sqrtf(powf(offset.x, 2) + powf(offset.y, 2));
-    
+    //TODO: offsetDistance too samll
     if (totalDistance <= 0)
     {
         totalDistance = offsetDistance;
@@ -327,8 +340,14 @@
     int targetY   = startPoint.y + offset.y * ratio;
     CGPoint targetPosition = ccp(targetX,targetY);
     
-    
     CGFloat duration = fabsf(totalDistance / speed);
+    
+    if (targetPosition.x < 0 || targetPosition.x > 3000 || targetPosition.y < 0 || targetPosition.y > 3000)
+    {
+        NSLog(@"startPoint: %@; targetPoint: %@  \n duration: %f | %@", NSStringFromCGPoint(startPoint), NSStringFromCGPoint(targetPoint), duration, NSStringFromCGPoint(targetPosition));
+    }
+    
+    
     CCActionMoveTo * action = [CCActionMoveTo actionWithDuration:duration position:targetPosition];
     
     return action;

@@ -223,6 +223,9 @@
 		2DBE8AB518D26F3C003701E4 /* DisplayItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8AB418D26F3C003701E4 /* DisplayItem.m */; };
 		2DBE8ABB18D3A0C3003701E4 /* DisplayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8ABA18D3A0C3003701E4 /* DisplayManager.m */; };
 		2DF6F06518F476E40057147D /* UIItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6F06418F476E40057147D /* UIItem.m */; };
+		2DF6F06A18F73F120057147D /* explosion.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6F06918F73F120057147D /* explosion.png */; };
+		2DF6F06D18F75DB10057147D /* BaseNetworkInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6F06C18F75DB10057147D /* BaseNetworkInterface.m */; };
+		2DF6F07018F75E5B0057147D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6F06F18F75E5B0057147D /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		6A2EF0F918F2711A0023885F /* field.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6A2EF0F818F2711A0023885F /* field.jpg */; };
 		6A2EF10618F289C60023885F /* ItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EF10518F289C60023885F /* ItemInfo.m */; };
 		6A7D1BC418F5195800F4A0A7 /* UIItemBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7D1BC318F5195800F4A0A7 /* UIItemBuilder.m */; };
@@ -692,6 +695,11 @@
 		2DBE8ABA18D3A0C3003701E4 /* DisplayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisplayManager.m; path = Classes/DisplayManager.m; sourceTree = "<group>"; };
 		2DF6F06318F476E40057147D /* UIItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIItem.h; path = Classes/UIItem.h; sourceTree = "<group>"; };
 		2DF6F06418F476E40057147D /* UIItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIItem.m; path = Classes/UIItem.m; sourceTree = "<group>"; };
+		2DF6F06918F73F120057147D /* explosion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion.png; sourceTree = "<group>"; };
+		2DF6F06B18F75DB10057147D /* BaseNetworkInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseNetworkInterface.h; path = Classes/Helper/BaseNetworkInterface.h; sourceTree = "<group>"; };
+		2DF6F06C18F75DB10057147D /* BaseNetworkInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseNetworkInterface.m; path = Classes/Helper/BaseNetworkInterface.m; sourceTree = "<group>"; };
+		2DF6F06E18F75E5B0057147D /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = Classes/Helper/JSONKit.h; sourceTree = "<group>"; };
+		2DF6F06F18F75E5B0057147D /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = Classes/Helper/JSONKit.m; sourceTree = "<group>"; };
 		6A2EF0F818F2711A0023885F /* field.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = field.jpg; sourceTree = "<group>"; };
 		6A2EF10418F289C60023885F /* ItemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemInfo.h; path = Classes/DataModels/ItemInfo.h; sourceTree = "<group>"; };
 		6A2EF10518F289C60023885F /* ItemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemInfo.m; path = Classes/DataModels/ItemInfo.m; sourceTree = "<group>"; };
@@ -1641,6 +1649,10 @@
 		2DBE8A9C18D25A02003701E4 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				2DF6F06E18F75E5B0057147D /* JSONKit.h */,
+				2DF6F06F18F75E5B0057147D /* JSONKit.m */,
+				2DF6F06B18F75DB10057147D /* BaseNetworkInterface.h */,
+				2DF6F06C18F75DB10057147D /* BaseNetworkInterface.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -1648,6 +1660,7 @@
 		2DBE8A9D18D25A1A003701E4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				2DF6F06918F73F120057147D /* explosion.png */,
 				6A2EF0F818F2711A0023885F /* field.jpg */,
 				6ACCF56A18EFF5A70056D9F7 /* bullet.png */,
 				6ACCF56B18EFF5A70056D9F7 /* cannon.png */,
@@ -1770,6 +1783,7 @@
 				2DBE880E18D25213003701E4 /* Icon-76@2x.png in Resources */,
 				6ACCF56E18EFF5A70056D9F7 /* cannon.png in Resources */,
 				2DBE8A8218D25216003701E4 /* LICENSE_Chipmunk.txt in Resources */,
+				2DF6F06A18F73F120057147D /* explosion.png in Resources */,
 				2DBE881C18D25213003701E4 /* Icon-Spotlight-iOS7@2x.png in Resources */,
 				2DBE880C18D25213003701E4 /* Icon-76.png in Resources */,
 				2DBE89E218D25215003701E4 /* ChangeLog in Resources */,
@@ -1829,6 +1843,7 @@
 				2DBE8A0118D25215003701E4 /* CCBAnimationManager.m in Sources */,
 				2DBE89E518D25215003701E4 /* mat4stack.c in Sources */,
 				2DBE888418D25214003701E4 /* CCNode.m in Sources */,
+				2DF6F06D18F75DB10057147D /* BaseNetworkInterface.m in Sources */,
 				2DBE886F18D25214003701E4 /* CCLabelBMFont.m in Sources */,
 				2DBE882D18D25213003701E4 /* CCActionEase.m in Sources */,
 				2DBE883C18D25213003701E4 /* CCActionTween.m in Sources */,
@@ -1838,6 +1853,7 @@
 				2DBE89E918D25215003701E4 /* mat3.c in Sources */,
 				2DBE88F518D25214003701E4 /* CCTiledMap.m in Sources */,
 				2DBE89BA18D25215003701E4 /* CCControl.m in Sources */,
+				2DF6F07018F75E5B0057147D /* JSONKit.m in Sources */,
 				2DBE893C18D25215003701E4 /* CCVertex.m in Sources */,
 				2DBE897818D25215003701E4 /* ALBuffer.m in Sources */,
 				2DBE894518D25215003701E4 /* NSThread+performBlock.m in Sources */,

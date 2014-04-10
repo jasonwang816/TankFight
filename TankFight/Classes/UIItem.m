@@ -29,6 +29,13 @@
     return sprite;
 }
 
+-(void)setPosition:(CGPoint)pos
+{
+    if (pos.x < 0 || pos.x > 3000 || pos.y < 0 || pos.y > 3000) {
+        NSLog(@"%@", NSStringFromCGPoint(pos));
+    }
+	[super setPosition:pos];
+}
 
 //-(CGAffineTransform) nodeToParentTransform
 //{

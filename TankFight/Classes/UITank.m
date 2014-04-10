@@ -124,8 +124,14 @@
 }
 
 - (void)moveTo:(CGPoint)locationPoint{
-
     UIItem * _player = self.ccBody;
+
+    CGPoint offset = ccpSub(_player.position, locationPoint);
+    CGFloat offsetDistance = sqrtf(powf(offset.x, 2) + powf(offset.y, 2));
+    
+    if (offsetDistance < 0.2) //too small;
+        return;
+    
     CCActionRotateBy* actionSpin = [self.manager rotateAtLocation:_player.position From:_player.rotation ToFacePoint:locationPoint AtSpeed:180]; //TODO speed constant
     CCActionMoveTo * actionMove = [self.manager moveFrom:_player.position ToPoint:locationPoint AtSpeed:30 Distance:0];
     [_player stopAllActions];

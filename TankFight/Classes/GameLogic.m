@@ -60,4 +60,8 @@ static NSUInteger nextUIItemID = 1; //start with 1.
     [self.delegate removedLogicDisplayItem:item];
 }
 
+- (void)explodeAt:(CGPoint)position{
+    [self.delegate explodedAt:position];
+}
+
 @end
