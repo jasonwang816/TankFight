@@ -8,6 +8,11 @@
 // -----------------------------------------------------------------------
 
 #import "cocos2d.h"
+#import "MainViewController.h"
 
 @interface AppDelegate : CCAppDelegate
+
+@property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) MainViewController *viewController;
+
 @end

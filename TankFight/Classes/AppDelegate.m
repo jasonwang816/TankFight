@@ -44,6 +44,13 @@
 //		CCSetupTabletScale2X: @(YES),
 	}];
 	[CCDirector sharedDirector].contentScaleFactor = 1;
+    
+    
+//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//	self.viewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+//	self.window.rootViewController = self.viewController;
+//	[self.window makeKeyAndVisible];
+    
 	return YES;
 }
 

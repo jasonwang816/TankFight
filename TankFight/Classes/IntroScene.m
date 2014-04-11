@@ -50,9 +50,16 @@
     CCButton *helloWorldButton = [CCButton buttonWithTitle:@"[ Start ]" fontName:@"Verdana-Bold" fontSize:18.0f];
     helloWorldButton.positionType = CCPositionTypeNormalized;
     helloWorldButton.position = ccp(0.5f, 0.35f);
-    [helloWorldButton setTarget:self selector:@selector(onSpinningClicked:)];
+    [helloWorldButton setTarget:self selector:@selector(loadMyViewController)];
     [self addChild:helloWorldButton];
 
+//    // Helloworld scene button
+//    CCButton *helloWorldButton = [CCButton buttonWithTitle:@"[ Start ]" fontName:@"Verdana-Bold" fontSize:18.0f];
+//    helloWorldButton.positionType = CCPositionTypeNormalized;
+//    helloWorldButton.position = ccp(0.5f, 0.35f);
+//    [helloWorldButton setTarget:self selector:@selector(onSpinningClicked:)];
+//    [self addChild:helloWorldButton];
+    
     // done
 	return self;
 }
@@ -68,6 +75,17 @@
     [[CCDirector sharedDirector] replaceScene:[GameScene scene] withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
 
 
+}
+
+- (void)loadMyViewController {
+    _viewController = [[MainViewController alloc] init];
+    
+    [[CCDirector sharedDirector] presentModalViewController:_viewController animated:YES];
+
+    
+//    AppController *app = (AppController *)[[UIApplication sharedApplication] delegate];
+//    [app.navController pushViewController:myView animated:YES];
+    [[CCDirector sharedDirector] pause];
 }
 
 // -----------------------------------------------------------------------
