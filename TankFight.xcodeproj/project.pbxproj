@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2D5AFEF418D8B1BF0039BF07 /* UITank.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5AFEF318D8B1BF0039BF07 /* UITank.m */; };
-		2D5AFEF718D8F5900039BF07 /* UIConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D5AFEF618D8F5900039BF07 /* UIConstants.m */; };
 		2DBE87E118D25213003701E4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBE87E018D25213003701E4 /* QuartzCore.framework */; };
 		2DBE87E318D25213003701E4 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBE87E218D25213003701E4 /* OpenGLES.framework */; };
 		2DBE87E518D25213003701E4 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBE87E418D25213003701E4 /* OpenAL.framework */; };
@@ -215,20 +213,22 @@
 		2DBE8A8D18D25216003701E4 /* HelloWorldScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8A8C18D25216003701E4 /* HelloWorldScene.m */; };
 		2DBE8A9018D25216003701E4 /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8A8F18D25216003701E4 /* IntroScene.m */; };
 		2DBE8AA118D25A1A003701E4 /* Body.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DBE8A9E18D25A1A003701E4 /* Body.png */; };
-		2DBE8AA618D25AA2003701E4 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8AA518D25AA2003701E4 /* GameScene.m */; };
-		2DBE8AA918D25D98003701E4 /* GameField.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8AA818D25D98003701E4 /* GameField.m */; };
-		2DBE8AAC18D25E8D003701E4 /* Tank.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8AAB18D25E8D003701E4 /* Tank.m */; };
 		2DBE8AAF18D25ED5003701E4 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8AAE18D25ED5003701E4 /* Constants.m */; };
-		2DBE8AB218D265E4003701E4 /* GameLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8AB118D265E4003701E4 /* GameLogic.m */; };
-		2DBE8AB518D26F3C003701E4 /* DisplayItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8AB418D26F3C003701E4 /* DisplayItem.m */; };
-		2DBE8ABB18D3A0C3003701E4 /* DisplayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBE8ABA18D3A0C3003701E4 /* DisplayManager.m */; };
-		2DF6F06518F476E40057147D /* UIItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6F06418F476E40057147D /* UIItem.m */; };
 		2DF6F06A18F73F120057147D /* explosion.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6F06918F73F120057147D /* explosion.png */; };
 		2DF6F06D18F75DB10057147D /* BaseNetworkInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6F06C18F75DB10057147D /* BaseNetworkInterface.m */; };
 		2DF6F07018F75E5B0057147D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6F06F18F75E5B0057147D /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		2DF6F07318F856A70057147D /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6F07218F856A70057147D /* GameScene.m */; };
+		2DF6F07E18F856C70057147D /* DisplayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6F07518F856C70057147D /* DisplayManager.m */; };
+		2DF6F07F18F856C70057147D /* UIConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6F07718F856C70057147D /* UIConstants.m */; };
+		2DF6F08018F856C70057147D /* UIItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6F07918F856C70057147D /* UIItem.m */; };
+		2DF6F08118F856C70057147D /* UIItemBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6F07B18F856C70057147D /* UIItemBuilder.m */; };
+		2DF6F08218F856C70057147D /* UITank.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6F07D18F856C70057147D /* UITank.m */; };
+		2DF6F08518F857830057147D /* GameLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6F08418F857830057147D /* GameLogic.m */; };
+		2DF6F08E18F8579F0057147D /* DisplayItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6F08718F8579F0057147D /* DisplayItem.m */; };
+		2DF6F08F18F8579F0057147D /* GameField.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6F08918F8579F0057147D /* GameField.m */; };
+		2DF6F09018F8579F0057147D /* ItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6F08B18F8579F0057147D /* ItemInfo.m */; };
+		2DF6F09118F8579F0057147D /* Tank.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6F08D18F8579F0057147D /* Tank.m */; };
 		6A2EF0F918F2711A0023885F /* field.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6A2EF0F818F2711A0023885F /* field.jpg */; };
-		6A2EF10618F289C60023885F /* ItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A2EF10518F289C60023885F /* ItemInfo.m */; };
-		6A7D1BC418F5195800F4A0A7 /* UIItemBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7D1BC318F5195800F4A0A7 /* UIItemBuilder.m */; };
 		6ACCF56D18EFF5A70056D9F7 /* bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ACCF56A18EFF5A70056D9F7 /* bullet.png */; };
 		6ACCF56E18EFF5A70056D9F7 /* cannon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ACCF56B18EFF5A70056D9F7 /* cannon.png */; };
 		6ACCF56F18EFF5A70056D9F7 /* radar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ACCF56C18EFF5A70056D9F7 /* radar.png */; };
@@ -246,10 +246,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2D5AFEF218D8B1BF0039BF07 /* UITank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UITank.h; path = Classes/UITank.h; sourceTree = "<group>"; };
-		2D5AFEF318D8B1BF0039BF07 /* UITank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UITank.m; path = Classes/UITank.m; sourceTree = "<group>"; };
-		2D5AFEF518D8F5900039BF07 /* UIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIConstants.h; path = Classes/UIConstants.h; sourceTree = "<group>"; };
-		2D5AFEF618D8F5900039BF07 /* UIConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIConstants.m; path = Classes/UIConstants.m; sourceTree = "<group>"; };
 		2DBE87DD18D25213003701E4 /* TankFight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TankFight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DBE87E018D25213003701E4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2DBE87E218D25213003701E4 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -679,32 +675,36 @@
 		2DBE8A8E18D25216003701E4 /* IntroScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IntroScene.h; path = Classes/IntroScene.h; sourceTree = "<group>"; };
 		2DBE8A8F18D25216003701E4 /* IntroScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = IntroScene.m; path = Classes/IntroScene.m; sourceTree = "<group>"; };
 		2DBE8A9E18D25A1A003701E4 /* Body.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Body.png; sourceTree = "<group>"; };
-		2DBE8AA418D25AA2003701E4 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameScene.h; path = Classes/GameScene.h; sourceTree = "<group>"; };
-		2DBE8AA518D25AA2003701E4 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameScene.m; path = Classes/GameScene.m; sourceTree = "<group>"; };
-		2DBE8AA718D25D98003701E4 /* GameField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameField.h; path = Classes/DataModels/GameField.h; sourceTree = "<group>"; };
-		2DBE8AA818D25D98003701E4 /* GameField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameField.m; path = Classes/DataModels/GameField.m; sourceTree = "<group>"; };
-		2DBE8AAA18D25E8D003701E4 /* Tank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tank.h; path = Classes/DataModels/Tank.h; sourceTree = "<group>"; };
-		2DBE8AAB18D25E8D003701E4 /* Tank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tank.m; path = Classes/DataModels/Tank.m; sourceTree = "<group>"; };
 		2DBE8AAD18D25ED5003701E4 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Classes/Constants.h; sourceTree = "<group>"; };
 		2DBE8AAE18D25ED5003701E4 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = Classes/Constants.m; sourceTree = "<group>"; };
-		2DBE8AB018D265E4003701E4 /* GameLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameLogic.h; path = Classes/GameLogic.h; sourceTree = "<group>"; };
-		2DBE8AB118D265E4003701E4 /* GameLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameLogic.m; path = Classes/GameLogic.m; sourceTree = "<group>"; };
-		2DBE8AB318D26F3C003701E4 /* DisplayItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisplayItem.h; path = Classes/DataModels/DisplayItem.h; sourceTree = "<group>"; };
-		2DBE8AB418D26F3C003701E4 /* DisplayItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisplayItem.m; path = Classes/DataModels/DisplayItem.m; sourceTree = "<group>"; };
-		2DBE8AB918D3A0C3003701E4 /* DisplayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisplayManager.h; path = Classes/DisplayManager.h; sourceTree = "<group>"; };
-		2DBE8ABA18D3A0C3003701E4 /* DisplayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisplayManager.m; path = Classes/DisplayManager.m; sourceTree = "<group>"; };
-		2DF6F06318F476E40057147D /* UIItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIItem.h; path = Classes/UIItem.h; sourceTree = "<group>"; };
-		2DF6F06418F476E40057147D /* UIItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIItem.m; path = Classes/UIItem.m; sourceTree = "<group>"; };
 		2DF6F06918F73F120057147D /* explosion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion.png; sourceTree = "<group>"; };
 		2DF6F06B18F75DB10057147D /* BaseNetworkInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseNetworkInterface.h; path = Classes/Helper/BaseNetworkInterface.h; sourceTree = "<group>"; };
 		2DF6F06C18F75DB10057147D /* BaseNetworkInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseNetworkInterface.m; path = Classes/Helper/BaseNetworkInterface.m; sourceTree = "<group>"; };
 		2DF6F06E18F75E5B0057147D /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = Classes/Helper/JSONKit.h; sourceTree = "<group>"; };
 		2DF6F06F18F75E5B0057147D /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = Classes/Helper/JSONKit.m; sourceTree = "<group>"; };
+		2DF6F07118F856A70057147D /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameScene.h; path = Classes/UILayer/GameScene.h; sourceTree = "<group>"; };
+		2DF6F07218F856A70057147D /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameScene.m; path = Classes/UILayer/GameScene.m; sourceTree = "<group>"; };
+		2DF6F07418F856C70057147D /* DisplayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisplayManager.h; path = Classes/UILayer/DisplayManager.h; sourceTree = "<group>"; };
+		2DF6F07518F856C70057147D /* DisplayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisplayManager.m; path = Classes/UILayer/DisplayManager.m; sourceTree = "<group>"; };
+		2DF6F07618F856C70057147D /* UIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIConstants.h; path = Classes/UILayer/UIConstants.h; sourceTree = "<group>"; };
+		2DF6F07718F856C70057147D /* UIConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIConstants.m; path = Classes/UILayer/UIConstants.m; sourceTree = "<group>"; };
+		2DF6F07818F856C70057147D /* UIItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIItem.h; path = Classes/UILayer/UIItem.h; sourceTree = "<group>"; };
+		2DF6F07918F856C70057147D /* UIItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIItem.m; path = Classes/UILayer/UIItem.m; sourceTree = "<group>"; };
+		2DF6F07A18F856C70057147D /* UIItemBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIItemBuilder.h; path = Classes/UILayer/UIItemBuilder.h; sourceTree = "<group>"; };
+		2DF6F07B18F856C70057147D /* UIItemBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIItemBuilder.m; path = Classes/UILayer/UIItemBuilder.m; sourceTree = "<group>"; };
+		2DF6F07C18F856C70057147D /* UITank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UITank.h; path = Classes/UILayer/UITank.h; sourceTree = "<group>"; };
+		2DF6F07D18F856C70057147D /* UITank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UITank.m; path = Classes/UILayer/UITank.m; sourceTree = "<group>"; };
+		2DF6F08318F857830057147D /* GameLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameLogic.h; path = Classes/Logic/GameLogic.h; sourceTree = "<group>"; };
+		2DF6F08418F857830057147D /* GameLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameLogic.m; path = Classes/Logic/GameLogic.m; sourceTree = "<group>"; };
+		2DF6F08618F8579F0057147D /* DisplayItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisplayItem.h; path = Classes/Logic/DataModels/DisplayItem.h; sourceTree = "<group>"; };
+		2DF6F08718F8579F0057147D /* DisplayItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DisplayItem.m; path = Classes/Logic/DataModels/DisplayItem.m; sourceTree = "<group>"; };
+		2DF6F08818F8579F0057147D /* GameField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameField.h; path = Classes/Logic/DataModels/GameField.h; sourceTree = "<group>"; };
+		2DF6F08918F8579F0057147D /* GameField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameField.m; path = Classes/Logic/DataModels/GameField.m; sourceTree = "<group>"; };
+		2DF6F08A18F8579F0057147D /* ItemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemInfo.h; path = Classes/Logic/DataModels/ItemInfo.h; sourceTree = "<group>"; };
+		2DF6F08B18F8579F0057147D /* ItemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemInfo.m; path = Classes/Logic/DataModels/ItemInfo.m; sourceTree = "<group>"; };
+		2DF6F08C18F8579F0057147D /* Tank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tank.h; path = Classes/Logic/DataModels/Tank.h; sourceTree = "<group>"; };
+		2DF6F08D18F8579F0057147D /* Tank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tank.m; path = Classes/Logic/DataModels/Tank.m; sourceTree = "<group>"; };
 		6A2EF0F818F2711A0023885F /* field.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = field.jpg; sourceTree = "<group>"; };
-		6A2EF10418F289C60023885F /* ItemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemInfo.h; path = Classes/DataModels/ItemInfo.h; sourceTree = "<group>"; };
-		6A2EF10518F289C60023885F /* ItemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemInfo.m; path = Classes/DataModels/ItemInfo.m; sourceTree = "<group>"; };
-		6A7D1BC218F5195800F4A0A7 /* UIItemBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIItemBuilder.h; path = Classes/UIItemBuilder.h; sourceTree = "<group>"; };
-		6A7D1BC318F5195800F4A0A7 /* UIItemBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIItemBuilder.m; path = Classes/UIItemBuilder.m; sourceTree = "<group>"; };
 		6ACCF56A18EFF5A70056D9F7 /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
 		6ACCF56B18EFF5A70056D9F7 /* cannon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cannon.png; sourceTree = "<group>"; };
 		6ACCF56C18EFF5A70056D9F7 /* radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radar.png; sourceTree = "<group>"; };
@@ -1615,8 +1615,8 @@
 		2DBE8A9918D25987003701E4 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				2DBE8AA418D25AA2003701E4 /* GameScene.h */,
-				2DBE8AA518D25AA2003701E4 /* GameScene.m */,
+				2DF6F07118F856A70057147D /* GameScene.h */,
+				2DF6F07218F856A70057147D /* GameScene.m */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -1624,14 +1624,14 @@
 		2DBE8A9A18D259AE003701E4 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
-				2DBE8AA718D25D98003701E4 /* GameField.h */,
-				2DBE8AA818D25D98003701E4 /* GameField.m */,
-				2DBE8AAA18D25E8D003701E4 /* Tank.h */,
-				2DBE8AAB18D25E8D003701E4 /* Tank.m */,
-				2DBE8AB318D26F3C003701E4 /* DisplayItem.h */,
-				2DBE8AB418D26F3C003701E4 /* DisplayItem.m */,
-				6A2EF10418F289C60023885F /* ItemInfo.h */,
-				6A2EF10518F289C60023885F /* ItemInfo.m */,
+				2DF6F08618F8579F0057147D /* DisplayItem.h */,
+				2DF6F08718F8579F0057147D /* DisplayItem.m */,
+				2DF6F08818F8579F0057147D /* GameField.h */,
+				2DF6F08918F8579F0057147D /* GameField.m */,
+				2DF6F08A18F8579F0057147D /* ItemInfo.h */,
+				2DF6F08B18F8579F0057147D /* ItemInfo.m */,
+				2DF6F08C18F8579F0057147D /* Tank.h */,
+				2DF6F08D18F8579F0057147D /* Tank.m */,
 			);
 			name = DataModels;
 			sourceTree = "<group>";
@@ -1639,9 +1639,9 @@
 		2DBE8A9B18D259F4003701E4 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				2DF6F08318F857830057147D /* GameLogic.h */,
+				2DF6F08418F857830057147D /* GameLogic.m */,
 				2DBE8A9A18D259AE003701E4 /* DataModels */,
-				2DBE8AB018D265E4003701E4 /* GameLogic.h */,
-				2DBE8AB118D265E4003701E4 /* GameLogic.m */,
 			);
 			name = Logic;
 			sourceTree = "<group>";
@@ -1675,17 +1675,17 @@
 		2DBE8AB618D37C3C003701E4 /* UILayer */ = {
 			isa = PBXGroup;
 			children = (
+				2DF6F07418F856C70057147D /* DisplayManager.h */,
+				2DF6F07518F856C70057147D /* DisplayManager.m */,
+				2DF6F07618F856C70057147D /* UIConstants.h */,
+				2DF6F07718F856C70057147D /* UIConstants.m */,
+				2DF6F07818F856C70057147D /* UIItem.h */,
+				2DF6F07918F856C70057147D /* UIItem.m */,
+				2DF6F07A18F856C70057147D /* UIItemBuilder.h */,
+				2DF6F07B18F856C70057147D /* UIItemBuilder.m */,
+				2DF6F07C18F856C70057147D /* UITank.h */,
+				2DF6F07D18F856C70057147D /* UITank.m */,
 				2DBE8A9918D25987003701E4 /* Scenes */,
-				2DBE8AB918D3A0C3003701E4 /* DisplayManager.h */,
-				2DBE8ABA18D3A0C3003701E4 /* DisplayManager.m */,
-				2D5AFEF218D8B1BF0039BF07 /* UITank.h */,
-				2D5AFEF318D8B1BF0039BF07 /* UITank.m */,
-				2D5AFEF518D8F5900039BF07 /* UIConstants.h */,
-				2D5AFEF618D8F5900039BF07 /* UIConstants.m */,
-				2DF6F06318F476E40057147D /* UIItem.h */,
-				2DF6F06418F476E40057147D /* UIItem.m */,
-				6A7D1BC218F5195800F4A0A7 /* UIItemBuilder.h */,
-				6A7D1BC318F5195800F4A0A7 /* UIItemBuilder.m */,
 			);
 			name = UILayer;
 			sourceTree = "<group>";
@@ -1800,6 +1800,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DBE888F18D25214003701E4 /* CCParticleBatchNode.m in Sources */,
+				2DF6F07318F856A70057147D /* GameScene.m in Sources */,
 				2DBE8A0718D25215003701E4 /* CCBReader.m in Sources */,
 				2DBE89B718D25215003701E4 /* CCButton.m in Sources */,
 				2DBE896218D25215003701E4 /* OALAudioActions.m in Sources */,
@@ -1807,12 +1808,12 @@
 				2DBE892118D25215003701E4 /* CCGLView.m in Sources */,
 				2DBE89EB18D25215003701E4 /* mat4.c in Sources */,
 				2DBE884718D25214003701E4 /* CCAtlasNode.m in Sources */,
+				2DF6F08018F856C70057147D /* UIItem.m in Sources */,
 				2DBE899518D25215003701E4 /* OpenALManager.m in Sources */,
 				2DBE89A118D25215003701E4 /* IOSVersion.m in Sources */,
 				2DBE885618D25214003701E4 /* CCDirector.m in Sources */,
 				2DBE89C118D25215003701E4 /* CCScrollView.m in Sources */,
 				2DBE88B418D25214003701E4 /* CCResponder.m in Sources */,
-				2DBE8AB518D26F3C003701E4 /* DisplayItem.m in Sources */,
 				2DBE884B18D25214003701E4 /* CCClippingNode.m in Sources */,
 				2DBE88DE18D25214003701E4 /* CCSpriteBatchNode.m in Sources */,
 				2DBE890218D25214003701E4 /* CCTransition.m in Sources */,
@@ -1832,8 +1833,7 @@
 				2DBE88BE18D25214003701E4 /* CCScheduler.m in Sources */,
 				2DBE889218D25214003701E4 /* CCParticleExamples.m in Sources */,
 				2DBE89C418D25215003701E4 /* CCSlider.m in Sources */,
-				2DBE8AA918D25D98003701E4 /* GameField.m in Sources */,
-				6A7D1BC418F5195800F4A0A7 /* UIItemBuilder.m in Sources */,
+				2DF6F09018F8579F0057147D /* ItemInfo.m in Sources */,
 				2DBE88FF18D25214003701E4 /* CCTMXXMLParser.m in Sources */,
 				2DBE893F18D25215003701E4 /* CGPointExtension.m in Sources */,
 				2DBE89CA18D25215003701E4 /* CCTextField.m in Sources */,
@@ -1843,6 +1843,7 @@
 				2DBE8A0118D25215003701E4 /* CCBAnimationManager.m in Sources */,
 				2DBE89E518D25215003701E4 /* mat4stack.c in Sources */,
 				2DBE888418D25214003701E4 /* CCNode.m in Sources */,
+				2DF6F08118F856C70057147D /* UIItemBuilder.m in Sources */,
 				2DF6F06D18F75DB10057147D /* BaseNetworkInterface.m in Sources */,
 				2DBE886F18D25214003701E4 /* CCLabelBMFont.m in Sources */,
 				2DBE882D18D25213003701E4 /* CCActionEase.m in Sources */,
@@ -1884,8 +1885,6 @@
 				2DBE887C18D25214003701E4 /* CCLayoutBox.m in Sources */,
 				2DBE887918D25214003701E4 /* CCLayout.m in Sources */,
 				2DBE899C18D25215003701E4 /* OALSuspendHandler.m in Sources */,
-				2DBE8AAC18D25E8D003701E4 /* Tank.m in Sources */,
-				2D5AFEF418D8B1BF0039BF07 /* UITank.m in Sources */,
 				2DBE89FB18D25215003701E4 /* vec4.c in Sources */,
 				2DBE890D18D25214003701E4 /* CCDirectorIOS.m in Sources */,
 				2DBE88E418D25214003701E4 /* CCSpriteFrameCache.m in Sources */,
@@ -1895,10 +1894,9 @@
 				2DBE893718D25215003701E4 /* ccUtils.c in Sources */,
 				2DBE88A818D25214003701E4 /* CCPhysicsShape.m in Sources */,
 				2DBE88B018D25214003701E4 /* CCRenderTexture.m in Sources */,
+				2DF6F08518F857830057147D /* GameLogic.m in Sources */,
 				2DBE883618D25213003701E4 /* CCActionManager.m in Sources */,
-				2D5AFEF718D8F5900039BF07 /* UIConstants.m in Sources */,
 				2DBE88DA18D25214003701E4 /* CCSprite9Slice.m in Sources */,
-				2DBE8ABB18D3A0C3003701E4 /* DisplayManager.m in Sources */,
 				2DBE88EC18D25214003701E4 /* CCTextureAtlas.m in Sources */,
 				2DBE89AD18D25215003701E4 /* OALAudioFile.m in Sources */,
 				2DBE88D318D25214003701E4 /* ccShaders.m in Sources */,
@@ -1908,10 +1906,13 @@
 				2DBE89ED18D25215003701E4 /* neon_matrix_impl.c in Sources */,
 				2DBE887218D25214003701E4 /* CCLabelTTF.m in Sources */,
 				2DBE892718D25215003701E4 /* NSEvent+CC.m in Sources */,
+				2DF6F08218F856C70057147D /* UITank.m in Sources */,
 				2DBE898418D25215003701E4 /* ALDevice.m in Sources */,
 				2DBE89F718D25215003701E4 /* vec2.c in Sources */,
-				6A2EF10618F289C60023885F /* ItemInfo.m in Sources */,
+				2DF6F08E18F8579F0057147D /* DisplayItem.m in Sources */,
+				2DF6F07E18F856C70057147D /* DisplayManager.m in Sources */,
 				2DBE882718D25213003701E4 /* CCAction.m in Sources */,
+				2DF6F08F18F8579F0057147D /* GameField.m in Sources */,
 				2DBE888B18D25214003701E4 /* CCParallaxNode.m in Sources */,
 				2DBE89F318D25215003701E4 /* ray2.c in Sources */,
 				2DBE896F18D25215003701E4 /* OALAudioTracks.m in Sources */,
@@ -1926,28 +1927,27 @@
 				2DBE894218D25215003701E4 /* NSAttributedString+CCAdditions.m in Sources */,
 				2DBE8A0418D25215003701E4 /* CCBKeyframe.m in Sources */,
 				2DBE89BE18D25215003701E4 /* CCControlTextureFactory.m in Sources */,
+				2DF6F07F18F856C70057147D /* UIConstants.m in Sources */,
 				2DBE884318D25214003701E4 /* CCAnimationCache.m in Sources */,
 				2DBE89C718D25215003701E4 /* CCTableView.m in Sources */,
 				2DBE8A8A18D25216003701E4 /* AppDelegate.m in Sources */,
 				2DBE885A18D25214003701E4 /* CCDrawingPrimitives.m in Sources */,
 				2DBE894B18D25215003701E4 /* TGAlib.m in Sources */,
 				2DBE891718D25214003701E4 /* UITouch+CC.m in Sources */,
-				2DF6F06518F476E40057147D /* UIItem.m in Sources */,
 				2DBE89F518D25215003701E4 /* utility.c in Sources */,
 				2DBE895418D25215003701E4 /* ZipUtils.m in Sources */,
 				2DBE896518D25215003701E4 /* OALUtilityActions.m in Sources */,
 				2DBE891018D25214003701E4 /* CCES2Renderer.m in Sources */,
+				2DF6F09118F8579F0057147D /* Tank.m in Sources */,
 				2DBE89E018D25215003701E4 /* aabb.c in Sources */,
 				2DBE8A0A18D25215003701E4 /* CCBsequence.m in Sources */,
 				2DBE886B18D25214003701E4 /* CCLabelAtlas.m in Sources */,
 				2DBE890618D25214003701E4 /* cocos2d.m in Sources */,
-				2DBE8AA618D25AA2003701E4 /* GameScene.m in Sources */,
 				2DBE898E18D25215003701E4 /* ALSource.m in Sources */,
 				2DBE889618D25214003701E4 /* CCParticleSystem.m in Sources */,
 				2DBE88BB18D25214003701E4 /* CCScene.m in Sources */,
 				2DBE88E918D25214003701E4 /* CCTexture.m in Sources */,
 				2DBE897B18D25215003701E4 /* ALCaptureDevice.m in Sources */,
-				2DBE8AB218D265E4003701E4 /* GameLogic.m in Sources */,
 				2DBE88B718D25214003701E4 /* CCResponderManager.m in Sources */,
 				2DBE884F18D25214003701E4 /* CCConfiguration.m in Sources */,
 				2DBE899218D25215003701E4 /* ALWrapper.m in Sources */,
