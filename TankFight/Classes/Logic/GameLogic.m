@@ -8,6 +8,7 @@
 
 #import "GameLogic.h"
 #import "Tank.h"
+#import "GameUIData.h"
 
 @implementation GameLogic
 
@@ -25,6 +26,12 @@ static NSUInteger nextUIItemID = 1; //start with 1.
     self = [super init];
     
     if (self){
+        
+        //game data
+        //TODO: CFAbsoluteTimeGetCurrent
+        //NSTimeInterval timeInMiliseconds = [[NSDate date] timeIntervalSince1970];
+        _gameData = [[GameUIData alloc] initWithStartTime:[[NSDate date] timeIntervalSince1970]];
+        
         //game field
         _gameField = [[GameField alloc] initWithPosition:CGPointMake(0, 0) AndAngle:0 AndSize:CGSizeMake(480, 320)];
         

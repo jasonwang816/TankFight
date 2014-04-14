@@ -112,9 +112,9 @@
 }
 
 - (void) update:(CCTime) time {
-    [physicsManager updateUI];
+    [physicsManager updateUI:time];
     //NSLog(@"scene update.");
-    [uiManager updateUI];
+    [uiManager updateUI:time];
 }
 
 // -----------------------------------------------------------------------

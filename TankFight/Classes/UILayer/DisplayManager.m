@@ -9,6 +9,8 @@
 #import "DisplayManager.h"
 #import "ItemInfo.h"
 #import "UIItemBuilder.h"
+#import "UIFrame.h"
+#import "GameUIData.h"
 
 @implementation DisplayManager
 
@@ -20,7 +22,7 @@
         _isPhysicsEnable = enabled;
         
         _adjustAngle = 0;
-        
+        _deltaTotal = 0;
 //        CCTexture *texture = [cctexture]
 //        [[CCTextureCache sharedTextureCache] addImage:@"myatlastexture.png"];
 //        CCSprite *sprite =
@@ -111,38 +113,50 @@
     
 }
 
-- (void)updateUI
+- (void)updateUI:(CCTime) time
 {
-    if (_isPhysicsEnable){
+    _deltaTotal += time;
+    
+    if (_isPhysicsEnable){ //server
         for (int i=0; i<self.ccTanks.count; i++) {
             [self.ccTanks[i] adjustRelatedSprites];
         }
 
-        [self updateLogicDataFromUI];
+        [self updateLogicDataFromUI:_deltaTotal];
     }else
     {
-        [self updateUIDataFromLogic];
+        [self updateUIDataFromLogic:_deltaTotal];
     }
-    //_logic.tankHome.position = _ccTankHome.bo
     
     //TODO: update game data in game logic!!!!!!!!!
 }
 
 //Used for update logic data from Physics manager
-- (void) updateLogicDataFromUI{
+- (void) updateLogicDataFromUI:(CCTime) time{
+    
+    NSMutableArray * items = [[NSMutableArray alloc] init];
+    
     for (int i=0; i<self.ccTanks.count; i++) {
-        [self.ccTanks[i] syncToLogicTank:_logic.tanks[i]];
+        UITank * uiTank = (UITank *)self.ccTanks[i];
+        [uiTank syncToLogicTank:_logic.tanks[i]];
+        [items addObject:uiTank.ccBody.logicItem];
+        [items addObject:uiTank.ccCannon.logicItem];
+        [items addObject:uiTank.ccLaser.logicItem];
     }
     
     for (id uiItemID in _uiItems) {
         UIItem * uiItem = [_uiItems objectForKey:uiItemID];
         [uiItem syncToLogicDisplayItem];
+        [items addObject:uiItem.logicItem];
     }
+    
+    UIFrame * frame = [[UIFrame alloc] initWithFrameTime:time AndDisplayItems:items];
+    [_logic.gameData addFrame:frame];
 }
 
 //Used fro update UI display from logic data.
 //Note! It is possible displaymanager.uiItems doesn't have the uiitem in Logic.displayitems
-- (void) updateUIDataFromLogic{
+- (void) updateUIDataFromLogic:(CCTime) time{
     for (int i=0; i<self.ccTanks.count; i++) {
         [self.ccTanks[i] syncFromLogicTank:_logic.tanks[i]];
     }

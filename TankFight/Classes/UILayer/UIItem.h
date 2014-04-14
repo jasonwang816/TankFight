@@ -18,8 +18,8 @@
 
 - (void)syncToLogicDisplayItem;
 - (void)syncFromLogicDisplayItem;
-//- (void)syncToLogicDisplayItem:(LogicDisplayItem *) display;
-//- (void)syncFromLogicDisplayItem:(LogicDisplayItem *) display;
+- (void)syncToLogicDisplayItem:(LogicDisplayItem *) display;
+- (void)syncFromLogicDisplayItem:(LogicDisplayItem *) display;
 
 - (CCUnitType)userObjectType;
 

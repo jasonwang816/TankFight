@@ -25,6 +25,7 @@
 
 @property (nonatomic) GameLogic * logic;
 @property (nonatomic) CGPoint origin;
+@property (nonatomic) NSTimeInterval deltaTotal;
 
 //if true, this dinstance is for real game physics logic;
 //oterwise is just for display, no physics bodys for sprites.
@@ -39,7 +40,7 @@
 @property (nonatomic) NSMutableDictionary * uiItems;
 
 - (id)initWithGameLogic:(GameLogic *)logic AtOrigin:(CGPoint)originPoint WithPhysics:(BOOL)enabled;
-- (void)updateUI;
+- (void)updateUI:(CCTime) time;
 - (void)addUIItem:(UIItem *)item;
 - (void)removeUIItem:(UIItem *)item;
 

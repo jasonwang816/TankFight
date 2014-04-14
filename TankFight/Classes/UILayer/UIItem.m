@@ -55,24 +55,22 @@
 }
 
 - (void)syncToLogicDisplayItem{
-    self.logicItem.position = self.position;
-    self.logicItem.rotation = self.rotation;
+    [self syncToLogicDisplayItem:self.logicItem];
 }
 
 - (void)syncFromLogicDisplayItem{
-    self.position = self.logicItem.position;
-    self.rotation = self.logicItem.rotation;
+    [self syncFromLogicDisplayItem:self.logicItem];
 }
 
-//- (void)syncToLogicDisplayItem:(LogicDisplayItem *) logic{
-//    logic.position = self.position;
-//    logic.rotation = self.rotation;
-//}
-//
-//- (void)syncFromLogicDisplayItem:(LogicDisplayItem *) logic{
-//    self.position = logic.position;
-//    self.rotation = logic.rotation;
-//}
+- (void)syncToLogicDisplayItem:(LogicDisplayItem *) logic{
+    logic.position = self.position;
+    logic.rotation = self.rotation;
+}
+
+- (void)syncFromLogicDisplayItem:(LogicDisplayItem *) logic{
+    self.position = logic.position;
+    self.rotation = logic.rotation;
+}
 
 
 @end

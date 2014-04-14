@@ -10,6 +10,8 @@
 #import "GameField.h"
 #import "Tank.h"
 
+@class GameUIData;
+
 
 static const CGPoint homeTankPosition = (CGPoint){100, 200};
 static const CGPoint visitorTankPosition = (CGPoint){350, 200};
@@ -24,6 +26,10 @@ static const CGPoint visitorTankPosition = (CGPoint){350, 200};
 @interface GameLogic : NSObject
 
 @property (nonatomic, weak) id <GameLogicDelegate> delegate;
+
+@property (nonatomic) NSTimeInterval * updateInterval;
+
+@property (nonatomic) GameUIData * gameData;
 
 @property (nonatomic) GameField * gameField;
 @property (nonatomic) NSMutableArray * tanks;

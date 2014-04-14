@@ -175,6 +175,10 @@
 		2DBA6BCA18F8A979003D14DE /* TextField@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA6B2718F8A979003D14DE /* TextField@2x.png */; };
 		2DBA6BCB18F8A979003D14DE /* WrongSnap.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA6B2818F8A979003D14DE /* WrongSnap.png */; };
 		2DBA6BCC18F8A979003D14DE /* WrongSnap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA6B2918F8A979003D14DE /* WrongSnap@2x.png */; };
+		2DBA6BCF18FC53A1003D14DE /* GameUIData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA6BCE18FC53A1003D14DE /* GameUIData.m */; };
+		2DBA6BD318FC58D7003D14DE /* UIFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA6BD218FC58D7003D14DE /* UIFrame.m */; };
+		2DBA6BD718FC8200003D14DE /* ExTank.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA6BD618FC8200003D14DE /* ExTank.m */; };
+		2DBA6BDA18FC8334003D14DE /* ExItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA6BD918FC8334003D14DE /* ExItem.m */; };
 		2DBE87E118D25213003701E4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBE87E018D25213003701E4 /* QuartzCore.framework */; };
 		2DBE87E318D25213003701E4 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBE87E218D25213003701E4 /* OpenGLES.framework */; };
 		2DBE87E518D25213003701E4 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBE87E418D25213003701E4 /* OpenAL.framework */; };
@@ -597,6 +601,14 @@
 		2DBA6B2718F8A979003D14DE /* TextField@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TextField@2x.png"; sourceTree = "<group>"; };
 		2DBA6B2818F8A979003D14DE /* WrongSnap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WrongSnap.png; sourceTree = "<group>"; };
 		2DBA6B2918F8A979003D14DE /* WrongSnap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WrongSnap@2x.png"; sourceTree = "<group>"; };
+		2DBA6BCD18FC53A1003D14DE /* GameUIData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameUIData.h; path = Classes/Logic/DataModels/GameUIData.h; sourceTree = "<group>"; };
+		2DBA6BCE18FC53A1003D14DE /* GameUIData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameUIData.m; path = Classes/Logic/DataModels/GameUIData.m; sourceTree = "<group>"; };
+		2DBA6BD118FC58D7003D14DE /* UIFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIFrame.h; path = Classes/Logic/DataModels/UIFrame.h; sourceTree = "<group>"; };
+		2DBA6BD218FC58D7003D14DE /* UIFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIFrame.m; path = Classes/Logic/DataModels/UIFrame.m; sourceTree = "<group>"; };
+		2DBA6BD518FC8200003D14DE /* ExTank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExTank.h; path = Classes/Logic/DataModels/ExTank.h; sourceTree = "<group>"; };
+		2DBA6BD618FC8200003D14DE /* ExTank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExTank.m; path = Classes/Logic/DataModels/ExTank.m; sourceTree = "<group>"; };
+		2DBA6BD818FC8334003D14DE /* ExItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExItem.h; path = Classes/Logic/DataModels/ExItem.h; sourceTree = "<group>"; };
+		2DBA6BD918FC8334003D14DE /* ExItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExItem.m; path = Classes/Logic/DataModels/ExItem.m; sourceTree = "<group>"; };
 		2DBE87DD18D25213003701E4 /* TankFight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TankFight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DBE87E018D25213003701E4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2DBE87E218D25213003701E4 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1282,6 +1294,36 @@
 			);
 			name = UIImages;
 			path = Resources/UIImages;
+			sourceTree = "<group>";
+		};
+		2DBA6BD018FC57B1003D14DE /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				2DF6F0AC18F8612D0057147D /* Game.h */,
+				2DF6F0AD18F8612D0057147D /* Game.m */,
+				2DF6F0AE18F8612D0057147D /* Player.h */,
+				2DF6F0AF18F8612D0057147D /* Player.m */,
+				2DF6F08818F8579F0057147D /* GameField.h */,
+				2DF6F08918F8579F0057147D /* GameField.m */,
+				2DF6F08C18F8579F0057147D /* Tank.h */,
+				2DF6F08D18F8579F0057147D /* Tank.m */,
+			);
+			name = Logic;
+			sourceTree = "<group>";
+		};
+		2DBA6BD418FC8196003D14DE /* ExchangeData */ = {
+			isa = PBXGroup;
+			children = (
+				2DBA6BCD18FC53A1003D14DE /* GameUIData.h */,
+				2DBA6BCE18FC53A1003D14DE /* GameUIData.m */,
+				2DBA6BD118FC58D7003D14DE /* UIFrame.h */,
+				2DBA6BD218FC58D7003D14DE /* UIFrame.m */,
+				2DBA6BD518FC8200003D14DE /* ExTank.h */,
+				2DBA6BD618FC8200003D14DE /* ExTank.m */,
+				2DBA6BD818FC8334003D14DE /* ExItem.h */,
+				2DBA6BD918FC8334003D14DE /* ExItem.m */,
+			);
+			name = ExchangeData;
 			sourceTree = "<group>";
 		};
 		2DBE87D418D25213003701E4 = {
@@ -2182,18 +2224,12 @@
 		2DBE8A9A18D259AE003701E4 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
-				2DF6F0AC18F8612D0057147D /* Game.h */,
-				2DF6F0AD18F8612D0057147D /* Game.m */,
-				2DF6F0AE18F8612D0057147D /* Player.h */,
-				2DF6F0AF18F8612D0057147D /* Player.m */,
+				2DBA6BD418FC8196003D14DE /* ExchangeData */,
+				2DBA6BD018FC57B1003D14DE /* Logic */,
 				2DF6F08618F8579F0057147D /* DisplayItem.h */,
 				2DF6F08718F8579F0057147D /* DisplayItem.m */,
-				2DF6F08818F8579F0057147D /* GameField.h */,
-				2DF6F08918F8579F0057147D /* GameField.m */,
 				2DF6F08A18F8579F0057147D /* ItemInfo.h */,
 				2DF6F08B18F8579F0057147D /* ItemInfo.m */,
-				2DF6F08C18F8579F0057147D /* Tank.h */,
-				2DF6F08D18F8579F0057147D /* Tank.m */,
 			);
 			name = DataModels;
 			sourceTree = "<group>";
@@ -2577,6 +2613,7 @@
 				2DBE8A0718D25215003701E4 /* CCBReader.m in Sources */,
 				2DBE89B718D25215003701E4 /* CCButton.m in Sources */,
 				2DBE896218D25215003701E4 /* OALAudioActions.m in Sources */,
+				2DBA6BD318FC58D7003D14DE /* UIFrame.m in Sources */,
 				2DBE89A718D25215003701E4 /* NSMutableArray+WeakReferences.m in Sources */,
 				2DBE892118D25215003701E4 /* CCGLView.m in Sources */,
 				2DC4947E18F88D0600046B8F /* PacketActivatePlayer.m in Sources */,
@@ -2642,6 +2679,7 @@
 				2DBE891418D25214003701E4 /* CCGLView.m in Sources */,
 				2DBE88D718D25214003701E4 /* CCSprite.m in Sources */,
 				2DBE883318D25213003701E4 /* CCActionInterval.m in Sources */,
+				2DBA6BCF18FC53A1003D14DE /* GameUIData.m in Sources */,
 				2DBE88A218D25214003701E4 /* CCPhysicsJoint.m in Sources */,
 				2DBE888018D25214003701E4 /* CCMotionStreak.m in Sources */,
 				2DF6F0A618F85FD20057147D /* MatchmakingClient.m in Sources */,
@@ -2659,6 +2697,7 @@
 				2DBE8A8618D25216003701E4 /* main.m in Sources */,
 				2DF6F0AB18F85FE80057147D /* NSData+Additions.m in Sources */,
 				2DBE899918D25215003701E4 /* OALAudioSession.m in Sources */,
+				2DBA6BDA18FC8334003D14DE /* ExItem.m in Sources */,
 				2DBE8A1018D25215003701E4 /* CCBLocalizationManager.m in Sources */,
 				2DBE88FC18D25214003701E4 /* CCTiledMapObjectGroup.m in Sources */,
 				2DBE89F918D25215003701E4 /* vec3.c in Sources */,
@@ -2718,6 +2757,7 @@
 				2DBE885A18D25214003701E4 /* CCDrawingPrimitives.m in Sources */,
 				2DBE894B18D25215003701E4 /* TGAlib.m in Sources */,
 				2DBE891718D25214003701E4 /* UITouch+CC.m in Sources */,
+				2DBA6BD718FC8200003D14DE /* ExTank.m in Sources */,
 				2DBE89F518D25215003701E4 /* utility.c in Sources */,
 				2DBE895418D25215003701E4 /* ZipUtils.m in Sources */,
 				2DBE896518D25215003701E4 /* OALUtilityActions.m in Sources */,
