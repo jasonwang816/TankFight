@@ -10,16 +10,8 @@
 
 - (void)gameDidBegin:(Game *)game;
 - (void)gameDidBeginNewRound:(Game *)game;
-- (void)gameShouldDealCards:(Game *)game startingWithPlayer:(Player *)startingPlayer;
 
 - (void)game:(Game *)game didActivatePlayer:(Player *)player;
-- (void)game:(Game *)game player:(Player *)player turnedOverCard:(Card *)card;
-- (void)game:(Game *)game didRecycleCards:(NSArray *)recycledCards forPlayer:(Player *)player;
-
-- (void)game:(Game *)game playerCalledSnapWithNoMatch:(Player *)player;
-- (void)game:(Game *)game playerCalledSnapTooLate:(Player *)player;
-- (void)game:(Game *)game player:(Player *)player calledSnapWithMatchingPlayers:(NSSet *)matchingPlayers;
-- (void)game:(Game *)game player:(Player *)fromPlayer paysCard:(Card *)card toPlayer:(Player *)toPlayer;
 - (void)game:(Game *)game roundDidEndWithWinner:(Player *)player;
 
 - (void)game:(Game *)game playerDidDisconnect:(Player *)disconnectedPlayer redistributedCards:(NSDictionary *)redistributedCards;
@@ -43,11 +35,5 @@
 
 - (void)beginRound;
 - (void)nextRound;
-
-- (void)turnCardForPlayerAtBottom;
-- (void)resumeAfterRecyclingCardsForPlayer:(Player *)player;
-- (BOOL)resumeAfterMovingCardsForPlayer:(Player *)player;
-- (void)playerCalledSnap:(Player *)player;
-- (void)playerMustPayCards:(Player *)player;
 
 @end

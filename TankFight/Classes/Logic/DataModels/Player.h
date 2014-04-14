@@ -1,6 +1,6 @@
 
-@class Card;
-@class Stack;
+//@class Card;
+//@class Stack;
 
 typedef enum
 {

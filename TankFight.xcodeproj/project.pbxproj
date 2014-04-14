@@ -12,8 +12,6 @@
 		2DBA6A7D18F89491003D14DE /* JoinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA6A7418F89491003D14DE /* JoinViewController.xib */; };
 		2DBA6A7E18F89491003D14DE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA6A7618F89491003D14DE /* Localizable.strings */; };
 		2DBA6A7F18F89491003D14DE /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA6A7818F89491003D14DE /* MainViewController.xib */; };
-		2DBA6A8218F89595003D14DE /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBA6A8118F89595003D14DE /* GameViewController.m */; };
-		2DBA6A8518F895A6003D14DE /* GameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA6A8318F895A6003D14DE /* GameViewController.xib */; };
 		2DBA6B2A18F8A979003D14DE /* ActivePlayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA6A8718F8A978003D14DE /* ActivePlayer.png */; };
 		2DBA6B2B18F8A979003D14DE /* ActivePlayer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA6A8818F8A978003D14DE /* ActivePlayer@2x.png */; };
 		2DBA6B2C18F8A979003D14DE /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA6A8918F8A978003D14DE /* Back.png */; };
@@ -436,9 +434,6 @@
 		2DBA6A7518F89491003D14DE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = TankFight/en.lproj/JoinViewController.xib; sourceTree = "<group>"; };
 		2DBA6A7718F89491003D14DE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = TankFight/en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2DBA6A7918F89491003D14DE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = TankFight/en.lproj/MainViewController.xib; sourceTree = "<group>"; };
-		2DBA6A8018F89595003D14DE /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
-		2DBA6A8118F89595003D14DE /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
-		2DBA6A8418F895A6003D14DE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = TankFight/en.lproj/GameViewController.xib; sourceTree = SOURCE_ROOT; };
 		2DBA6A8718F8A978003D14DE /* ActivePlayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ActivePlayer.png; sourceTree = "<group>"; };
 		2DBA6A8818F8A978003D14DE /* ActivePlayer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ActivePlayer@2x.png"; sourceTree = "<group>"; };
 		2DBA6A8918F8A978003D14DE /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
@@ -2264,9 +2259,6 @@
 		2DF6F09218F85F9D0057147D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				2DBA6A8018F89595003D14DE /* GameViewController.h */,
-				2DBA6A8118F89595003D14DE /* GameViewController.m */,
-				2DBA6A8318F895A6003D14DE /* GameViewController.xib */,
 				2DF6F09518F85F9D0057147D /* HostViewController.h */,
 				2DF6F09618F85F9D0057147D /* HostViewController.m */,
 				2DBA6A7018F89491003D14DE /* HostViewController.xib */,
@@ -2388,7 +2380,6 @@
 				2DBA6B8C18F8A979003D14DE /* Hearts King.png in Resources */,
 				2DBA6B9D18F8A979003D14DE /* Logo N.png in Resources */,
 				2DBA6BCA18F8A979003D14DE /* TextField@2x.png in Resources */,
-				2DBA6A8518F895A6003D14DE /* GameViewController.xib in Resources */,
 				2DBA6B4718F8A979003D14DE /* Clubs 9@2x.png in Resources */,
 				2DBA6B2F18F8A979003D14DE /* Button@2x.png in Resources */,
 				2DBA6BC318F8A979003D14DE /* Spades King.png in Resources */,
@@ -2682,7 +2673,6 @@
 				2DBE88E418D25214003701E4 /* CCSpriteFrameCache.m in Sources */,
 				2DBE89A318D25215003701E4 /* mach_timing.c in Sources */,
 				2DBE898718D25215003701E4 /* ALListener.m in Sources */,
-				2DBA6A8218F89595003D14DE /* GameViewController.m in Sources */,
 				2DBE886018D25214003701E4 /* ccFPSImages.m in Sources */,
 				2DBE893718D25215003701E4 /* ccUtils.c in Sources */,
 				2DBE88A818D25214003701E4 /* CCPhysicsShape.m in Sources */,
@@ -2843,14 +2833,6 @@
 			);
 			name = MainViewController.xib;
 			path = ../../../..;
-			sourceTree = "<group>";
-		};
-		2DBA6A8318F895A6003D14DE /* GameViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2DBA6A8418F895A6003D14DE /* en */,
-			);
-			name = GameViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

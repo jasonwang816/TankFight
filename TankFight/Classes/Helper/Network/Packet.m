@@ -56,8 +56,8 @@ const size_t PACKET_HEADER_SIZE = 10;
 	{
 		case PacketTypeSignInRequest:
 		case PacketTypeClientReady:
-		case PacketTypeClientDealtCards:
-		case PacketTypeClientTurnedCard:
+//		case PacketTypeClientDealtCards:
+//		case PacketTypeClientTurnedCard:
 		case PacketTypeServerQuit:
 		case PacketTypeClientQuit:
 			packet = [Packet packetWithType:packetType];

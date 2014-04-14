@@ -70,28 +70,6 @@ GameState;
 
 #pragma mark - Game Logic
 
-- (Player *)playerAtPosition:(PlayerPosition)position
-{
-	NSAssert(position >= PlayerPositionBottom && position <= PlayerPositionRight, @"Invalid player position");
-    
-	__block Player *player;
-	[_players enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
-     {
-         player = obj;
-         if (player.position == position)
-             *stop = YES;
-         else
-             player = nil;
-     }];
-    
-	return player;
-}
-
-- (Player *)activePlayer
-{
-	return [self playerAtPosition:_activePlayerPosition];
-}
-
 - (void)startServerGameWithSession:(GKSession *)session playerName:(NSString *)name clients:(NSArray *)clients
 {
 	self.isServer = YES;
@@ -167,17 +145,6 @@ GameState;
 	player.position = PlayerPositionLeft;
 	[_players setObject:player forKey:player.peerID];
     
-	player = [[Player alloc] init];
-	player.name = NSLocalizedString(@"Lucy", @"Single player mode, name of top player");
-	player.peerID = @"3";
-	player.position = PlayerPositionTop;
-	[_players setObject:player forKey:player.peerID];
-    
-	player = [[Player alloc] init];
-	player.name = NSLocalizedString(@"Steve", @"Single player mode, name of right player");
-	player.peerID = @"4";
-	player.position = PlayerPositionRight;
-	[_players setObject:player forKey:player.peerID];
     
 	[self beginGame];
 }
@@ -227,7 +194,6 @@ GameState;
     
 	if (self.isServer)
 	{
-		[self pickRandomStartingPlayer];
 		[self dealCards];
 	}
 }
@@ -250,33 +216,8 @@ GameState;
     
 	if (self.isServer)
 	{
-		[self pickNextStartingPlayer];
 		[self dealCards];
 	}
-}
-
-- (void)pickRandomStartingPlayer
-{
-	do
-	{
-		_startingPlayerPosition = arc4random() % 4;
-	}
-	while ([self playerAtPosition:_startingPlayerPosition] == nil);
-    
-	_activePlayerPosition = _startingPlayerPosition;
-}
-
-- (void)pickNextStartingPlayer
-{
-	do
-	{
-		_startingPlayerPosition++;
-		if (_startingPlayerPosition > PlayerPositionRight)
-			_startingPlayerPosition = PlayerPositionBottom;
-	}
-	while ([self playerAtPosition:_startingPlayerPosition] == nil);
-    
-	_activePlayerPosition = _startingPlayerPosition;
 }
 
 - (void)dealCards
@@ -284,35 +225,6 @@ GameState;
 	NSAssert(self.isServer, @"Must be server");
 	NSAssert(_state == GameStateDealing, @"Wrong state");
     
-//	Deck *deck = [[Deck alloc] init];
-//	[deck shuffle];
-//    
-//	while ([deck cardsRemaining] > 0)
-//	{
-//		for (PlayerPosition p = _startingPlayerPosition; p < _startingPlayerPosition + 4; ++p)
-//		{
-//			Player *player = [self playerAtPosition:(p % 4)];
-//			if (player != nil && [deck cardsRemaining] > 0)
-//			{
-//				Card *card = [deck draw];
-//				[player.closedCards addCardToTop:card];
-//			}
-//		}
-//	}
-//    
-//	Player *startingPlayer = [self activePlayer];
-//    
-//	NSMutableDictionary *playerCards = [NSMutableDictionary dictionaryWithCapacity:4];
-//	[_players enumerateKeysAndObjectsUsingBlock:^(id key, Player *obj, BOOL *stop)
-//     {
-//         NSArray *array = [obj.closedCards array];
-//         [playerCards setObject:array forKey:obj.peerID];
-//     }];
-//    
-//	PacketDealCards *packet = [PacketDealCards packetWithCards:playerCards startingWithPlayerPeerID:startingPlayer.peerID];
-//	[self sendPacketToAllClients:packet];
-//    
-//	[self.delegate gameShouldDealCards:self startingWithPlayer:startingPlayer];
 }
 
 - (void)beginRound
@@ -345,350 +257,27 @@ GameState;
 {
 	_hasTurnedCard = NO;
     
-	if ([self isSinglePlayerGame])
-	{
-		if (_activePlayerPosition != PlayerPositionBottom)
-			[self scheduleTurningCardForComputerPlayer];
-	}
-	else if (self.isServer)
-	{
-		NSString *peerID = [self activePlayer].peerID;
-		Packet* packet = [PacketActivatePlayer packetWithPeerID:peerID];
-		[self sendPacketToAllClients:packet];
-	}
+//	if ([self isSinglePlayerGame])
+//	{
+//		if (_activePlayerPosition != PlayerPositionBottom)
+////			[self scheduleTurningCardForComputerPlayer];
+//	}
+//	else if (self.isServer)
+//	{
+//		NSString *peerID = [self activePlayer].peerID;
+//		Packet* packet = [PacketActivatePlayer packetWithPeerID:peerID];
+//		[self sendPacketToAllClients:packet];
+//	}
     
 	[self.delegate game:self didActivatePlayer:[self activePlayer]];
-}
-
-- (void)activatePlayerWithPeerID:(NSString *)peerID
-{
-	NSAssert(!self.isServer, @"Must be client");
-    
-	Player *player = [self playerWithPeerID:peerID];
-	_activePlayerPosition = player.position;
-	[self activatePlayerAtPosition:_activePlayerPosition];
-    
-//	if ([player shouldRecycle])
-//	{
-//		[self recycleCardsForActivePlayer];
-//	}
 }
 
 - (void)activateNextPlayer
 {
 	NSAssert(self.isServer, @"Must be server");
-    
-	while (true)
-	{
-		// Try the next player (clockwise).
-		_activePlayerPosition++;
-		if (_activePlayerPosition > PlayerPositionRight)
-			_activePlayerPosition = PlayerPositionBottom;
-        
-		// Skip players that are not enabled, that have no more cards at all,
-		// or that have just one open card. There will always be at least one
-		// player that can be made active, so this loop will not be infinite!
-		Player *nextPlayer = [self activePlayer];
-		if (nextPlayer != nil)
-		{
-			// If this player still has cards on the closed deck, then we can
-			// simply activate him.
-//			if ([nextPlayer.closedCards cardCount] > 0)
-//			{
-//				[self activatePlayerAtPosition:_activePlayerPosition];
-//				return;
-//			}
-//            
-//			// If the player has no closed cards, but at least 2 open cards,
-//			// then we recycle them and activate this player. (It doesn't make
-//			// sense to recycle just one card.)
-//			if ([nextPlayer shouldRecycle])
-//			{
-//				[self activatePlayerAtPosition:_activePlayerPosition];
-//				[self recycleCardsForActivePlayer];
-//				return;
-//			}
-		}
-	}
+
 }
 
-- (void)changeRelativePositionsOfPlayers
-{
-	NSAssert(!self.isServer, @"Must be client");
-    
-	// We want the player for this device's user to sit at the bottom.
-	// The server sent us the player positions relative to its own user
-	// being at the bottom, so we have to "rotate" them. This depends on
-	// PlayerPositionBottom having value 0 and the other positions being
-	// in clockwise order from that.
-    
-	Player *myPlayer = [self playerWithPeerID:_session.peerID];
-	int diff = myPlayer.position;
-	myPlayer.position = PlayerPositionBottom;
-    
-	[_players enumerateKeysAndObjectsUsingBlock:^(id key, Player *obj, BOOL *stop)
-     {
-         if (obj != myPlayer)
-         {
-             obj.position = (obj.position - diff) % 4;
-         }
-     }];
-    
-	// For faking missed ActivatePlayer messages.
-	//testPosition = diff;
-}
-
-- (void)turnCardForPlayer:(Player *)player
-{
-//	NSAssert([player.closedCards cardCount] > 0, @"Player has no more cards");
-//    
-//	_hasTurnedCard = YES;
-//	_haveSnap = NO;
-//    
-//	Card *card = [player turnOverTopCard];
-//	[self.delegate game:self player:player turnedOverCard:card];
-    
-	[self checkMatch];
-}
-
-- (void)turnCardForActivePlayer
-{
-	// Cancel any Snap! messages from computer players that still may be pending.
-	// (If we do this in activateNextPlayer, it is too soon.)
-	if ([self isSinglePlayerGame])
-	{
-		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(playerCalledSnap:) object:[self playerAtPosition:PlayerPositionLeft]];
-		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(playerCalledSnap:) object:[self playerAtPosition:PlayerPositionTop]];
-		[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(playerCalledSnap:) object:[self playerAtPosition:PlayerPositionRight]];
-	}
-    
-	[self turnCardForPlayer:[self activePlayer]];
-    
-	if ([self isSinglePlayerGame])
-	{
-		if ([_matchingPlayers count] > 0 || RANDOM_INT(50) == 0)
-		{
-			for (PlayerPosition p = PlayerPositionLeft; p <= PlayerPositionRight; ++p)
-			{
-				Player *computerPlayer = [self playerAtPosition:p];
-//				if ([computerPlayer totalCardCount] > 0)
-//				{
-//					NSTimeInterval delay = 0.5f + RANDOM_FLOAT() * 2.0f;
-//					[self performSelector:@selector(playerCalledSnap:) withObject:computerPlayer afterDelay:delay];
-//				}
-			}
-		}
-	}
-    
-	// There will be a small delay between when the player turns over his
-	// card and the next player becomes active. That just feels better.
-	if (self.isServer)
-		[self performSelector:@selector(activateNextPlayer) withObject:nil afterDelay:0.5f];
-}
-
-- (void)turnCardForPlayerAtBottom
-{
-//	if (_state == GameStatePlaying
-//		&& _activePlayerPosition == PlayerPositionBottom
-//		&& !_busyDealing
-//		&& !_hasTurnedCard
-//		&& [[self activePlayer].closedCards cardCount] > 0)
-//	{
-//		[self turnCardForActivePlayer];
-//        
-//		if (!self.isServer)
-//		{
-//			Packet *packet = [Packet packetWithType:PacketTypeClientTurnedCard];
-//			[self sendPacketToServer:packet];
-//		}
-//	}
-}
-
-- (void)recycleCardsForActivePlayer
-{
-	Player *player = [self activePlayer];
-    
-//	NSArray *recycledCards = [player recycleCards];
-//	NSAssert([recycledCards count] > 0, @"Should have cards to recycle");
-//    
-//	// We also have to check after recycling cards, because a player's card
-//	// may have matched before recycling but no longer after they have been
-//	// turned face-down again.
-//	[self checkMatch];
-//    
-//	[self.delegate game:self didRecycleCards:recycledCards forPlayer:player];
-}
-
-- (void)resumeAfterRecyclingCardsForPlayer:(Player *)player
-{
-	if (_mustPayCards)
-	{
-		// Note that we have to loop through the players in the same order on
-		// both the server and the clients, otherwise the cards get mixed up.
-		for (PlayerPosition p = player.position; p < player.position + 4; ++p)
-		{
-			Player *otherPlayer = [self playerAtPosition:p % 4];
-//			if (otherPlayer != nil && otherPlayer != player && [otherPlayer totalCardCount] > 0)
-//			{
-//				Card *card = [player giveTopmostClosedCardToPlayer:otherPlayer];
-//				if (card != nil)
-//					[self.delegate game:self player:player paysCard:card toPlayer:otherPlayer];
-//			}
-		}
-	}
-}
-
-- (BOOL)resumeAfterMovingCardsForPlayer:(Player *)player
-{
-	_mustPayCards = NO;
-    
-	Player *winner = [self checkWinner];
-	if (winner != nil)
-	{
-		[self endRoundWithWinner:winner];
-		return YES;
-	}
-    
-//	if ([[self activePlayer] totalCardCount] == 0
-//		|| _hasTurnedCard
-//		|| ([[self activePlayer].closedCards cardCount] == 0 && [[self activePlayer].openCards cardCount] == 1))
-//	{
-//		if (self.isServer)
-//			[self activateNextPlayer];
-//        
-//		return YES;
-//	}
-//	else if ([[self activePlayer] shouldRecycle])
-//	{
-//		[self recycleCardsForActivePlayer];
-//		return NO;
-//	}
-//	else if ([self isSinglePlayerGame] && _activePlayerPosition != PlayerPositionBottom)
-//	{
-//		[self scheduleTurningCardForComputerPlayer];
-//		return NO;
-//	}
-    
-	return NO;
-}
-
-//- (void)playerCalledSnap:(Player *)player
-//{
-//	if (self.isServer)
-//	{
-//		if (_haveSnap)
-//		{
-//			Packet *packet = [PacketPlayerCalledSnap packetWithPeerID:player.peerID snapType:SnapTypeTooLate matchingPeerIDs:nil];
-//			[self sendPacketToAllClients:packet];
-//            
-//			[self.delegate game:self playerCalledSnapTooLate:player];
-//		}
-//		else
-//		{
-//			// Interrupt turning over the card for the active computer player.
-//			// We will reschedule this in resumeAfterMovingCardsForPlayer:.
-//			if ([self isSinglePlayerGame])
-//				[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(turnCardForActivePlayer) object:nil];
-//            
-//			// We don't want the PlayerCalledSnap and ActivatePlayer packets
-//			// to interfere with each other, so we wait with activating the next
-//			// player until after the cards have been moved around.
-//			[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(activateNextPlayer) object:nil];
-//            
-//			_haveSnap = YES;
-//            
-//			if ([_matchingPlayers count] == 0)
-//			{
-//				// If no match, then give a card from the closed stack to the
-//				// other players in clockwise order.
-//                
-//				Packet *packet = [PacketPlayerCalledSnap packetWithPeerID:player.peerID snapType:SnapTypeWrong matchingPeerIDs:nil];
-//				[self sendPacketToAllClients:packet];
-//                
-//				[self.delegate game:self playerCalledSnapWithNoMatch:player];
-//			}
-//			else
-//			{
-//				NSMutableSet *matchingPeerIDs = [NSMutableSet setWithCapacity:4];
-//				[_matchingPlayers enumerateObjectsUsingBlock:^(Player *obj, BOOL *stop)
-//                 {
-//                     [matchingPeerIDs addObject:obj.peerID];
-//                 }];
-//                
-//				Packet *packet = [PacketPlayerCalledSnap packetWithPeerID:player.peerID snapType:SnapTypeCorrect matchingPeerIDs:matchingPeerIDs];
-//				[self sendPacketToAllClients:packet];
-//                
-//				[self.delegate game:self player:player calledSnapWithMatchingPlayers:_matchingPlayers];
-//			}
-//		}
-//	}
-//	else
-//	{
-//		Packet *packet = [PacketPlayerShouldSnap packetWithPeerID:_session.peerID];
-//		[self sendPacketToServer:packet];
-//	}
-//}
-//
-//- (void)playerMustPayCards:(Player *)player
-//{
-//	_mustPayCards = YES;
-//    
-//	// Count how many cards we need to pay. If the player doesn't have enough
-//	// cards on his closed stack, then we first recycle those cards.
-//	int cardsNeeded = 0;
-//	for (PlayerPosition p = player.position; p < player.position + 4; ++p)
-//	{
-//		Player *otherPlayer = [self playerAtPosition:p % 4];
-//		if (otherPlayer != nil && otherPlayer != player && [otherPlayer totalCardCount] > 0)
-//			++cardsNeeded;
-//	}
-//    
-//	if (cardsNeeded > [player.closedCards cardCount])
-//	{
-//		NSArray *recycledCards = [player recycleCards];
-//		if ([recycledCards count] > 0)
-//		{
-//			[self.delegate game:self didRecycleCards:recycledCards forPlayer:player];
-//			return;
-//		}
-//	}
-//    
-//	[self resumeAfterRecyclingCardsForPlayer:player];
-//}
-
-- (void)checkMatch
-{
-	// This will match AABC, AAAB, AAAA, AABB. Any of these combinations can
-	// occur in a 4-player game and they all count as valid matches.
-    
-	[_matchingPlayers removeAllObjects];
-    
-	for (PlayerPosition p = PlayerPositionBottom; p <= PlayerPositionRight; ++p)
-	{
-		Player *player1 = [self playerAtPosition:p];
-		if (player1 != nil)
-		{
-			for (PlayerPosition q = PlayerPositionBottom; q <= PlayerPositionRight; ++q)
-			{
-				Player *player2 = [self playerAtPosition:q];
-				if (p != q && player2 != nil)
-				{
-//					Card *card1 = [player1.openCards topmostCard];
-//					Card *card2 = [player2.openCards topmostCard];
-//					if (card1 != nil && card2 != nil && [card1 matchesCard:card2])
-//					{
-//						[_matchingPlayers addObject:player1];
-//						break;
-//					}
-				}
-			}
-		}
-	}
-    
-#ifdef DEBUG
-	NSLog(@"Matching players: %@", _matchingPlayers);
-#endif
-}
 
 - (Player *)checkWinner
 {
@@ -706,11 +295,6 @@ GameState;
 	return winner;
 }
 
-- (void)scheduleTurningCardForComputerPlayer
-{
-	NSTimeInterval delay = 0.5f + RANDOM_FLOAT() * 2.0f;
-	[self performSelector:@selector(turnCardForActivePlayer) withObject:nil afterDelay:delay];
-}
 
 #pragma mark - Networking
 
@@ -773,7 +357,7 @@ GameState;
 	return YES;
 }
 
-- (void)clientDidDisconnect:(NSString *)peerID redistributedCards:(NSDictionary *)redistributedCards
+- (void)clientDidDisconnect:(NSString *)peerID
 {
 	if (_state != GameStateQuitting)
 	{
@@ -788,69 +372,12 @@ GameState;
 				// Give the cards of the disconnected player to the others.
 				if (self.isServer)
 				{
-					redistributedCards = [self redistributeCardsOfDisconnectedPlayer:player];
-                    
-					PacketOtherClientQuit *packet = [PacketOtherClientQuit packetWithPeerID:peerID cards:redistributedCards];
-					[self sendPacketToAllClients:packet];
+//					PacketOtherClientQuit *packet = [PacketOtherClientQuit packetWithPeerID:peerID];
+//					[self sendPacketToAllClients:packet];
 				}
-                
-				// Add the new cards to the bottom of the closed piles.
-				[redistributedCards enumerateKeysAndObjectsUsingBlock:^(id key, NSArray *array, BOOL *stop)
-                 {
-                     Player *player = [self playerWithPeerID:key];
-                     if (player != nil)
-                     {
-//                         [array enumerateObjectsUsingBlock:^(Card *card, NSUInteger idx, BOOL *stop)
-//                          {
-//                              card.isTurnedOver = NO;
-//                              [player.closedCards addCardToBottom:card];
-//                          }];
-                     }
-                 }];
-                
-				[self.delegate game:self playerDidDisconnect:player redistributedCards:redistributedCards];
-                
-				if (self.isServer && player.position == _activePlayerPosition)
-					[self activateNextPlayer];
 			}
 		}
 	}
-}
-
-- (NSDictionary *)redistributeCardsOfDisconnectedPlayer:(Player *)disconnectedPlayer
-{
-	NSMutableDictionary *playerCards = [NSMutableDictionary dictionaryWithCapacity:4];
-    
-//	[_players enumerateKeysAndObjectsUsingBlock:^(id key, Player *obj, BOOL *stop)
-//     {
-//         if (obj != disconnectedPlayer && [obj totalCardCount] > 0)
-//         {
-//             NSMutableArray *array = [NSMutableArray arrayWithCapacity:26];
-//             [playerCards setObject:array forKey:key];
-//         }
-//     }];
-//    
-//	NSMutableArray *oldCards = [NSMutableArray arrayWithCapacity:52];
-//	[oldCards addObjectsFromArray:[disconnectedPlayer.closedCards array]];
-//	[oldCards addObjectsFromArray:[disconnectedPlayer.openCards array]];
-//    
-//	while ([oldCards count] > 0)
-//	{
-//		[playerCards enumerateKeysAndObjectsUsingBlock:^(id key, NSMutableArray *obj, BOOL *stop)
-//         {
-//             if ([oldCards count] > 0)
-//             {
-//                 [obj addObject:[oldCards lastObject]];
-//                 [oldCards removeLastObject];
-//             }
-//             else
-//             {
-//                 *stop = YES;
-//             }
-//         }];
-//	}
-    
-	return playerCards;
 }
 
 #pragma mark - GKSessionDelegate
@@ -865,7 +392,7 @@ GameState;
 	{
 		if (self.isServer)
 		{
-			[self clientDidDisconnect:peerID redistributedCards:nil];
+			[self clientDidDisconnect:peerID];
 		}
 		else if ([peerID isEqualToString:_serverPeerID])
 		{
@@ -906,6 +433,7 @@ GameState;
 		}
 	}
 }
+#pragma mark
 
 #pragma mark - GKSession Data Receive Handler
 
@@ -967,32 +495,8 @@ GameState;
 			}
 			break;
             
-		case PacketTypeClientDealtCards:
-			if (_state == GameStateDealing && [self receivedResponsesFromAllPlayers])
-			{
-				_state = GameStatePlaying;
-			}
-			break;
-            
-		case PacketTypeClientTurnedCard:
-			if (_state == GameStatePlaying && player == [self activePlayer])
-			{
-				[self turnCardForActivePlayer];
-			}
-			break;
-            
-		case PacketTypePlayerShouldSnap:
-//			if (_state == GameStatePlaying)
-//			{
-//				NSString *peerID = ((PacketPlayerShouldSnap *)packet).peerID;
-//				Player *player = [self playerWithPeerID:peerID];
-//				if (player != nil)
-//					[self playerCalledSnap:player];
-//			}
-			break;
-            
 		case PacketTypeClientQuit:
-			[self clientDidDisconnect:player.peerID redistributedCards:nil];
+			[self clientDidDisconnect:player.peerID];
 			break;
             
 		default:
@@ -1019,7 +523,7 @@ GameState;
 			if (_state == GameStateWaitingForReady)
 			{
 				_players = ((PacketServerReady *)packet).players;
-				[self changeRelativePositionsOfPlayers];
+//				[self changeRelativePositionsOfPlayers];
                 
 				Packet *packet = [Packet packetWithType:PacketTypeClientReady];
 				[self sendPacketToServer:packet];
@@ -1028,36 +532,18 @@ GameState;
 			}
 			break;
             
-		case PacketTypeDealCards:
-//			if (_state == GameStateGameOver)
-//			{
-//				[self nextRound];
-//			}
-//			if (_state == GameStateDealing)
-//			{
-//				[self handleDealCardsPacket:(PacketDealCards *)packet];
-//			}
-			break;
-            
 		case PacketTypeActivatePlayer:
 			if (_state == GameStatePlaying)
 			{
-				[self handleActivatePlayerPacket:(PacketActivatePlayer *)packet];
+//				[self handleActivatePlayerPacket:(PacketActivatePlayer *)packet];
 			}
-			break;
-            
-		case PacketTypePlayerCalledSnap:
-//			if (_state == GameStatePlaying)
-//			{
-//				[self handlePlayerCalledSnapPacket:(PacketPlayerCalledSnap *)packet];
-//			}
 			break;
             
 		case PacketTypeOtherClientQuit:
 			if (_state != GameStateQuitting)
 			{
 				PacketOtherClientQuit *quitPacket = ((PacketOtherClientQuit *)packet);
-				[self clientDidDisconnect:quitPacket.peerID redistributedCards:quitPacket.cards];
+				[self clientDidDisconnect:quitPacket.peerID];
 			}
 			break;
             
@@ -1071,115 +557,8 @@ GameState;
 	}
 }
 
-//- (void)handleDealCardsPacket:(PacketDealCards *)packet
-//{
-//	[packet.cards enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
-//     {
-//         Player *player = [self playerWithPeerID:key];
-//         [player.closedCards addCardsFromArray:obj];
-//     }];
-//    
-//	Player *startingPlayer = [self playerWithPeerID:packet.startingPeerID];
-//	_activePlayerPosition = startingPlayer.position;
-//    
-//	Packet *responsePacket = [Packet packetWithType:PacketTypeClientDealtCards];
-//	[self sendPacketToServer:responsePacket];
-//    
-//	_state = GameStatePlaying;
-//    
-//	[self.delegate gameShouldDealCards:self startingWithPlayer:startingPlayer];
-//}
 
-- (void)handleActivatePlayerPacket:(PacketActivatePlayer *)packet
-{
-	// When a new round starts, the starting player has already been activated.
-	// In that case, we don't need to do anything here.
-	if (_firstTime)
-	{
-		_firstTime = NO;
-		return;
-	}
-    
-	NSString *peerID = packet.peerID;
-    
-	Player* newPlayer = [self playerWithPeerID:peerID];
-	if (newPlayer == nil)
-		return;
-    
-	// For faking missed ActivatePlayer messages.
-	/*static int foo = 0;
-     if (foo++ % 2 == 1 && testPosition == PlayerPositionTop && newPlayer.position != PlayerPositionBottom)
-     {
-     NSLog(@"*** faking missed message");
-     return;
-     }*/
-    
-	// Turn the card for the previous player, but not if we were the previous
-	// player (because that card has already been turned manually by the user).
-	//
-	// Also look at all the players in between the previously active and the
-	// newly active player. If we skipped any players, then we also have to
-	// flip the cards for them.
-    
-	PlayerPosition minPosition = _activePlayerPosition;
-	if (minPosition == PlayerPositionBottom)
-		minPosition = PlayerPositionLeft;
-    
-	PlayerPosition maxPosition = newPlayer.position;
-	if (maxPosition < minPosition)
-		maxPosition = PlayerPositionRight + 1;
-    
-	// Special situation for when there is only one player (that is not the
-	// local user) who has more than one card. In that case the active player
-	// has remained the same.
-	if (_activePlayerPosition == newPlayer.position && _activePlayerPosition != PlayerPositionBottom)
-		maxPosition = minPosition + 1;
-    
-	for (PlayerPosition p = minPosition; p < maxPosition; ++p)
-	{
-		Player *player = [self playerAtPosition:p];
-		
-		// Skip players that have no cards or only one open card.
-//		if (player != nil && [player.closedCards cardCount] > 0)
-//		{
-//			[self turnCardForPlayer:player];
-//		}
-	}
-    
-	// Delay the activation of the next player, which looks better
-	// in combination with the card turn animation.
-	[self performSelector:@selector(activatePlayerWithPeerID:) withObject:peerID afterDelay:0.5f];
-}
 
-//- (void)handlePlayerCalledSnapPacket:(PacketPlayerCalledSnap *)packet
-//{
-//	NSString *peerID = packet.peerID;
-//	SnapType snapType = packet.snapType;
-//    
-//	Player *player = [self playerWithPeerID:peerID];
-//	if (player != nil)
-//	{
-//		if (snapType == SnapTypeTooLate)
-//		{
-//			[self.delegate game:self playerCalledSnapTooLate:player];
-//		}
-//		else if (snapType == SnapTypeWrong)
-//		{
-//			[self.delegate game:self playerCalledSnapWithNoMatch:player];
-//		}
-//		else
-//		{
-//			NSMutableSet *matchingPlayers = [NSMutableSet setWithCapacity:4];
-//			[packet.matchingPeerIDs enumerateObjectsUsingBlock:^(NSString *obj, BOOL *stop)
-//             {
-//                 Player *player = [self playerWithPeerID:obj];
-//                 if (player != nil)
-//                     [matchingPlayers addObject:player];
-//             }];
-//            
-//			[self.delegate game:self player:player calledSnapWithMatchingPlayers:matchingPlayers];
-//		}
-//	}
-//}
+
 
 @end

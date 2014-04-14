@@ -526,38 +526,7 @@
 	_tappedView.hidden = YES;
 }
 
-- (void)removeAllRemainingCardViews
-{
-	for (PlayerPosition p = PlayerPositionBottom; p <= PlayerPositionRight; ++p)
-	{
-		Player *player = [self.game playerAtPosition:p];
-		if (player != nil)
-		{
-//			[self removeRemainingCardsFromStack:player.openCards forPlayer:player];
-//			[self removeRemainingCardsFromStack:player.closedCards forPlayer:player];
-		}
-	}
-}
 
-- (void)removeRemainingCardsFromStack:(Stack *)stack forPlayer:(Player *)player
-{
-	NSTimeInterval delay = 0.0f;
-
-//	for (int t = 0; t < [stack cardCount]; ++t)
-//	{
-//		NSUInteger index = [stack cardCount] - t - 1;
-//		CardView *cardView = [self cardViewForCard:[stack cardAtIndex:index]];
-//		if (t < 5)
-//		{
-//			[cardView animateRemovalAtRoundEndForPlayer:player withDelay:delay];
-//			delay += 0.05f;
-//		}
-//		else  // we only animate the top 5 cards from the stack
-//		{
-//			[cardView removeFromSuperview];
-//		}
-//	}
-}
 
 #pragma mark - Actions
 
@@ -604,17 +573,6 @@
 	[self hideTappedView];
 }
 
-- (IBAction)turnOverAction:(id)sender
-{
-	[self hideTappedView];
-	[self.game turnCardForPlayerAtBottom];
-}
-
-- (IBAction)snapAction:(id)sender
-{
-	[self.game playerCalledSnap:[self.game playerAtPosition:PlayerPositionBottom]];
-}
-
 - (IBAction)nextRoundAction:(id)sender
 {
 	[self.game nextRound];
@@ -641,7 +599,7 @@
 
 - (void)gameDidBeginNewRound:(Game *)game
 {
-	[self removeAllRemainingCardViews];
+//	[self removeAllRemainingCardViews];
 }
 
 - (void)gameShouldDealCards:(Game *)game startingWithPlayer:(Player *)startingPlayer
@@ -689,40 +647,6 @@
 	self.snapButton.enabled = YES;
 }
 
-- (void)game:(Game *)game player:(Player *)player turnedOverCard:(Card *)card
-{
-	self.snapButton.enabled = (player.position != PlayerPositionBottom);
-
-	[_turnCardSound play];
-
-//	CardView *cardView = [self cardViewForCard:card];
-//	[cardView animateTurningOverForPlayer:player];
-}
-
-- (void)game:(Game *)game didRecycleCards:(NSArray *)recycledCards forPlayer:(Player *)player
-{
-	self.snapButton.enabled = NO;
-	self.turnOverButton.enabled = NO;
-
-	NSTimeInterval delay = 0.0f;
-	for (Card *card in recycledCards)
-	{
-//		CardView *cardView = [self cardViewForCard:card];
-//		[cardView animateRecycleForPlayer:player withDelay:delay];
-		delay += 0.025f;
-	}
-
-	[self performSelector:@selector(afterRecyclingCardsForPlayer:) withObject:player afterDelay:delay + 0.5f];
-}
-
-- (void)afterRecyclingCardsForPlayer:(Player *)player
-{
-	self.snapButton.enabled = YES;
-	self.turnOverButton.enabled = YES;
-
-	[self.game resumeAfterRecyclingCardsForPlayer:player];
-}
-
 - (void)game:(Game *)game playerCalledSnapWithNoMatch:(Player *)player
 {
 	[_wrongMatchSound play];
@@ -735,29 +659,6 @@
 	self.centerLabel.text = NSLocalizedString(@"No Match!", @"Status text: player called snap with no match");
 
 	[self performSelector:@selector(playerMustPayCards:) withObject:player afterDelay:1.0f];
-}
-
-- (void)playerMustPayCards:(Player *)player
-{
-	self.centerLabel.text = [NSString stringWithFormat: NSLocalizedString(@"%@ Must Pay", @"Status text: player must pay cards to the others"), player.name];
-	[self.game playerMustPayCards:player];
-	[self performSelector:@selector(afterMovingCardsForPlayer:) withObject:player afterDelay:1.0f];
-}
-
-- (void)afterMovingCardsForPlayer:(Player *)player
-{
-	BOOL changedPlayer = [self.game resumeAfterMovingCardsForPlayer:player];
-
-	self.snapButton.enabled = YES;
-	self.turnOverButton.enabled = YES;
-
-	// If he has no more cards available, the local player no longer participates.
-//	if ([[self.game playerAtPosition:PlayerPositionBottom] totalCardCount] == 0)
-//		self.snapButton.hidden = YES;
-
-	// Show the "Player X's Turn" message again for the currently active player.
-	if (!changedPlayer)
-		[self showIndicatorForActivePlayer];
 }
 
 - (void)game:(Game *)game playerCalledSnapTooLate:(Player *)player
@@ -838,16 +739,16 @@
 		Player *otherPlayer = [self.game playerAtPosition:p];
 		if (otherPlayer != disconnectedPlayer)
 		{
-			NSArray *cards = [redistributedCards objectForKey:otherPlayer.peerID];
-			for (Card *card in cards)
-			{
-				// Note: the CardView at this point has a Card object that has
-				// the same suit and value as our "card", but on the client it
-				// is actually a different Card object!
-//				CardView *cardView = [self cardViewForCard:card];
-//				cardView.card = card;
-//				[cardView animateCloseAndMoveFromPlayer:disconnectedPlayer toPlayer:otherPlayer withDelay:0.0f];			
-			}
+//			NSArray *cards = [redistributedCards objectForKey:otherPlayer.peerID];
+//			for (Card *card in cards)
+//			{
+//				// Note: the CardView at this point has a Card object that has
+//				// the same suit and value as our "card", but on the client it
+//				// is actually a different Card object!
+////				CardView *cardView = [self cardViewForCard:card];
+////				cardView.card = card;
+////				[cardView animateCloseAndMoveFromPlayer:disconnectedPlayer toPlayer:otherPlayer withDelay:0.0f];			
+//			}
 		}
 	}
 }
