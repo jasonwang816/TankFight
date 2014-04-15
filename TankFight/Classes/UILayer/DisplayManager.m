@@ -12,6 +12,8 @@
 #import "UIFrame.h"
 #import "GameUIData.h"
 
+int testCounter = 0;
+
 @implementation DisplayManager
 
 - (id)initWithGameLogic:(GameLogic *)logic AtOrigin:(CGPoint)originPoint WithPhysics:(BOOL)enabled{
@@ -121,11 +123,17 @@
         for (int i=0; i<self.ccTanks.count; i++) {
             [self.ccTanks[i] adjustRelatedSprites];
         }
-
-        [self updateLogicDataFromUI:_deltaTotal];
+        
+        if (testCounter % 4 == 0) //TODO: decide what's the number
+        {
+            testCounter = 0;
+            [self updateLogicDataFromUI:_deltaTotal];
+        }
+        testCounter++;
+        
     }else
     {
-        [self updateUIDataFromLogic:_deltaTotal];
+        [self updateUIDataFromLogic:_deltaTotal - 1];
     }
     
     //TODO: update game data in game logic!!!!!!!!!
@@ -154,8 +162,25 @@
     [_logic.gameData addFrame:frame];
 }
 
+
+- (void) updateUIDataFromLogic:(CCTime) time{
+    
+    UIFrame * frame = [_logic.gameData getFrameAtTime:time];
+    
+    for (int i=0; i<self.ccTanks.count; i++) {
+        [self.ccTanks[i] syncFromFrame:frame];
+    }
+    
+    for (id uiItemID in _uiItems) {
+        UIItem * uiItem = [_uiItems objectForKey:uiItemID];
+        [uiItem syncFromFrame:frame];
+    }
+    
+}
+/* old code -----------------------------------
 //Used fro update UI display from logic data.
 //Note! It is possible displaymanager.uiItems doesn't have the uiitem in Logic.displayitems
+
 - (void) updateUIDataFromLogic:(CCTime) time{
     for (int i=0; i<self.ccTanks.count; i++) {
         [self.ccTanks[i] syncFromLogicTank:_logic.tanks[i]];
@@ -187,6 +212,7 @@
 //    }
 
 }
+----------------------------------------------------*/
 
 -(void) addUIItem:(UIItem *)item{
     [self.rootNode addChild:item];

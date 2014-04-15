@@ -20,7 +20,7 @@
 @property (nonatomic) CGPoint position;
 @property (nonatomic) float rotation;
 
-//- (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndType:(CCUnitType)type AndID:(NSUInteger *)itemID;
+- (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndType:(CCUnitType)type AndID:(NSUInteger *)itemID;
 - (id)initWithLogicDisplayItem:(LogicDisplayItem * )displayItem;
 
 @end

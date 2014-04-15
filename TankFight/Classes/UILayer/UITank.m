@@ -205,6 +205,13 @@
     
 }
 
+- (void) syncFromFrame:(UIFrame *) frame{
+    
+    [self.ccBody syncFromFrame:frame];
+    [self.ccCannon syncFromFrame:frame];
+    [self.ccLaser syncFromFrame:frame];
+    
+}
 
 // -----------------------------------------------------------------------
 

@@ -32,5 +32,56 @@
     return self;
 }
 
++ (id)initWithFrame:(UIFrame *)first AndFrame:(UIFrame *)second atRatio:(double)ratio{
+
+    if (ratio >= 1)
+        return second;
+    
+    //if new item added or item dismissed, always return second one
+    //NOTE: always add new frame when item added or item dismissed.
+    if (second.logicDisplayItems.count != first.logicDisplayItems.count)
+        return second;
+
+    UIFrame * frame = [[UIFrame alloc] init];
+    
+    frame.frameTime = first.frameTime + (second.frameTime - first.frameTime) * ratio;
+    frame.logicDisplayItems = [[NSMutableDictionary alloc] initWithCapacity:first.logicDisplayItems.count];
+    
+    for(id eItemID in first.logicDisplayItems)
+    {
+        ExItem * eItem = [first.logicDisplayItems objectForKey:eItemID];
+        ExItem * nItem = [second.logicDisplayItems objectForKey:eItemID];
+        if (nItem) //item disappeared, like bullet
+        {
+            NSUInteger itemID = eItem.itemID;
+            CCUnitType itemType = eItem.itemType;
+            CGFloat x = [self getValueBetweenA:eItem.position.x AndB:nItem.position.x AtRatio:ratio];
+            CGFloat y = [self getValueBetweenA:eItem.position.y AndB:nItem.position.y AtRatio:ratio];
+            CGPoint position = CGPointMake(x, y);
+            float rotation = [self getValueBetweenA:eItem.rotation AndB:nItem.rotation AtRatio:ratio];
+            
+            ExItem * newItem = [[ExItem alloc] initWithPosition:position AndAngle:rotation AndType:itemType AndID:itemID];
+            
+            [frame.logicDisplayItems setObject:newItem forKey:@(newItem.itemID)];
+        }else{
+            [frame.logicDisplayItems setObject:eItem forKey:@(eItem.itemID)];
+        }
+
+    };
+
+    return frame;
+}
+
++ (float)getValueBetweenA:(float)a AndB:(float)b AtRatio:(double)r{
+    return a + (b - a) * r;
+}
+
+- (NSString *)description
+{
+    ExItem * e = (ExItem *)[self.logicDisplayItems objectForKey:@(2)];
+	return [NSString stringWithFormat:@"time: %f; count %lu, item2(tank): position [%@]",
+            self.frameTime, self.logicDisplayItems.count,
+            NSStringFromCGPoint( e.position)];
+}
 
 @end

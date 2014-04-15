@@ -33,6 +33,7 @@
 //Sync data
 - (void) syncToLogicTank:(Tank *) logicTank;
 - (void) syncFromLogicTank:(Tank *) logicTank;
+- (void) syncFromFrame:(UIFrame *) frame;
 
 //Actions
 - (void)moveTo:(CGPoint)locationPoint;

@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 #import "cocos2d-ui.h"
 #import "ItemInfo.h"
+#import "ExItem.h"
 
 @implementation UIItem
 
@@ -58,13 +59,13 @@
     [self syncToLogicDisplayItem:self.logicItem];
 }
 
-- (void)syncFromLogicDisplayItem{
-    [self syncFromLogicDisplayItem:self.logicItem];
-}
-
 - (void)syncToLogicDisplayItem:(LogicDisplayItem *) logic{
     logic.position = self.position;
     logic.rotation = self.rotation;
+}
+
+- (void)syncFromLogicDisplayItem{
+    [self syncFromLogicDisplayItem:self.logicItem];
 }
 
 - (void)syncFromLogicDisplayItem:(LogicDisplayItem *) logic{
@@ -72,5 +73,14 @@
     self.rotation = logic.rotation;
 }
 
+
+- (void)syncFromFrame:(UIFrame *)frame{
+    
+    ExItem * eItem = [frame.logicDisplayItems objectForKey:@(self.itemID)];
+    if (eItem){
+        self.position = eItem.position;
+        self.rotation = eItem.rotation;
+    }
+}
 
 @end

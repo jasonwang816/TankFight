@@ -29,19 +29,46 @@
 - (void)addFrame:(UIFrame *)frame
 {
     [_framesData addObject:frame];
-    NSLog(@"logic.gameData addFrame:frame: %f", frame.frameTime);
+    NSLog(@"addFrame[%lu] : %@", (unsigned long)_framesData.count, frame);
 }
 
 
 - (UIFrame *)getFrameAtTime:(NSTimeInterval)time
 {
     UIFrame * frame;
-    if (time > 0)
+    if (time > 0 && self.framesData.count > _curDisplayPointer)
     {
-        if (time > _curDisplayPointer)
-        [_framesData addObject:frame];
+
+        UIFrame * curframe = (UIFrame *)self.framesData[_curDisplayPointer];
+        if (time > curframe.frameTime && self.framesData.count > _curDisplayPointer + 1) //has more frames
+        {
+            UIFrame * nextframe = (UIFrame *)self.framesData[_curDisplayPointer + 1];
+            
+            while (time > nextframe.frameTime && self.framesData.count > _curDisplayPointer + 1) {
+                curframe = nextframe;
+                _curDisplayPointer++;
+                if (self.framesData.count > _curDisplayPointer + 1) {
+                    nextframe = (UIFrame *)self.framesData[_curDisplayPointer + 1];
+                }
+            }
+            
+            if (time > nextframe.frameTime || curframe.frameTime == nextframe.frameTime) //reach last frame
+            {
+                frame = nextframe;
+            }else //now time between cur and next;
+            {
+                double ratio = (time - curframe.frameTime) / (nextframe.frameTime - curframe.frameTime);
+                frame = [UIFrame initWithFrame:curframe AndFrame:nextframe atRatio:ratio];
+                NSLog(@"getFrame:[time:%fl][ratio:%fl]:%@", time, ratio, frame);
+                
+            }
+        }else
+        {
+            frame = curframe;
+        }
+        
     }
-    NSLog(@"getFrameAtTime: %f", time);
+    return frame;
 }
 
 @end

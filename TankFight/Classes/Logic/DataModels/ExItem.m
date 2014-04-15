@@ -24,18 +24,18 @@
     return self;
 }
 
-//- (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndType:(CCUnitType)type AndID:(NSUInteger *)itemID{
-//    
-//    self = [super init];
-//    
-//    if (self){
-//        _position = pos;
-//        _rotation = angle;
-//        _itemType = type;
-//        _itemID = itemID;
-//    }
-//    
-//    return self;
-//}
+- (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndType:(CCUnitType)type AndID:(NSUInteger *)itemID{
+    
+    self = [super init];
+    
+    if (self){
+        _position = pos;
+        _rotation = angle;
+        _itemType = type;
+        _itemID = itemID;
+    }
+    
+    return self;
+}
 
 @end

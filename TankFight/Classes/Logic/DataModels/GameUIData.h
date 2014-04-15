@@ -18,4 +18,5 @@
 
 - (id)initWithStartTime:(NSTimeInterval)startTime;
 - (void)addFrame:(UIFrame *)frame;
+- (UIFrame *)getFrameAtTime:(NSTimeInterval)time;
 @end

@@ -17,4 +17,6 @@
 
 - (id)initWithFrameTime:(NSTimeInterval)frameTime AndDisplayItems:(NSMutableArray *)displayItems;
 
++ (id)initWithFrame:(UIFrame *)first AndFrame:(UIFrame *)second atRatio:(double)ratio;
+
 @end

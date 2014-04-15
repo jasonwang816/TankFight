@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 #import "cocos2d-ui.h"
 #import "DisplayItem.h"
+#import "UIFrame.h"
 
 @interface UIItem : CCSprite
 
@@ -20,6 +21,7 @@
 - (void)syncFromLogicDisplayItem;
 - (void)syncToLogicDisplayItem:(LogicDisplayItem *) display;
 - (void)syncFromLogicDisplayItem:(LogicDisplayItem *) display;
+- (void)syncFromFrame:(UIFrame *)frame;
 
 - (CCUnitType)userObjectType;
 
