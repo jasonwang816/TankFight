@@ -40,3 +40,5 @@
 - (void)fireAt:(CGPoint)locationPoint;
 - (void)scan:(CGFloat)angle;
 @end
+
+

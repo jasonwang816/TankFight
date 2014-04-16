@@ -297,12 +297,12 @@ GameState;
 }
 
 
-{
-    static const NSUInteger kItemsPerView = 20;
-    NSUInteger startIndex = viewIndex * kItemsPerView;
-    NSUInteger count = MIN( completeArray.count - startIndex, kItemsPerView );
-    NSArray *itemsForView = [completeArray subarrayWithRange: NSMakeRange( startIndex, count )];
-}
+//{
+//    static const NSUInteger kItemsPerView = 20;
+//    NSUInteger startIndex = viewIndex * kItemsPerView;
+//    NSUInteger count = MIN( completeArray.count - startIndex, kItemsPerView );
+//    NSArray *itemsForView = [completeArray subarrayWithRange: NSMakeRange( startIndex, count )];
+//}
 
 #pragma mark - Networking
 
@@ -356,12 +356,12 @@ GameState;
 
 - (BOOL)receivedResponsesFromAllPlayers
 {
-	for (NSString *peerID in _players)
-	{
-		Player *player = [self playerWithPeerID:peerID];
-		if (!player.receivedResponse)
-			return NO;
-	}
+//	for (NSString *peerID in _players)
+//	{
+//		Player *player = [self playerWithPeerID:peerID];
+//		if (!player.receivedResponse)
+//			return NO;
+//	}
 	return YES;
 }
 

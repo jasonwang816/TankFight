@@ -14,7 +14,7 @@
 {
     DisplayManager * physicsManager;
     DisplayManager * uiManager;
-
+    CCLabelTTF  *textLabel;
 }
 
 // -----------------------------------------------------------------------
@@ -47,7 +47,10 @@
     [backButton setTarget:self selector:@selector(onBackClicked:)];
     [self addChild:backButton];
     
-    [[CCDirector sharedDirector] pause];
+    textLabel = [CCLabelTTF labelWithString:@"test" fontName:@"Helvetica" fontSize:20];
+    textLabel.position =  ccp(255,60);
+    [self addChild:textLabel];
+    //[[CCDirector sharedDirector] pause];
     
     // done
 	return self;
@@ -143,16 +146,22 @@
 
 - (void)gameWaitingForClientsReady:(Game *)game
 {
+    [textLabel setString:NSLocalizedString(@"Waiting for other players...", @"Status text: waiting for clients")];
 	//self.centerLabel.text = NSLocalizedString(@"Waiting for other players...", @"Status text: waiting for clients");
 }
 
 - (void)gameWaitingForServerReady:(Game *)game
 {
+    [textLabel setString:NSLocalizedString(@"Waiting for game to start...", @"Status text: waiting for server")];
+
 	//self.centerLabel.text = NSLocalizedString(@"Waiting for game to start...", @"Status text: waiting for server");
 }
 
 - (void)gameDidBegin:(Game *)game
 {
+    
+    [textLabel setString:@"gameDidBegin."];
+    
     GameLogic * logic = [[GameLogic alloc] init];
     
     if (game.isServer) {
