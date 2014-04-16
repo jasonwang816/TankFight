@@ -12,7 +12,7 @@
 
 @class LogicDisplayItem;
 
-@interface ExItem : NSObject
+@interface ExItem : NSObject<NSCoding>
 
 @property (nonatomic) NSUInteger itemID;
 @property (nonatomic) CCUnitType itemType;

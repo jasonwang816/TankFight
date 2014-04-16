@@ -301,6 +301,7 @@
 		2DF6F0B018F8612D0057147D /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6F0AD18F8612D0057147D /* Game.m */; };
 		2DF6F0B118F8612D0057147D /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6F0AF18F8612D0057147D /* Player.m */; };
 		2DF6F0B318F8699A0057147D /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF6F0B218F8699A0057147D /* GameKit.framework */; };
+		6A15AD8A18FE3EC900ED9D72 /* PacketFrames.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A15AD8918FE3EC900ED9D72 /* PacketFrames.m */; };
 		6A2EF0F918F2711A0023885F /* field.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6A2EF0F818F2711A0023885F /* field.jpg */; };
 		6ACCF56D18EFF5A70056D9F7 /* bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ACCF56A18EFF5A70056D9F7 /* bullet.png */; };
 		6ACCF56E18EFF5A70056D9F7 /* cannon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ACCF56B18EFF5A70056D9F7 /* cannon.png */; };
@@ -869,6 +870,8 @@
 		2DF6F0AE18F8612D0057147D /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = Classes/Logic/DataModels/Player.h; sourceTree = "<group>"; };
 		2DF6F0AF18F8612D0057147D /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Player.m; path = Classes/Logic/DataModels/Player.m; sourceTree = "<group>"; };
 		2DF6F0B218F8699A0057147D /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		6A15AD8818FE3EC900ED9D72 /* PacketFrames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketFrames.h; sourceTree = "<group>"; };
+		6A15AD8918FE3EC900ED9D72 /* PacketFrames.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketFrames.m; sourceTree = "<group>"; };
 		6A2EF0F818F2711A0023885F /* field.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = field.jpg; sourceTree = "<group>"; };
 		6ACCF56A18EFF5A70056D9F7 /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
 		6ACCF56B18EFF5A70056D9F7 /* cannon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cannon.png; sourceTree = "<group>"; };
@@ -1986,6 +1989,8 @@
 				2DF6F0A318F85FD20057147D /* MatchmakingServer.m */,
 				2DF6F0A418F85FD20057147D /* Packet.h */,
 				2DF6F0A518F85FD20057147D /* Packet.m */,
+				6A15AD8818FE3EC900ED9D72 /* PacketFrames.h */,
+				6A15AD8918FE3EC900ED9D72 /* PacketFrames.m */,
 			);
 			name = Network;
 			path = Classes/Helper/Network;
@@ -2172,6 +2177,7 @@
 				2DBE89C118D25215003701E4 /* CCScrollView.m in Sources */,
 				2DBE88B418D25214003701E4 /* CCResponder.m in Sources */,
 				2DC4947518F86D8900046B8F /* PeerCell.m in Sources */,
+				6A15AD8A18FE3EC900ED9D72 /* PacketFrames.m in Sources */,
 				2DBE884B18D25214003701E4 /* CCClippingNode.m in Sources */,
 				2DF6F0B118F8612D0057147D /* Player.m in Sources */,
 				2DBE88DE18D25214003701E4 /* CCSpriteBatchNode.m in Sources */,

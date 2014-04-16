@@ -29,7 +29,7 @@
 - (void)addFrame:(UIFrame *)frame
 {
     [_framesData addObject:frame];
-    NSLog(@"addFrame[%lu] : %@", (unsigned long)_framesData.count, frame);
+//    NSLog(@"addFrame[%lu] : %@", (unsigned long)_framesData.count, frame);
 }
 
 
@@ -59,8 +59,8 @@
             {
                 double ratio = (time - curframe.frameTime) / (nextframe.frameTime - curframe.frameTime);
                 frame = [UIFrame initWithFrame:curframe AndFrame:nextframe atRatio:ratio];
-                NSLog(@"getFrame:[time:%fl][ratio:%fl]:%@", time, ratio, frame);
-                
+//                NSLog(@"getFrame:[time:%fl][ratio:%fl]:%@", time, ratio, frame);
+
             }
         }else
         {
@@ -68,6 +68,18 @@
         }
         
     }
+    
+//    if (self.framesData.count == 30){
+//        //test
+//        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:self.framesData];
+//        
+//        NSMutableArray * test = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+//        
+//        //NSLog(@"NSKeyedUnarchiver : %@", test);
+//        
+//    }
+
+    
     return frame;
 }
 

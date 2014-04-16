@@ -11,7 +11,9 @@
 #import "cocos2d-ui.h"
 
 
-@interface GameScene : CCScene
+@interface GameScene : CCScene <UIAlertViewDelegate, GameDelegate>
+
+@property (nonatomic, strong) Game *game;
 
 + (GameScene *)scene;
 - (id)init;

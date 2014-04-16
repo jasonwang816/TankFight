@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface UIFrame : NSObject
+
+@interface UIFrame :NSObject<NSCoding>
 
 @property (nonatomic) NSTimeInterval frameTime;
 

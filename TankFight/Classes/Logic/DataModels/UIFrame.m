@@ -13,6 +13,19 @@
 
 @implementation UIFrame
 
+-(void)encodeWithCoder:(NSCoder *)encoder{
+    [encoder encodeDouble:self.frameTime forKey:@"frameTime"];
+    [encoder encodeObject:self.logicDisplayItems forKey:@"logicDisplayItems"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if (self = [super init]) {
+        self.frameTime = [decoder decodeDoubleForKey:@"frameTime"];
+        self.logicDisplayItems = [decoder decodeObjectForKey:@"logicDisplayItems"];
+    }
+    return self;
+}
+
 - (id)initWithFrameTime:(NSTimeInterval)frameTime AndDisplayItems:(NSMutableArray *)displayItems{
     
     self = [super init];

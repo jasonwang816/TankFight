@@ -196,6 +196,7 @@ GameState;
 	{
 		[self dealCards];
 	}
+    
 }
 
 - (void)nextRound
@@ -295,6 +296,13 @@ GameState;
 	return winner;
 }
 
+
+{
+    static const NSUInteger kItemsPerView = 20;
+    NSUInteger startIndex = viewIndex * kItemsPerView;
+    NSUInteger count = MIN( completeArray.count - startIndex, kItemsPerView );
+    NSArray *itemsForView = [completeArray subarrayWithRange: NSMakeRange( startIndex, count )];
+}
 
 #pragma mark - Networking
 

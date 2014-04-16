@@ -5,6 +5,7 @@
 #import "cocos2d.h"
 #import "cocos2d-ui.h"
 #import "GameScene.h"
+#import "IntroScene.h"
 
 @interface MainViewController ()
 
@@ -194,8 +195,11 @@
 //		block(game);
 //	}];
     [self dismissViewControllerAnimated:NO completion:nil];
-    [[CCDirector sharedDirector] resume];
-    [[CCDirector sharedDirector] replaceScene:[GameScene scene] withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
+    
+    GameScene * startScene = (GameScene *)[[CCDirector sharedDirector] runningScene];
+    Game *game = [[Game alloc] init];
+    game.delegate = startScene;
+    block(game);
 }
 
 #pragma mark - HostViewControllerDelegate

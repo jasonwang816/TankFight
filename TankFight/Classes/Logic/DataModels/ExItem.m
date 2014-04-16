@@ -11,6 +11,44 @@
 
 @implementation ExItem
 
+//-(void)encodeWithCoder:(NSCoder *)encoder{
+//    [encoder encodeCGPoint:self.position forKey:@"p"];
+//    [encoder encodeDouble:self.rotation forKey:@"r"];
+//    [encoder encodeInt:self.itemType forKey:@"t"];
+//    [encoder encodeInt64:self.itemID forKey:@"i"];
+//    
+//}
+//
+//- (id)initWithCoder:(NSCoder *)decoder {
+//    if (self = [super init]) {
+//        
+//        self.position = [decoder decodeCGPointForKey:@"p"];
+//        self.rotation = [decoder decodeDoubleForKey:@"r"];
+//        self.itemType = [decoder decodeIntForKey:@"t"];
+//        self.itemID = [decoder decodeInt64ForKey:@"i"];
+//    }
+//    return self;
+//}
+
+-(void)encodeWithCoder:(NSCoder *)encoder{
+    [encoder encodeCGPoint:self.position forKey:@"position"];
+    [encoder encodeDouble:self.rotation forKey:@"rotation"];
+    [encoder encodeInt:self.itemType forKey:@"itemType"];
+    [encoder encodeInt64:self.itemID forKey:@"itemID"];
+
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if (self = [super init]) {
+        
+        self.position = [decoder decodeCGPointForKey:@"position"];
+        self.rotation = [decoder decodeDoubleForKey:@"rotation"];
+        self.itemType = [decoder decodeIntForKey:@"itemType"];
+        self.itemID = [decoder decodeInt64ForKey:@"itemID"];
+    }
+    return self;
+}
+
 - (id)initWithLogicDisplayItem:(LogicDisplayItem * )displayItem{
     self = [super init];
     
