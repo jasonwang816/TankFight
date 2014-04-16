@@ -201,13 +201,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TankFight/Classes/UILayer/ViewControllers/HostViewController.m"
-            timestampString = "418950505.648794"
+            filePath = "TankFight/Classes/Logic/DataModels/Game.m"
+            timestampString = "419286530.497981"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "-viewDidAppear:"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "-beginGame"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

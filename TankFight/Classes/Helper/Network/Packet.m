@@ -33,6 +33,8 @@ const size_t PACKET_HEADER_SIZE = 10;
 	return self;
 }
 
+
+//build packet from received data
 + (id)packetWithData:(NSData *)data
 {
 	if ([data length] < PACKET_HEADER_SIZE)
@@ -100,6 +102,8 @@ const size_t PACKET_HEADER_SIZE = 10;
 	return packet;
 }
 
+
+//return data to send;
 - (NSData *)data
 {
 	NSMutableData *data = [[NSMutableData alloc] initWithCapacity:100];
@@ -112,6 +116,8 @@ const size_t PACKET_HEADER_SIZE = 10;
 	return data;
 }
 
+
+//override by children to prepare data
 - (void)addPayloadToData:(NSMutableData *)data
 {
 	// base class does nothing

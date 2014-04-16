@@ -6,8 +6,11 @@ typedef enum
 
 	PacketTypeServerReady,             // server to client
 	PacketTypeClientReady,             // client to server
-
-//	PacketTypeDealCards,               // server to client
+	PacketTypeOtherClientQuit,         // server to client
+	PacketTypeServerQuit,              // server to client
+	PacketTypeClientQuit,              // client to server
+    
+	PacketTypeFrames,                  // server to client
 //	PacketTypeClientDealtCards,        // client to server
 
 	PacketTypeActivatePlayer,          // server to client
@@ -16,9 +19,7 @@ typedef enum
 //	PacketTypePlayerShouldSnap,        // client to server
 //	PacketTypePlayerCalledSnap,        // server to client
 
-	PacketTypeOtherClientQuit,         // server to client
-	PacketTypeServerQuit,              // server to client
-	PacketTypeClientQuit,              // client to server
+
 }
 PacketType;
 

@@ -276,6 +276,7 @@
 		2DC4947F18F88D0600046B8F /* PacketOtherClientQuit.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC4947918F88D0600046B8F /* PacketOtherClientQuit.m */; };
 		2DC4948018F88D0600046B8F /* PacketServerReady.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC4947B18F88D0600046B8F /* PacketServerReady.m */; };
 		2DC4948118F88D0600046B8F /* PacketSignInResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC4947D18F88D0600046B8F /* PacketSignInResponse.m */; };
+		2DCC5FCB18FDAEC20050C17C /* ExEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DCC5FCA18FDAEC20050C17C /* ExEvent.m */; };
 		2DF6F06A18F73F120057147D /* explosion.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DF6F06918F73F120057147D /* explosion.png */; };
 		2DF6F06D18F75DB10057147D /* BaseNetworkInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6F06C18F75DB10057147D /* BaseNetworkInterface.m */; };
 		2DF6F07018F75E5B0057147D /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF6F06F18F75E5B0057147D /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -820,6 +821,8 @@
 		2DC4947B18F88D0600046B8F /* PacketServerReady.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketServerReady.m; sourceTree = "<group>"; };
 		2DC4947C18F88D0600046B8F /* PacketSignInResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketSignInResponse.h; sourceTree = "<group>"; };
 		2DC4947D18F88D0600046B8F /* PacketSignInResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketSignInResponse.m; sourceTree = "<group>"; };
+		2DCC5FC918FDAEC20050C17C /* ExEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExEvent.h; path = Classes/Logic/DataModels/ExEvent.h; sourceTree = "<group>"; };
+		2DCC5FCA18FDAEC20050C17C /* ExEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExEvent.m; path = Classes/Logic/DataModels/ExEvent.m; sourceTree = "<group>"; };
 		2DF6F06918F73F120057147D /* explosion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion.png; sourceTree = "<group>"; };
 		2DF6F06B18F75DB10057147D /* BaseNetworkInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseNetworkInterface.h; path = Classes/Helper/BaseNetworkInterface.h; sourceTree = "<group>"; };
 		2DF6F06C18F75DB10057147D /* BaseNetworkInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseNetworkInterface.m; path = Classes/Helper/BaseNetworkInterface.m; sourceTree = "<group>"; };
@@ -977,6 +980,8 @@
 				2DBA6BD618FC8200003D14DE /* ExTank.m */,
 				2DBA6BD818FC8334003D14DE /* ExItem.h */,
 				2DBA6BD918FC8334003D14DE /* ExItem.m */,
+				2DCC5FC918FDAEC20050C17C /* ExEvent.h */,
+				2DCC5FCA18FDAEC20050C17C /* ExEvent.m */,
 			);
 			name = ExchangeData;
 			sourceTree = "<group>";
@@ -2162,6 +2167,7 @@
 				2DF6F08018F856C70057147D /* UIItem.m in Sources */,
 				2DBE899518D25215003701E4 /* OpenALManager.m in Sources */,
 				2DBE89A118D25215003701E4 /* IOSVersion.m in Sources */,
+				2DCC5FCB18FDAEC20050C17C /* ExEvent.m in Sources */,
 				2DBE885618D25214003701E4 /* CCDirector.m in Sources */,
 				2DBE89C118D25215003701E4 /* CCScrollView.m in Sources */,
 				2DBE88B418D25214003701E4 /* CCResponder.m in Sources */,
