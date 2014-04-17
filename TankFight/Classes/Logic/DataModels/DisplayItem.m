@@ -8,7 +8,8 @@
 
 #import "DisplayItem.h"
 #import "Constants.h"
-#import "GameLogic.h"
+//#import "GameLogic.h"
+#import "Game.h"
 
 @implementation LogicDisplayItem
 
@@ -21,7 +22,7 @@
         _rotation = angle;
         _itemType = type;
         _owner = owner;
-        _itemID = [GameLogic getNextUIItemID];
+        _itemID = [Game getNextUIItemID];
     }
     
     return self;

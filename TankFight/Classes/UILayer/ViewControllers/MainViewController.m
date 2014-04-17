@@ -198,6 +198,7 @@
     
     GameScene * startScene = (GameScene *)[[CCDirector sharedDirector] runningScene];
     Game *game = [[Game alloc] init];
+    startScene.game = game;
     game.delegate = startScene;
     block(game);
 }

@@ -16,7 +16,7 @@ int testCounter = 0;
 
 @implementation DisplayManager
 
-- (id)initWithGameLogic:(GameLogic *)logic AtOrigin:(CGPoint)originPoint WithPhysics:(BOOL)enabled{
+- (id)initWithGameLogic:(Game *)logic AtOrigin:(CGPoint)originPoint WithPhysics:(BOOL)enabled{
     self = [super init];
     if (self){
         _logic = logic;
@@ -40,7 +40,7 @@ int testCounter = 0;
         }else{
             //setup delegate only when this is not physics manager.
             //since UI manager need to be update when logic item changed.
-            _logic.delegate = self;
+            _logic.logicDelegate = self;
         }
         
         //uitanks
@@ -159,7 +159,7 @@ int testCounter = 0;
     }
     
     UIFrame * frame = [[UIFrame alloc] initWithFrameTime:time AndDisplayItems:items];
-    [_logic.gameData addFrame:frame];
+    [_logic addFrame:frame];
 }
 
 

@@ -10,7 +10,7 @@
 #import "cocos2d.h"
 #import "cocos2d-ui.h"
 
-#import "GameLogic.h"
+#import "Game.h"
 #import "UITank.h"
 #import "Tank.h"
 #import "GameField.h"
@@ -23,7 +23,7 @@
     UIItem * _ccGameField;
 }
 
-@property (nonatomic) GameLogic * logic;
+@property (nonatomic) Game * logic;
 @property (nonatomic) CGPoint origin;
 @property (nonatomic) NSTimeInterval deltaTotal;
 
@@ -39,7 +39,7 @@
 @property (nonatomic) NSMutableArray * ccTanks;
 @property (nonatomic) NSMutableDictionary * uiItems;
 
-- (id)initWithGameLogic:(GameLogic *)logic AtOrigin:(CGPoint)originPoint WithPhysics:(BOOL)enabled;
+- (id)initWithGameLogic:(Game *)logic AtOrigin:(CGPoint)originPoint WithPhysics:(BOOL)enabled;
 - (void)updateUI:(CCTime) time;
 - (void)addUIItem:(UIItem *)item;
 - (void)removeUIItem:(UIItem *)item;

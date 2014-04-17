@@ -10,7 +10,7 @@
 #import "Constants.h"
 #import "DisplayItem.h"
 #import "UIItem.h"
-#import "GameLogic.h"
+#import "Game.h"
 
 @implementation UIItemBuilder
 

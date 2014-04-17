@@ -26,11 +26,11 @@
     return self;
 }
 
-- (void)addFrame:(UIFrame *)frame
-{
-    [_framesData addObject:frame];
-//    NSLog(@"addFrame[%lu] : %@", (unsigned long)_framesData.count, frame);
-}
+//- (void)addFrame:(UIFrame *)frame
+//{
+//    [_framesData addObject:frame];
+////    NSLog(@"addFrame[%lu] : %@", (unsigned long)_framesData.count, frame);
+//}
 
 
 - (UIFrame *)getFrameAtTime:(NSTimeInterval)time

@@ -17,6 +17,6 @@
 @property (nonatomic) long curDisplayPointer;
 
 - (id)initWithStartTime:(NSTimeInterval)startTime;
-- (void)addFrame:(UIFrame *)frame;
+//- (void)addFrame:(UIFrame *)frame;
 - (UIFrame *)getFrameAtTime:(NSTimeInterval)time;
 @end

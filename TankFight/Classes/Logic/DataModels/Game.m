@@ -13,6 +13,10 @@
 #import "Player.h"
 //#import "Stack.h"
 
+#import "GameLogic.h"
+#import "Tank.h"
+#import "GameUIData.h"
+
 // For faking missed ActivatePlayer messages.
 //PlayerPosition testPosition;
 
@@ -26,6 +30,9 @@ typedef enum
 	GameStateQuitting,
 }
 GameState;
+
+
+
 
 @implementation Game
 {
@@ -48,6 +55,8 @@ GameState;
 	NSMutableSet *_matchingPlayers;
 }
 
+static NSUInteger nextUIItemID = 1; //start with 1.
+
 @synthesize delegate = _delegate;
 @synthesize isServer = _isServer;
 
@@ -57,6 +66,8 @@ GameState;
 	{
 		_players = [NSMutableDictionary dictionaryWithCapacity:4];
 		_matchingPlayers = [NSMutableSet setWithCapacity:4];
+        //_logic = [[GameLogic alloc] init];
+        [self setupGameData];
 	}
 	return self;
 }
@@ -68,7 +79,59 @@ GameState;
 #endif
 }
 
++ (NSUInteger)getNextUIItemID{
+    NSUInteger num = nextUIItemID++;
+    NSLog(@"getNextUIItemID : %lu", (unsigned long)num);
+    return num;
+}
+
+- (void)setupGameData{
+    //game data
+    //TODO: CFAbsoluteTimeGetCurrent
+    //NSTimeInterval timeInMiliseconds = [[NSDate date] timeIntervalSince1970];
+    _gameData = [[GameUIData alloc] initWithStartTime:[[NSDate date] timeIntervalSince1970]];
+    
+    //game field
+    _gameField = [[GameField alloc] initWithPosition:CGPointMake(0, 0) AndAngle:0 AndSize:CGSizeMake(480, 320)];
+    
+    //tanks
+    Tank * tank;
+    self.tanks = [[NSMutableArray alloc] init];
+    
+    tank = [[Tank alloc] initWithPosition:homeTankPosition AndAngle:90 AndName:@"Home"];
+    [_tanks addObject:tank];
+    
+    tank = [[Tank alloc] initWithPosition:visitorTankPosition AndAngle:90 AndName:@"visitor"];
+    [_tanks addObject:tank];
+    
+    //logicDisplayItems
+    _logicDisplayItems = [[NSMutableDictionary alloc] init];
+}
+
+- (void)addLogicDisplayItem:(LogicDisplayItem *)item{
+    [_logicDisplayItems setObject:item forKey:@(item.itemID)];
+    [self.logicDelegate addedLogicDisplayItem:item];
+}
+
+- (void)removeLogicDisplayItem:(LogicDisplayItem *)item{
+    [_logicDisplayItems removeObjectForKey:@(item.itemID)];
+    [self.logicDelegate removedLogicDisplayItem:item];
+}
+
+- (void)explodeAt:(CGPoint)position{
+    [self.logicDelegate explodedAt:position];
+}
+
+- (void)addFrame:(UIFrame *)frame
+{
+    [self.gameData.framesData addObject:frame];
+    //    NSLog(@"addFrame[%lu] : %@", (unsigned long)_framesData.count, frame);
+}
+
+
 #pragma mark - Game Logic
+
+
 
 - (void)startServerGameWithSession:(GKSession *)session playerName:(NSString *)name clients:(NSArray *)clients
 {
@@ -270,7 +333,7 @@ GameState;
 //		[self sendPacketToAllClients:packet];
 //	}
     
-	[self.delegate game:self didActivatePlayer:[self activePlayer]];
+//	[self.delegate game:self didActivatePlayer:[self activePlayer]];
 }
 
 - (void)activateNextPlayer
@@ -356,12 +419,12 @@ GameState;
 
 - (BOOL)receivedResponsesFromAllPlayers
 {
-//	for (NSString *peerID in _players)
-//	{
-//		Player *player = [self playerWithPeerID:peerID];
-//		if (!player.receivedResponse)
-//			return NO;
-//	}
+	for (NSString *peerID in _players)
+	{
+		Player *player = [self playerWithPeerID:peerID];
+		if (!player.receivedResponse)
+			return NO;
+	}
 	return YES;
 }
 
