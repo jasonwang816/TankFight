@@ -117,7 +117,8 @@ int testCounter = 0;
 
 - (void)updateUI:(CCTime) time
 {
-    _deltaTotal += time;
+    //_deltaTotal += time;
+    _deltaTotal = [[NSDate date] timeIntervalSince1970];
     
     if (_isPhysicsEnable){ //server
         for (int i=0; i<self.ccTanks.count; i++) {

@@ -49,7 +49,7 @@ GameState;
     long syncedFramesCount;
 }
 
-static const int FramePacketSize = 30;
+static const int FramePacketSize = 10;
 
 static NSUInteger nextUIItemID = 1; //start with 1.
 
@@ -135,8 +135,7 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 
         Packet *packet = [PacketFrames packetWithFrames:frames];
         [self sendPacketToAllClients:packet];
-        //NSData * data = [NSKeyedArchiver archivedDataWithRootObject:itemsForView];
-        //NSMutableArray * test = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        syncedFramesCount += FramePacketSize;
 
     }
     
@@ -350,6 +349,7 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 	{
 		NSLog(@"Error sending data to clients: %@", error);
 	}
+    NSLog(@"PacketFrames : %lu", (unsigned long)data.length);
 }
 
 - (void)sendPacketToServer:(Packet *)packet

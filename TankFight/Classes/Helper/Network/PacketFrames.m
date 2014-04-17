@@ -27,7 +27,7 @@
 + (id)packetWithData:(NSData *)data
 {
     NSData* chunk = [NSData dataWithBytesNoCopy:(char *)[data bytes] + PACKET_HEADER_SIZE
-                                         length:data.length
+                                         length:data.length - PACKET_HEADER_SIZE
                                    freeWhenDone:NO];
     
 	NSArray *frames = [NSKeyedUnarchiver unarchiveObjectWithData:chunk];
