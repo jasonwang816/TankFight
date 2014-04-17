@@ -118,7 +118,8 @@ int testCounter = 0;
 - (void)updateUI:(CCTime) time
 {
     //_deltaTotal += time;
-    _deltaTotal = [[NSDate date] timeIntervalSince1970];
+    _deltaTotal = [[NSDate date] timeIntervalSince1970];sdgs
+    //_deltaTotal = CACurrentMediaTime();
     
     if (_isPhysicsEnable){ //server
         for (int i=0; i<self.ccTanks.count; i++) {
@@ -134,7 +135,7 @@ int testCounter = 0;
         
     }else
     {
-        [self updateUIDataFromLogic:_deltaTotal - 1];
+        [self updateUIDataFromLogic:_deltaTotal - 2];dfgdfh
     }
     
     //TODO: update game data in game logic!!!!!!!!!
