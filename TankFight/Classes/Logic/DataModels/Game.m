@@ -4,7 +4,7 @@
 //#import "Deck.h"
 #import "Packet.h"
 #import "PacketActivatePlayer.h"
-//#import "PacketDealCards.h"
+#import "PacketFrames.h"
 //#import "PacketPlayerCalledSnap.h"
 //#import "PacketPlayerShouldSnap.h"
 #import "PacketServerReady.h"
@@ -31,9 +31,6 @@ typedef enum
 }
 GameState;
 
-
-
-
 @implementation Game
 {
 	GameState _state;
@@ -48,12 +45,11 @@ GameState;
 	PlayerPosition _activePlayerPosition;
     
 	BOOL _firstTime;
-	BOOL _busyDealing;
-	BOOL _hasTurnedCard;
-	BOOL _haveSnap;
-	BOOL _mustPayCards;
-	NSMutableSet *_matchingPlayers;
+    
+    long syncedFramesCount;
 }
+
+static const int FramePacketSize = 30;
 
 static NSUInteger nextUIItemID = 1; //start with 1.
 
@@ -65,11 +61,15 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 	if ((self = [super init]))
 	{
 		_players = [NSMutableDictionary dictionaryWithCapacity:4];
-		_matchingPlayers = [NSMutableSet setWithCapacity:4];
-        //_logic = [[GameLogic alloc] init];
+        
+        [self resetData];
         [self setupGameData];
 	}
 	return self;
+}
+
+- (void)resetData{
+    syncedFramesCount = 0;
 }
 
 - (void)dealloc
@@ -126,12 +126,24 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 {
     [self.gameData.framesData addObject:frame];
     //    NSLog(@"addFrame[%lu] : %@", (unsigned long)_framesData.count, frame);
+    
+    if (self.gameData.framesData.count - syncedFramesCount >= FramePacketSize) {
+
+        NSUInteger startIndex = syncedFramesCount;
+        NSUInteger count = FramePacketSize;
+        NSArray *frames = [self.gameData.framesData subarrayWithRange: NSMakeRange( startIndex, count )];
+
+        Packet *packet = [PacketFrames packetWithFrames:frames];
+        [self sendPacketToAllClients:packet];
+        //NSData * data = [NSKeyedArchiver archivedDataWithRootObject:itemsForView];
+        //NSMutableArray * test = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+
+    }
+    
 }
 
 
 #pragma mark - Game Logic
-
-
 
 - (void)startServerGameWithSession:(GKSession *)session playerName:(NSString *)name clients:(NSArray *)clients
 {
@@ -249,10 +261,6 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 	_state = GameStateDealing;
 	_firstTime = YES;
     
-	// This prevents the player from turning over cards while the dealing
-	// animation is still taking place.
-	_busyDealing = YES;
-    
 	[self.delegate gameDidBegin:self];
     
 	if (self.isServer)
@@ -268,7 +276,7 @@ static NSUInteger nextUIItemID = 1; //start with 1.
     
 	_state = GameStateDealing;
 	_firstTime = YES;
-	_busyDealing = YES;
+    [self resetData];
     
 	[self.delegate gameDidBeginNewRound:self];
     
@@ -293,16 +301,11 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 
 - (void)beginRound
 {
-	_busyDealing = NO;
-	_hasTurnedCard = NO;
-	_haveSnap = NO;
-	_mustPayCards = NO;
-	[_matchingPlayers removeAllObjects];
     
 	if ([self isSinglePlayerGame])
 		_state = GameStatePlaying;
     
-	[self activatePlayerAtPosition:_activePlayerPosition];
+
 }
 
 - (void)endRoundWithWinner:(Player *)winner
@@ -317,55 +320,9 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 	[self.delegate game:self roundDidEndWithWinner:winner];
 }
 
-- (void)activatePlayerAtPosition:(PlayerPosition)playerPosition
-{
-	_hasTurnedCard = NO;
-    
-//	if ([self isSinglePlayerGame])
-//	{
-//		if (_activePlayerPosition != PlayerPositionBottom)
-////			[self scheduleTurningCardForComputerPlayer];
-//	}
-//	else if (self.isServer)
-//	{
-//		NSString *peerID = [self activePlayer].peerID;
-//		Packet* packet = [PacketActivatePlayer packetWithPeerID:peerID];
-//		[self sendPacketToAllClients:packet];
-//	}
-    
-//	[self.delegate game:self didActivatePlayer:[self activePlayer]];
-}
-
-- (void)activateNextPlayer
-{
-	NSAssert(self.isServer, @"Must be server");
-
-}
 
 
-- (Player *)checkWinner
-{
-	__block Player *winner;
-    
-//	[_players enumerateKeysAndObjectsUsingBlock:^(id key, Player *obj, BOOL *stop)
-//     {
-//         if ([obj totalCardCount] == 52)
-//         {
-//             winner = obj;
-//             *stop = YES;
-//         }
-//     }];
-    
-	return winner;
-}
 
-
-//{
-//    static const NSUInteger kItemsPerView = 20;
-//    NSUInteger startIndex = viewIndex * kItemsPerView;
-//    NSUInteger count = MIN( completeArray.count - startIndex, kItemsPerView );
-//    NSArray *itemsForView = [completeArray subarrayWithRange: NSMakeRange( startIndex, count )];
-//}
 
 #pragma mark - Networking
 
@@ -601,6 +558,13 @@ static NSUInteger nextUIItemID = 1; //start with 1.
                 
 				[self beginGame];
 			}
+			break;
+
+        case PacketTypeFrames:
+            {
+                NSArray * frames = ((PacketFrames *)packet).frames;
+                [self.gameData.framesData addObjectsFromArray:frames];
+            }
 			break;
             
 		case PacketTypeActivatePlayer:

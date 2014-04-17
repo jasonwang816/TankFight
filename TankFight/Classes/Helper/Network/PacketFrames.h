@@ -12,4 +12,6 @@
 
 @property (nonatomic, copy) NSArray * frames;
 
++ (id)packetWithFrames:(NSArray *)frames;
+
 @end

@@ -1,7 +1,7 @@
 
 #import "Packet.h"
 #import "PacketActivatePlayer.h"
-//#import "PacketDealCards.h"
+#import "PacketFrames.h"
 #import "PacketOtherClientQuit.h"
 //#import "PacketPlayerCalledSnap.h"
 //#import "PacketPlayerShouldSnap.h"
@@ -73,9 +73,9 @@ const size_t PACKET_HEADER_SIZE = 10;
 			packet = [PacketServerReady packetWithData:data];
 			break;
 
-//		case PacketTypeDealCards:
-//			packet = [PacketDealCards packetWithData:data];
-//			break;
+		case PacketTypeFrames:
+			packet = [PacketFrames packetWithData:data];
+			break;
 
 		case PacketTypeActivatePlayer:
 			packet = [PacketActivatePlayer packetWithData:data];

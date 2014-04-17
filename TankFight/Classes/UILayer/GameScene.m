@@ -162,14 +162,17 @@
     
     [textLabel setString:@"gameDidBegin."];
     
+    CGPoint displayOrigin = CGPointZero;
+    
     if (game.isServer) {
-        
+        [CCDirector sharedDirector].contentScaleFactor = 1;
         physicsManager = [[DisplayManager alloc] initWithGameLogic:game AtOrigin:CGPointZero WithPhysics:YES];
         [self addChild:physicsManager.rootNode];        
+        displayOrigin = CGPointMake(500, 0);
         
     }
     
-    uiManager = [[DisplayManager alloc] initWithGameLogic:game AtOrigin:CGPointMake(500, 0) WithPhysics:NO];
+    uiManager = [[DisplayManager alloc] initWithGameLogic:game AtOrigin:displayOrigin WithPhysics:NO];
     [self addChild:uiManager.rootNode];
     
     [[CCDirector sharedDirector] resume];
