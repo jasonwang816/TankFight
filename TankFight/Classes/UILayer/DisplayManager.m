@@ -118,9 +118,10 @@ int testCounter = 0;
 - (void)updateUI:(CCTime) time
 {
     //_deltaTotal += time;
-    _deltaTotal = [[NSDate date] timeIntervalSince1970];sdgs
+    NSDate * date2001 = [NSDate dateWithTimeIntervalSinceReferenceDate:419492022];
+    _deltaTotal = [date2001 timeIntervalSinceNow] * -1000;
     //_deltaTotal = CACurrentMediaTime();
-    
+    NSLog(@"time: %f | _deltaTotal : %f", time, _deltaTotal);
     if (_isPhysicsEnable){ //server
         for (int i=0; i<self.ccTanks.count; i++) {
             [self.ccTanks[i] adjustRelatedSprites];
@@ -135,7 +136,7 @@ int testCounter = 0;
         
     }else
     {
-        [self updateUIDataFromLogic:_deltaTotal - 2];dfgdfh
+        [self updateUIDataFromLogic:_deltaTotal - 2000];
     }
     
     //TODO: update game data in game logic!!!!!!!!!

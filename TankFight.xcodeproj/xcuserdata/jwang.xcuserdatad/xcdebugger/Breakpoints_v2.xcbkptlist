@@ -191,7 +191,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "186"
             endingLineNumber = "186"
-            landmarkName = "-beginGame"
+            landmarkName = "-startServerGameWithSession:playerName:clients:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -207,7 +207,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "485"
             endingLineNumber = "485"
-            landmarkName = "-serverReceivedPacket:fromPlayer:"
+            landmarkName = "-receiveData:fromPeer:inSession:context:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -223,23 +223,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "521"
             endingLineNumber = "521"
-            landmarkName = "-clientReceivedPacket:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TankFight/Classes/Logic/DataModels/Game.m"
-            timestampString = "419372586.012309"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
-            landmarkName = "-startClientGameWithSession:playerName:server:"
+            landmarkName = "-serverReceivedPacket:fromPlayer:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -287,7 +271,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "401"
             endingLineNumber = "401"
-            landmarkName = "-session:peer:didChangeState:"
+            landmarkName = "-clientDidDisconnect:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
