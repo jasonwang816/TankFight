@@ -10,6 +10,7 @@
 
 #import "GameUIData.h"
 #import "UIFrame.h"
+#import "ExEvent.h"
 
 @implementation GameUIData
 
@@ -20,7 +21,10 @@
     if (self){
         _startTime = startTime;
         _framesData = [[NSMutableArray alloc] init];
+        _eventsData = [[NSMutableArray alloc] init];
         _curDisplayPointer = 0;
+        _nextEventPointer = 0;
+
     }
     
     return self;
@@ -32,6 +36,19 @@
 ////    NSLog(@"addFrame[%lu] : %@", (unsigned long)_framesData.count, frame);
 //}
 
+- (NSArray *)getEventAtTime:(NSTimeInterval)time{
+    
+    if(self.eventsData.count > _nextEventPointer && time > ((ExEvent *)self.eventsData[_nextEventPointer]).eventTime){
+        NSMutableArray * events = [[NSMutableArray alloc] init];
+        while (self.eventsData.count > _nextEventPointer && time > ((ExEvent *)self.eventsData[_nextEventPointer]).eventTime) {
+            [events addObject:self.eventsData[_nextEventPointer]];
+            _nextEventPointer++;
+        }
+        return events;
+    }
+    
+    return nil;
+}
 
 - (UIFrame *)getFrameAtTime:(NSTimeInterval)time
 {
@@ -68,17 +85,6 @@
         }
         
     }
-    
-//    if (self.framesData.count == 30){
-//        //test
-//        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:self.framesData];
-//        
-//        NSMutableArray * test = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-//        
-//        //NSLog(@"NSKeyedUnarchiver : %@", test);
-//        
-//    }
-
     
     return frame;
 }

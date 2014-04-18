@@ -1,17 +1,20 @@
 
+//
+//  Game.m
+//  TankFight
+//
+//  Created by Jason Wang on 2014-03-13.
+//  Copyright (c) 2014 Jason Wang. All rights reserved.
+//
+
 #import "Game.h"
-//#import "Card.h"
-//#import "Deck.h"
 #import "Packet.h"
 #import "PacketActivatePlayer.h"
 #import "PacketFrames.h"
-//#import "PacketPlayerCalledSnap.h"
-//#import "PacketPlayerShouldSnap.h"
 #import "PacketServerReady.h"
 #import "PacketSignInResponse.h"
 #import "PacketOtherClientQuit.h"
 #import "Player.h"
-//#import "Stack.h"
 
 #import "GameLogic.h"
 #import "Tank.h"
@@ -45,7 +48,7 @@ GameState;
 	PlayerPosition _activePlayerPosition;
     
 	BOOL _firstTime;
-    
+    NSDate * timeBaseline;
     long syncedFramesCount;
 }
 
@@ -85,10 +88,24 @@ static NSUInteger nextUIItemID = 1; //start with 1.
     return num;
 }
 
+
+//the time for server
+- (NSTimeInterval) getGameTime{
+    return [timeBaseline timeIntervalSinceNow] * -1000;
+    //_gameTime = CACurrentMediaTime();
+}
+//the time for all client: 3 seconds delay of gametime
+- (NSTimeInterval) getClientTime{
+    return [timeBaseline timeIntervalSinceNow] * -1000 - 3000;
+}
+
 - (void)setupGameData{
     //game data
     //TODO: CFAbsoluteTimeGetCurrent
     //NSTimeInterval timeInMiliseconds = [[NSDate date] timeIntervalSince1970];
+    
+    timeBaseline = [NSDate dateWithTimeIntervalSinceReferenceDate:419492022];  //millisecons since 2014-4-17
+
     _gameData = [[GameUIData alloc] initWithStartTime:[[NSDate date] timeIntervalSince1970]];
     
     //game field
@@ -127,6 +144,8 @@ static NSUInteger nextUIItemID = 1; //start with 1.
     [self.gameData.framesData addObject:frame];
     //    NSLog(@"addFrame[%lu] : %@", (unsigned long)_framesData.count, frame);
     
+    //TODO: move to a method
+    //send frame data when have enough frames: FramePacketSize;
     if (self.gameData.framesData.count - syncedFramesCount >= FramePacketSize) {
 
         NSUInteger startIndex = syncedFramesCount;
@@ -141,6 +160,36 @@ static NSUInteger nextUIItemID = 1; //start with 1.
     
 }
 
+- (void)addEvent:(ExEvent *)event{
+    NSLog(@"GameTime: %f add event: %@", [self getGameTime], event);
+    [self.gameData.eventsData addObject:event];
+    //TODO: send event to client
+    
+    
+    
+}
+
+- (void)handleEvents:(NSTimeInterval)time{
+    NSArray * events = [self.gameData getEventAtTime:time];
+    if (events){
+        for (ExEvent * event in events) {
+            switch (event.eventType) {
+                case ExEventType_AddItem:
+                    [self addLogicDisplayItem:event.item];
+                    break;
+                    
+                case ExEventType_RemoveItem:
+                    [self removeLogicDisplayItem:event.item];
+                    break;
+                    
+                default:
+                    break;
+            }
+            NSLog(@"handle event: %@", event);
+
+        }
+    }
+}
 
 #pragma mark - Game Logic
 
@@ -304,7 +353,6 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 	if ([self isSinglePlayerGame])
 		_state = GameStatePlaying;
     
-
 }
 
 - (void)endRoundWithWinner:(Player *)winner
@@ -318,10 +366,6 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 	winner.gamesWon++;
 	[self.delegate game:self roundDidEndWithWinner:winner];
 }
-
-
-
-
 
 #pragma mark - Networking
 

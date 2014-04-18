@@ -13,7 +13,7 @@
 
 @class Tank;
 
-@interface LogicDisplayItem : NSObject
+@interface LogicDisplayItem : NSObject<NSCoding>
 
 @property (nonatomic) NSUInteger itemID;
 @property (nonatomic) CCUnitType itemType;

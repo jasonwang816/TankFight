@@ -89,12 +89,12 @@
     return a + (b - a) * r;
 }
 
-- (NSString *)description
-{
-    ExItem * e = (ExItem *)[self.logicDisplayItems objectForKey:@(2)];
-	return [NSString stringWithFormat:@"time: %f; count %lu, item2(tank): position [%@]",
-            self.frameTime, self.logicDisplayItems.count,
-            NSStringFromCGPoint( e.position)];
-}
+//- (NSString *)description
+//{
+//    ExItem * e = (ExItem *)[self.logicDisplayItems objectForKey:@(2)];
+//	return [NSString stringWithFormat:@"time: %f; count %lu, item2(tank): position [%@]",
+//            self.frameTime, self.logicDisplayItems.count,
+//            NSStringFromCGPoint( e.position)];
+//}
 
 @end

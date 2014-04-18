@@ -1,9 +1,17 @@
+//
+//  Game.h
+//  TankFight
+//
+//  Created by Jason Wang on 2014-03-13.
+//  Copyright (c) 2014 Jason Wang. All rights reserved.
+//
 
 #import "Player.h"
 #import <Foundation/Foundation.h>
 #import "GameField.h"
 #import "Tank.h"
 #import "UIFrame.h"
+#import "ExEvent.h"
 
 @class Game;
 @class GameUIData;
@@ -48,16 +56,24 @@ static const CGPoint visitorTankPosition = (CGPoint){350, 200};
 @property (nonatomic) NSMutableDictionary * logicDisplayItems;
 
 //Logic
-- (void)addLogicDisplayItem:(LogicDisplayItem *)item;
-- (void)removeLogicDisplayItem:(LogicDisplayItem *)item;
+//- (void)addLogicDisplayItem:(LogicDisplayItem *)item;
+//- (void)removeLogicDisplayItem:(LogicDisplayItem *)item;
 - (void)explodeAt:(CGPoint)position;
+
 - (void)addFrame:(UIFrame *)frame;
+- (void)addEvent:(ExEvent *)event;
+- (void)handleEvents:(NSTimeInterval)time;
 
 //client-server
 - (void)startServerGameWithSession:(GKSession *)session playerName:(NSString *)name clients:(NSArray *)clients;
 - (void)startClientGameWithSession:(GKSession *)session playerName:(NSString *)name server:(NSString *)peerID;
 - (void)startSinglePlayerGame;
 - (void)quitGameWithReason:(QuitReason)reason;
+
+//the time for server
+- (NSTimeInterval) getGameTime;
+//the time for all client: 3 seconds delay of gametime
+- (NSTimeInterval) getClientTime;
 
 //- (Player *)playerAtPosition:(PlayerPosition)position;
 //- (Player *)activePlayer;

@@ -25,7 +25,7 @@
 
 @property (nonatomic) Game * logic;
 @property (nonatomic) CGPoint origin;
-@property (nonatomic) NSTimeInterval deltaTotal;
+//@property (nonatomic) NSTimeInterval gameTime;
 
 //if true, this dinstance is for real game physics logic;
 //oterwise is just for display, no physics bodys for sprites.

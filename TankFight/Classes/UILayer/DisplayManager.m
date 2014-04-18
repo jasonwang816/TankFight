@@ -11,20 +11,24 @@
 #import "UIItemBuilder.h"
 #import "UIFrame.h"
 #import "GameUIData.h"
+#import "ExEvent.h"
 
 int testCounter = 0;
 
-@implementation DisplayManager
+@implementation DisplayManager{
+
+}
 
 - (id)initWithGameLogic:(Game *)logic AtOrigin:(CGPoint)originPoint WithPhysics:(BOOL)enabled{
     self = [super init];
     if (self){
+        
         _logic = logic;
         _origin = originPoint;
         _isPhysicsEnable = enabled;
         
         _adjustAngle = 0;
-        _deltaTotal = 0;
+
 //        CCTexture *texture = [cctexture]
 //        [[CCTextureCache sharedTextureCache] addImage:@"myatlastexture.png"];
 //        CCSprite *sprite =
@@ -115,28 +119,25 @@ int testCounter = 0;
     
 }
 
+
 - (void)updateUI:(CCTime) time
 {
-    //_deltaTotal += time;
-    NSDate * date2001 = [NSDate dateWithTimeIntervalSinceReferenceDate:419492022];
-    _deltaTotal = [date2001 timeIntervalSinceNow] * -1000;
-    //_deltaTotal = CACurrentMediaTime();
-    NSLog(@"time: %f | _deltaTotal : %f", time, _deltaTotal);
+    
     if (_isPhysicsEnable){ //server
         for (int i=0; i<self.ccTanks.count; i++) {
             [self.ccTanks[i] adjustRelatedSprites];
         }
         
-        if (testCounter % 4 == 0) //TODO: decide what's the number
+        if (testCounter % 5 == 0) //TODO: decide what's the number
         {
             testCounter = 0;
-            [self updateLogicDataFromUI:_deltaTotal];
+            [self updateLogicDataFromUI:[_logic getGameTime]];
         }
         testCounter++;
         
     }else
     {
-        [self updateUIDataFromLogic:_deltaTotal - 2000];
+        [self updateUIDataFromLogic:[_logic getClientTime]];  //3 second delay
     }
     
     //TODO: update game data in game logic!!!!!!!!!
@@ -168,6 +169,10 @@ int testCounter = 0;
 
 - (void) updateUIDataFromLogic:(CCTime) time{
     
+    //handle events first
+    [_logic handleEvents:time];
+    
+    //update frames
     UIFrame * frame = [_logic.gameData getFrameAtTime:time];
     
     for (int i=0; i<self.ccTanks.count; i++) {
@@ -220,13 +225,17 @@ int testCounter = 0;
 -(void) addUIItem:(UIItem *)item{
     [self.rootNode addChild:item];
     [_uiItems setObject:item forKey:@(item.itemID)];
-    [_logic addLogicDisplayItem:item.logicItem];
+    ExEvent * event = [[ExEvent alloc] initWithTime:[_logic getGameTime] AndType:ExEventType_AddItem AndItem:item.logicItem];
+    [_logic addEvent:event];
+
 }
 
 -(void) removeUIItem:(UIItem *)item{
     [item removeFromParent];
     [_uiItems removeObjectForKey:@(item.itemID)];
-    [_logic removeLogicDisplayItem:item.logicItem];
+    ExEvent * event = [[ExEvent alloc] initWithTime:[_logic getGameTime] AndType:ExEventType_RemoveItem AndItem:item.logicItem];
+    [_logic addEvent:event];
+
 }
 
 // -----------------------------------------------------------------------
@@ -245,7 +254,7 @@ int testCounter = 0;
 
 // -----------------------------------------------------------------------
 // -----------------------------------------------------------------------
-#pragma mark - GameLogicDelegate
+#pragma mark - GameLogicDelegate - For UI manager
 // -----------------------------------------------------------------------
 - (void)addedLogicDisplayItem:(LogicDisplayItem *)logicItem{
     UIItem * uiItem = [UIItemBuilder buildUIItem:logicItem];
@@ -275,10 +284,9 @@ int testCounter = 0;
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair Default:(CCNode *)itemA Default:(CCNode *)itemB {
     
-    NSLog(@"\n itemA : %@ \n itemB : %@ \n ----------------------------------------------------------- ", (ItemInfo *)itemA.userObject, (ItemInfo *)itemB.userObject);
+//    NSLog(@"\n itemA : %@ \n itemB : %@ \n ----------------------------------------------------------- ", (ItemInfo *)itemA.userObject, (ItemInfo *)itemB.userObject);
     //return YES;
-    //    [monster removeFromParent];
-    //    [projectile removeFromParent];
+
     NSArray * items = [NSArray arrayWithObjects:itemA, itemB, nil];
     
     UIItem * theOne;  //the item with checking CCUnitType
