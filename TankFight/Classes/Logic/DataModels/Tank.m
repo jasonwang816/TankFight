@@ -8,6 +8,7 @@
 
 #import "Tank.h"
 #import "Constants.h"
+#import "StaticData.h"
 
 @implementation Tank
 -(void)encodeWithCoder:(NSCoder *)encoder{
@@ -73,9 +74,33 @@
 }
 
 
-//Should based on level
-- (CGFloat)getRadarRange{
-    return 150;
+//Spec
+- (CGFloat)movingSpeed{
+    return [[StaticData sharedInstance] getTankSpec:self Spec:TankSpec_MovingSpeed];
 }
+
+- (CGFloat)turningSpeed{
+    return [[StaticData sharedInstance] getTankSpec:self Spec:TankSpec_TurningSpeed];
+}
+
+- (CGFloat)demage{
+    return [[StaticData sharedInstance] getTankSpec:self Spec:TankSpec_Demage];
+}
+
+- (CGFloat)defence{
+    return [[StaticData sharedInstance] getTankSpec:self Spec:TankSpec_Defence];
+}
+
+- (CGFloat)bulletSpeed{
+    return [[StaticData sharedInstance] getTankSpec:self Spec:TankSpec_BulletSpeed];
+}
+
+- (CGFloat)radarSpeed{
+    return [[StaticData sharedInstance] getTankSpec:self Spec:TankSpec_RadarSpeed];
+}
+- (CGFloat)radarRange{
+    return [[StaticData sharedInstance] getTankSpec:self Spec:TankSpec_RadarRange];
+}
+
 
 @end

@@ -15,12 +15,8 @@
 //exchangable data
 @property (nonatomic) NSString * name;
 @property (nonatomic) NSInteger health;
-@property (nonatomic) CGFloat attackLevel;
-@property (nonatomic) CGFloat defenceLevel;
-@property (nonatomic) CGFloat speedLevel;
-@property (nonatomic) CGFloat bulletLevel;
-@property (nonatomic) CGFloat radarLevel;
 @property (nonatomic) NSInteger colorID;
+@property (nonatomic) NSMutableDictionary * specLevel;
 
 - (id)initWithName:(NSString *)name;
 

@@ -13,11 +13,7 @@
 -(void)encodeWithCoder:(NSCoder *)encoder{
     [encoder encodeObject:self.name forKey:@"name"];
     [encoder encodeInteger:self.health forKey:@"health"];
-    [encoder encodeFloat:self.attackLevel forKey:@"attackLevel"];
-    [encoder encodeFloat:self.defenceLevel forKey:@"defenceLevel"];
-    [encoder encodeFloat:self.speedLevel forKey:@"speedLevel"];
-    [encoder encodeFloat:self.bulletLevel forKey:@"bulletLevel"];
-    [encoder encodeFloat:self.radarLevel forKey:@"radarLevel"];
+    [encoder encodeObject:self.specLevel forKey:@"specLevel"];
     [encoder encodeInteger:self.colorID forKey:@"colorID"];
     
 }
@@ -30,11 +26,7 @@
     if (self = [super init]) {
         self.name = [decoder decodeObjectForKey:@"name"];
         self.health = [decoder decodeIntegerForKey:@"health"];
-        self.attackLevel = [decoder decodeFloatForKey:@"attackLevel"];
-        self.defenceLevel = [decoder decodeFloatForKey:@"defenceLevel"];
-        self.speedLevel = [decoder decodeFloatForKey:@"speedLevel"];
-        self.bulletLevel = [decoder decodeFloatForKey:@"bulletLevel"];
-        self.radarLevel = [decoder decodeFloatForKey:@"radarLevel"];
+        self.specLevel = [decoder decodeObjectForKey:@"specLevel"];
         self.colorID = [decoder decodeIntegerForKey:@"colorID"];
 
     }
@@ -48,12 +40,8 @@
     if (self){
         self.name = name;
         self.health = 100;
-        self.attackLevel = 1;
-        self.defenceLevel = 1;
-        self.speedLevel = 1;
-        self.bulletLevel = 1;
-        self.radarLevel = 1;
         self.colorID = 0;
+        self.specLevel = [[NSMutableDictionary alloc] init];
     }
     
     return self;

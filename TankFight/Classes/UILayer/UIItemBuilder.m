@@ -42,7 +42,7 @@
         case CCUnitType_RadarLaser:
         {
             uiItem = [UIItem spriteWithImageNamed:@"darkBlue_350_200.png" LinkToLogicItem:logicItem];
-            CGFloat range = logicItem.owner.getRadarRange;
+            CGFloat range = logicItem.owner.radarRange;
             uiItem.textureRect = CGRectMake(0, 0, range, 0.3);
             uiItem.anchorPoint = CGPointZero;
             

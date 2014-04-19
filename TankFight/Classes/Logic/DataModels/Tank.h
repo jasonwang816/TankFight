@@ -25,5 +25,11 @@
 
 - (void)physicsCollisionWith:(LogicDisplayItem *)item;
 
-- (CGFloat)getRadarRange;
+- (CGFloat)movingSpeed;
+- (CGFloat)turningSpeed;
+- (CGFloat)demage;
+- (CGFloat)defence;
+- (CGFloat)bulletSpeed;
+- (CGFloat)radarSpeed;
+- (CGFloat)radarRange;
 @end
