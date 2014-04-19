@@ -5,12 +5,12 @@
 
 @implementation Player
 
-@synthesize position = _position;
-@synthesize name = _name;
-@synthesize peerID = _peerID;
-@synthesize receivedResponse = _receivedResponse;
-@synthesize lastPacketNumberReceived = _lastPacketNumberReceived;
-@synthesize gamesWon = _gamesWon;
+//@synthesize position = _position;  //SinglePlayer: always 1
+//@synthesize name = _name;
+//@synthesize peerID = _peerID;
+//@synthesize receivedResponse = _receivedResponse;
+//@synthesize lastPacketNumberReceived = _lastPacketNumberReceived;
+//@synthesize gamesWon = _gamesWon;
 
 //@synthesize closedCards = _closedCards;
 //@synthesize openCards = _openCards;

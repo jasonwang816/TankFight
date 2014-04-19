@@ -61,6 +61,8 @@
 //            break;
         case CCUnitType_Tank:
             uiItem = [UIItem spriteWithImageNamed:@"Body.png" LinkToLogicItem:logicItem];
+            //uiItem.color = [CCColor yellowColor];
+            
             break;
         default:
             [NSException raise:NSGenericException format:@"Unexpected CCUnitType."];

@@ -13,7 +13,7 @@ typedef enum
 {
 	ExEventType_RemoveItem,     // RemoveItem : bullet ...
 	ExEventType_AddItem,        // AddItem : bullet ...
-	ExEventType_Fire,           // Tank Fire
+	ExEventType_Explode,        // Explode At
 	ExEventType_TankHit,        // Tank hit
 
 }ExEventType;

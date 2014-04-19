@@ -12,6 +12,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *hostGameButton;
 @property (nonatomic, weak) IBOutlet UIButton *joinGameButton;
 @property (nonatomic, weak) IBOutlet UIButton *singlePlayerGameButton;
+
 @end
 
 @implementation MainViewController
@@ -201,6 +202,11 @@
     startScene.game = game;
     game.delegate = startScene;
     block(game);
+}
+
+- (ExGameInfo *)buildGameInfo{
+    ExGameInfo * info = [[ExGameInfo alloc] init];
+    info.field = 
 }
 
 #pragma mark - HostViewControllerDelegate

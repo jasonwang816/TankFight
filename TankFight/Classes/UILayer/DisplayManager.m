@@ -47,6 +47,8 @@ int testCounter = 0;
             _logic.logicDelegate = self;
         }
         
+        self.rootNode.position  = self.origin;
+        
         //uitanks
         UITank * uiTank;
         self.ccTanks = [[NSMutableArray alloc] init];
@@ -67,11 +69,18 @@ int testCounter = 0;
     //game field
     GameField * field = _logic.gameField;
     _ccGameField = [CCSprite spriteWithImageNamed:@"field.jpg"];
+    //_ccGameField = [[CCSprite alloc] init];
     _ccGameField.anchorPoint = CGPointZero;
     _ccGameField.textureRect = CGRectMake(0, 0, field.fieldSize.width, field.fieldSize.height);
-    _ccGameField.position  = ccpAdd(field.position, self.origin);
+    //_ccGameField.position  = ccpAdd(field.position, self.origin);
+    _ccGameField.position  = field.position;
     _ccGameField.rotation = field.rotation;
     
+    //Test. TODO:remove
+    CCSprite * dot = [CCSprite spriteWithImageNamed:@"darkBlue_350_200.png"];
+    dot.textureRect = CGRectMake(0, 0, 1, 1);
+    dot.position = CGPointMake(250, 200);
+    [_ccGameField addChild:dot];
 }
 
 - (void)setupGameFieldPhysics{
@@ -145,7 +154,12 @@ int testCounter = 0;
 
 //Used for update logic data from Physics manager
 - (void) updateLogicDataFromUI:(CCTime) time{
-    
+
+    [_logic addFrame:[self getCurentFrame:time]];
+}
+
+-(UIFrame *)getCurentFrame:(CCTime) time
+{
     NSMutableArray * items = [[NSMutableArray alloc] init];
     
     for (int i=0; i<self.ccTanks.count; i++) {
@@ -163,12 +177,10 @@ int testCounter = 0;
     }
     
     UIFrame * frame = [[UIFrame alloc] initWithFrameTime:time AndDisplayItems:items];
-    [_logic addFrame:frame];
+    return frame;
 }
 
-
 - (void) updateUIDataFromLogic:(CCTime) time{
-    
     //handle events first
     [_logic handleEvents:time];
     
@@ -221,16 +233,24 @@ int testCounter = 0;
 
 }
 ----------------------------------------------------*/
-
+// -----------------------------------------------------------------------
+#pragma mark - GameLogicEvent - For Physics manager
+// -----------------------------------------------------------------------
 -(void) addUIItem:(UIItem *)item{
     [self.rootNode addChild:item];
     [_uiItems setObject:item forKey:@(item.itemID)];
+
+    //add frame data (with item start position) before add item
+    [_logic addFrame:[self getCurentFrame:[_logic getGameTime]]];
     ExEvent * event = [[ExEvent alloc] initWithTime:[_logic getGameTime] AndType:ExEventType_AddItem AndItem:item.logicItem];
     [_logic addEvent:event];
 
 }
 
 -(void) removeUIItem:(UIItem *)item{
+    //add frame data (with item last position) before remove item
+    [_logic addFrame:[self getCurentFrame:[_logic getGameTime]]];
+    
     [item removeFromParent];
     [_uiItems removeObjectForKey:@(item.itemID)];
     ExEvent * event = [[ExEvent alloc] initWithTime:[_logic getGameTime] AndType:ExEventType_RemoveItem AndItem:item.logicItem];
@@ -238,9 +258,14 @@ int testCounter = 0;
 
 }
 
+- (void)bulletExploded:(UIItem *)item{
+    ExEvent * event = [[ExEvent alloc] initWithTime:[_logic getGameTime] AndType:ExEventType_Explode AndItem:item.logicItem];
+    [_logic addEvent:event];
+
+}
+
 // -----------------------------------------------------------------------
-// -----------------------------------------------------------------------
-#pragma mark - For UI manager
+#pragma mark - GameLogicDelegate - For UI manager
 // -----------------------------------------------------------------------
 - (void)explodedAt:(CGPoint)position{
     CCSprite * expl = [CCSprite spriteWithImageNamed:@"explosion.png"];
@@ -252,10 +277,6 @@ int testCounter = 0;
     [expl runAction:[CCActionSequence actionWithArray:@[scaleAction, [CCActionRemove action]]]];
 }
 
-// -----------------------------------------------------------------------
-// -----------------------------------------------------------------------
-#pragma mark - GameLogicDelegate - For UI manager
-// -----------------------------------------------------------------------
 - (void)addedLogicDisplayItem:(LogicDisplayItem *)logicItem{
     UIItem * uiItem = [UIItemBuilder buildUIItem:logicItem];
     [self.rootNode addChild:uiItem];  //add to scene;
@@ -322,7 +343,7 @@ int testCounter = 0;
         if (theOther.userObjectType == CCUnitType_Tank) //bullet hit tank
         {
             //explode
-            [self.logic explodeAt:theOne.position];
+            [self bulletExploded:theOne];
             
             //update
             [theOther.logicItem.owner physicsCollisionWith:theOne.logicItem];

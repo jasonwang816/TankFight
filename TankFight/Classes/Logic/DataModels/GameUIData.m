@@ -20,21 +20,19 @@
     
     if (self){
         _startTime = startTime;
-        _framesData = [[NSMutableArray alloc] init];
-        _eventsData = [[NSMutableArray alloc] init];
-        _curDisplayPointer = 0;
-        _nextEventPointer = 0;
 
+        [self resetData];
     }
     
     return self;
 }
 
-//- (void)addFrame:(UIFrame *)frame
-//{
-//    [_framesData addObject:frame];
-////    NSLog(@"addFrame[%lu] : %@", (unsigned long)_framesData.count, frame);
-//}
+- (void)resetData{
+    _framesData = [[NSMutableArray alloc] init];
+    _eventsData = [[NSMutableArray alloc] init];
+    _curDisplayPointer = 0;  //for frames;
+    _nextEventPointer = 0;  //for events;    
+}
 
 - (NSArray *)getEventAtTime:(NSTimeInterval)time{
     

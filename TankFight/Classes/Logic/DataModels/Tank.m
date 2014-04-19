@@ -11,17 +11,6 @@
 
 @implementation Tank
 
-- (id)init
-{
-    self = [super init];
-    
-    if (self){
-
-    }
-    
-	return self;
-}
-
 - (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndName:(NSString *) name{
     
     self = [super init];
@@ -45,8 +34,8 @@
 {
     //bullet
     if (item.itemType == CCUnitType_Bullet) {
-        self.health -= 10;
-        NSLog(@"physicsCollisionWith: %@ hit by bullet. [health:%ld]", self.name, (long)self.health);
+        self.tankInfo.health -= 10;
+        NSLog(@"physicsCollisionWith: %@ hit by bullet. [health:%ld]", self.name, (long)self.tankInfo.health);
     }
     
     //other tank;

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DisplayItem.h"
+#import "ExTank.h"
 
 @class LogicDisplayItem;
 
@@ -15,7 +16,8 @@
 
 @property (nonatomic) NSString * name;
 @property (nonatomic) NSInteger level;
-@property (nonatomic) NSInteger health;
+
+@property (nonatomic) ExTank * tankInfo;
 
 @property (nonatomic) LogicDisplayItem * body;
 @property (nonatomic) LogicDisplayItem * cannon;

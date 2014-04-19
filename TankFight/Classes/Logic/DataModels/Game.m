@@ -44,8 +44,6 @@ GameState;
 	int _sendPacketNumber;
     
 	NSMutableDictionary *_players;
-	PlayerPosition _startingPlayerPosition;
-	PlayerPosition _activePlayerPosition;
     
 	BOOL _firstTime;
     NSDate * timeBaseline;
@@ -66,13 +64,13 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 		_players = [NSMutableDictionary dictionaryWithCapacity:4];
         
         [self resetData];
-        [self setupGameData];
 	}
 	return self;
 }
 
 - (void)resetData{
     syncedFramesCount = 0;
+    [self setupGameData];
 }
 
 - (void)dealloc
@@ -121,7 +119,7 @@ static NSUInteger nextUIItemID = 1; //start with 1.
     tank = [[Tank alloc] initWithPosition:visitorTankPosition AndAngle:90 AndName:@"visitor"];
     [_tanks addObject:tank];
     
-    //logicDisplayItems
+    //logicDisplayItems - for server;
     _logicDisplayItems = [[NSMutableDictionary alloc] init];
 }
 
@@ -165,8 +163,6 @@ static NSUInteger nextUIItemID = 1; //start with 1.
     [self.gameData.eventsData addObject:event];
     //TODO: send event to client
     
-    
-    
 }
 
 - (void)handleEvents:(NSTimeInterval)time{
@@ -180,6 +176,10 @@ static NSUInteger nextUIItemID = 1; //start with 1.
                     
                 case ExEventType_RemoveItem:
                     [self removeLogicDisplayItem:event.item];
+                    break;
+                    
+                case ExEventType_Explode:
+                    [self explodeAt:event.item.position];
                     break;
                     
                 default:
@@ -210,7 +210,7 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 	Player *player = [[Player alloc] init];
 	player.name = name;
 	player.peerID = _session.peerID;
-	player.position = PlayerPositionBottom;
+	player.screenPosition = 1;
 	[_players setObject:player forKey:player.peerID];
     
 	// Add a Player object for each client.
@@ -221,12 +221,12 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 		player.peerID = peerID;
 		[_players setObject:player forKey:player.peerID];
         
-		if (index == 0)
-			player.position = ([clients count] == 1) ? PlayerPositionTop : PlayerPositionLeft;
-		else if (index == 1)
-			player.position = PlayerPositionTop;
-		else
-			player.position = PlayerPositionRight;
+//		if (index == 0)
+//			player.position = ([clients count] == 1) ? PlayerPositionTop : PlayerPositionLeft;
+//		else if (index == 1)
+//			player.position = PlayerPositionTop;
+//		else
+//			player.position = PlayerPositionRight;
         
 		index++;
 	}
@@ -259,13 +259,13 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 	Player *player = [[Player alloc] init];
 	player.name = NSLocalizedString(@"You", @"Single player mode, name of user (bottom player)");
 	player.peerID = @"1";
-	player.position = PlayerPositionBottom;
+	player.screenPosition = 1;
 	[_players setObject:player forKey:player.peerID];
     
 	player = [[Player alloc] init];
 	player.name = NSLocalizedString(@"Ray", @"Single player mode, name of left player");
 	player.peerID = @"2";
-	player.position = PlayerPositionLeft;
+	player.screenPosition = 1;
 	[_players setObject:player forKey:player.peerID];
     
     

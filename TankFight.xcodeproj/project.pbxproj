@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D4FECFB1901EB2A003A5DFA /* healthBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D4FECF91901EB2A003A5DFA /* healthBar.png */; };
+		2D4FECFC1901EB2A003A5DFA /* healthBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D4FECFA1901EB2A003A5DFA /* healthBar@2x.png */; };
+		2D4FECFF19022AAF003A5DFA /* ExGameInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4FECFE19022AAF003A5DFA /* ExGameInfo.m */; };
+		2D4FED021902309B003A5DFA /* StaticData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4FED011902309B003A5DFA /* StaticData.m */; };
 		2DBA6A7B18F89491003D14DE /* HostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA6A7018F89491003D14DE /* HostViewController.xib */; };
 		2DBA6A7C18F89491003D14DE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA6A7218F89491003D14DE /* InfoPlist.strings */; };
 		2DBA6A7D18F89491003D14DE /* JoinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA6A7418F89491003D14DE /* JoinViewController.xib */; };
@@ -320,6 +324,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2D4FECF91901EB2A003A5DFA /* healthBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = healthBar.png; sourceTree = "<group>"; };
+		2D4FECFA1901EB2A003A5DFA /* healthBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "healthBar@2x.png"; sourceTree = "<group>"; };
+		2D4FECFD19022AAF003A5DFA /* ExGameInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExGameInfo.h; path = Classes/Logic/DataModels/ExGameInfo.h; sourceTree = "<group>"; };
+		2D4FECFE19022AAF003A5DFA /* ExGameInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExGameInfo.m; path = Classes/Logic/DataModels/ExGameInfo.m; sourceTree = "<group>"; };
+		2D4FED001902309B003A5DFA /* StaticData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StaticData.h; path = Classes/Logic/DataModels/StaticData.h; sourceTree = "<group>"; };
+		2D4FED011902309B003A5DFA /* StaticData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StaticData.m; path = Classes/Logic/DataModels/StaticData.m; sourceTree = "<group>"; };
 		2DBA6A7118F89491003D14DE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = TankFight/en.lproj/HostViewController.xib; sourceTree = "<group>"; };
 		2DBA6A7318F89491003D14DE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = TankFight/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2DBA6A7518F89491003D14DE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = TankFight/en.lproj/JoinViewController.xib; sourceTree = "<group>"; };
@@ -968,6 +978,8 @@
 				2DF6F08918F8579F0057147D /* GameField.m */,
 				2DF6F08C18F8579F0057147D /* Tank.h */,
 				2DF6F08D18F8579F0057147D /* Tank.m */,
+				2D4FED001902309B003A5DFA /* StaticData.h */,
+				2D4FED011902309B003A5DFA /* StaticData.m */,
 			);
 			name = Logic;
 			sourceTree = "<group>";
@@ -985,6 +997,8 @@
 				2DBA6BD918FC8334003D14DE /* ExItem.m */,
 				2DCC5FC918FDAEC20050C17C /* ExEvent.h */,
 				2DCC5FCA18FDAEC20050C17C /* ExEvent.m */,
+				2D4FECFD19022AAF003A5DFA /* ExGameInfo.h */,
+				2D4FECFE19022AAF003A5DFA /* ExGameInfo.m */,
 			);
 			name = ExchangeData;
 			sourceTree = "<group>";
@@ -1924,6 +1938,8 @@
 		2DBE8A9D18D25A1A003701E4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				2D4FECF91901EB2A003A5DFA /* healthBar.png */,
+				2D4FECFA1901EB2A003A5DFA /* healthBar@2x.png */,
 				2DF6F06918F73F120057147D /* explosion.png */,
 				6A2EF0F818F2711A0023885F /* field.jpg */,
 				6ACCF56A18EFF5A70056D9F7 /* bullet.png */,
@@ -2126,10 +2142,12 @@
 				2DBA6B5518F8A979003D14DE /* Default@2x.png in Resources */,
 				2DBA6BC718F8A979003D14DE /* TableViewBorder.png in Resources */,
 				2DBA6B2D18F8A979003D14DE /* Back@2x.png in Resources */,
+				2D4FECFC1901EB2A003A5DFA /* healthBar@2x.png in Resources */,
 				2DBE881F18D25213003701E4 /* iTunesArtwork in Resources */,
 				2DBA6B3218F8A979003D14DE /* CellBackground.png in Resources */,
 				2DBA6BA518F8A979003D14DE /* NextRoundButtonPressed.png in Resources */,
 				2DBA6B9B18F8A979003D14DE /* Logo Joker.png in Resources */,
+				2D4FECFB1901EB2A003A5DFA /* healthBar.png in Resources */,
 				2DBE881A18D25213003701E4 /* Icon-Spotlight-iOS7.png in Resources */,
 				2DBE880E18D25213003701E4 /* Icon-76@2x.png in Resources */,
 				2DBA6B5218F8A979003D14DE /* Darken.png in Resources */,
@@ -2263,6 +2281,7 @@
 				2DBE890D18D25214003701E4 /* CCDirectorIOS.m in Sources */,
 				2DBE88E418D25214003701E4 /* CCSpriteFrameCache.m in Sources */,
 				2DBE89A318D25215003701E4 /* mach_timing.c in Sources */,
+				2D4FED021902309B003A5DFA /* StaticData.m in Sources */,
 				2DBE898718D25215003701E4 /* ALListener.m in Sources */,
 				2DBE886018D25214003701E4 /* ccFPSImages.m in Sources */,
 				2DBE893718D25215003701E4 /* ccUtils.c in Sources */,
@@ -2289,6 +2308,7 @@
 				2DF6F08F18F8579F0057147D /* GameField.m in Sources */,
 				2DBE888B18D25214003701E4 /* CCParallaxNode.m in Sources */,
 				2DBE89F318D25215003701E4 /* ray2.c in Sources */,
+				2D4FECFF19022AAF003A5DFA /* ExGameInfo.m in Sources */,
 				2DBE896F18D25215003701E4 /* OALAudioTracks.m in Sources */,
 				2DBE896C18D25215003701E4 /* OALAudioTrackNotifications.m in Sources */,
 				2DBE89F118D25215003701E4 /* quaternion.c in Sources */,

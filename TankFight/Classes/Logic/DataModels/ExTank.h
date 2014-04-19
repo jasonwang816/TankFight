@@ -12,9 +12,14 @@
 
 @interface ExTank : NSObject
 
-//@property (nonatomic) ExItem * body;
-//@property (nonatomic) ExItem * cannon;
-//@property (nonatomic) ExItem * radarLaser;
+//exchangable data
+@property (nonatomic) NSInteger health;
+@property (nonatomic) CGFloat attackLevel;
+@property (nonatomic) CGFloat defenceLevel;
+@property (nonatomic) CGFloat speedLevel;
+@property (nonatomic) CGFloat bulletLevel;
+@property (nonatomic) CGFloat radarLevel;
+@property (nonatomic) NSInteger colorID;
 
 //- (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndType:(CCUnitType)type AndOwner:(Tank *)owner;
 

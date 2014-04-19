@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ExGameInfo.h"
 
 @class UIFrame;
 @class ExEvent;
@@ -16,12 +17,13 @@
 @property (nonatomic) NSTimeInterval startTime;
 @property (nonatomic) NSMutableArray * framesData;
 @property (nonatomic) NSMutableArray * eventsData;
+@property (nonatomic) ExGameInfo * gameInfo;
 
 @property (nonatomic) long curDisplayPointer;
 @property (nonatomic) long nextEventPointer;
 
 - (id)initWithStartTime:(NSTimeInterval)startTime;
-//- (void)addFrame:(UIFrame *)frame;
+- (void)resetData;
 
 - (UIFrame *)getFrameAtTime:(NSTimeInterval)time;
 - (NSArray *)getEventAtTime:(NSTimeInterval)time;

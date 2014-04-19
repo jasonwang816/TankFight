@@ -47,6 +47,10 @@
     [backButton setTarget:self selector:@selector(onBackClicked:)];
     [self addChild:backButton];
     
+    textLabel = [CCLabelTTF labelWithString:@"." fontName:@"Helvetica" fontSize:20];
+    textLabel.position =  ccp(250,200);
+    [self addChild:textLabel];
+    
     textLabel = [CCLabelTTF labelWithString:@"test" fontName:@"Helvetica" fontSize:20];
     textLabel.position =  ccp(255,60);
     [self addChild:textLabel];
@@ -70,9 +74,9 @@
     CGPoint touchLocation = [touch locationInNode:self];
     
     //scan test
-    [physicsManager.ccTanks[0] scan:160];
+    //[physicsManager.ccTanks[0] scan:160];
     //Fire test
-    //[uiManager.ccTankHome fireAt:touchLocation]; return;
+    //[physicsManager.ccTanks[0] fireAt:touchLocation]; return;
     //move test
     [physicsManager.ccTanks[0] moveTo:touchLocation];
     
@@ -82,7 +86,7 @@
 }
 
 -(void)fireAT{
-    [physicsManager.ccTanks[0] fireAt:CGPointMake(400, 200)];
+    [physicsManager.ccTanks[0] fireAt:CGPointMake(250, 200)];
 }
 
 // -----------------------------------------------------------------------
@@ -166,9 +170,9 @@
     
     if (game.isServer) {
         [CCDirector sharedDirector].contentScaleFactor = 1;
-        physicsManager = [[DisplayManager alloc] initWithGameLogic:game AtOrigin:CGPointZero WithPhysics:YES];
+        physicsManager = [[DisplayManager alloc] initWithGameLogic:game AtOrigin:CGPointMake(0, 320) WithPhysics:YES];
         [self addChild:physicsManager.rootNode];        
-        displayOrigin = CGPointMake(500, 0);
+        //displayOrigin = CGPointMake(500, 0);
         
     }
     
