@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "GameField.h"
 
-@interface ExGameInfo : NSObject
+@interface ExGameInfo : NSObject<NSCoding>
 
 @property (nonatomic) GameField * field;
 @property (nonatomic) NSMutableDictionary * players;

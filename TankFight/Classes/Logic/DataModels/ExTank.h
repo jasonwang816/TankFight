@@ -10,7 +10,7 @@
 #import "Constants.h"
 #import "ExItem.h"
 
-@interface ExTank : NSObject
+@interface ExTank : NSObject<NSCoding>
 
 //exchangable data
 @property (nonatomic) NSString * name;

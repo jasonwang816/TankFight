@@ -377,7 +377,7 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 		if (player != nil)
 		{
 			[self.gameInfo.players removeObjectForKey:peerID];
-            
+            //TODO:clientDidDisconnect
 			if (_state != GameStateWaitingForSignIn)
 			{
 				// Tell the other clients that this one is now disconnected.
@@ -494,7 +494,7 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 				{
 					_state = GameStateWaitingForReady;
                     
-					Packet *packet = [PacketServerReady packetWithPlayers:self.gameInfo.players];
+					Packet *packet = [PacketServerReady packetWithGameInfo:self.gameInfo];
 					[self sendPacketToAllClients:packet];
 				}
 			}
@@ -534,7 +534,8 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 		case PacketTypeServerReady:
 			if (_state == GameStateWaitingForReady)
 			{
-				self.gameInfo.players = ((PacketServerReady *)packet).players;
+                //TODO: all the info can be replaced?????
+				self.gameInfo = ((PacketServerReady *)packet).gameInfo;
 //				[self changeRelativePositionsOfPlayers];
                 
 				Packet *packet = [Packet packetWithType:PacketTypeClientReady];

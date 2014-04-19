@@ -10,6 +10,18 @@
 
 @implementation GameField
 
+-(void)encodeWithCoder:(NSCoder *)encoder{
+    [super encodeWithCoder:encoder];
+    [encoder encodeCGSize:self.fieldSize forKey:@"fieldSize"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if (self = [super initWithCoder:decoder]) {
+        self.fieldSize = [decoder decodeCGSizeForKey:@"fieldSize"];
+    }
+    return self;
+}
+
 - (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndSize:(CGSize) size{
     
     self = [self initWithPosition:pos AndAngle:angle AndType:CCUnitType_Field AndOwner:nil];

@@ -1,10 +1,11 @@
 
 #import "Packet.h"
+#import "ExGameInfo.h"
 
 @interface PacketServerReady : Packet
 
-@property (nonatomic, strong) NSMutableDictionary *players;
+@property (nonatomic, strong) ExGameInfo *gameInfo;
 
-+ (id)packetWithPlayers:(NSMutableDictionary *)players;
++ (id)packetWithGameInfo:(ExGameInfo *)info;
 
 @end

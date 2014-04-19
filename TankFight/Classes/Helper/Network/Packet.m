@@ -123,55 +123,6 @@ const size_t PACKET_HEADER_SIZE = 10;
 	// base class does nothing
 }
 
-- (void)addCards:(NSMutableDictionary *)cards toPayload:(NSMutableData *)data
-{
-	[cards enumerateKeysAndObjectsUsingBlock:^(id key, NSArray *array, BOOL *stop)
-	{
-		[data rw_appendString:key];
-		[data rw_appendInt8:[array count]];
-
-		for (int t = 0; t < [array count]; ++t)
-		{
-//			Card *card = [array objectAtIndex:t];
-//			[data rw_appendInt8:card.suit];
-//			[data rw_appendInt8:card.value];
-		}
-	}];
-}
-
-+ (NSMutableDictionary *)cardsFromData:(NSData *)data atOffset:(size_t) offset
-{
-	size_t count;
-
-	NSMutableDictionary *cards = [NSMutableDictionary dictionaryWithCapacity:4];
-
-	while (offset < [data length])
-	{
-		NSString *peerID = [data rw_stringAtOffset:offset bytesRead:&count];
-		offset += count;
-
-		int numberOfCards = [data rw_int8AtOffset:offset];
-		offset += 1;
-
-		NSMutableArray *array = [NSMutableArray arrayWithCapacity:numberOfCards];
-
-		for (int t = 0; t < numberOfCards; ++t)
-		{
-			int suit = [data rw_int8AtOffset:offset];
-			offset += 1;
-
-			int value = [data rw_int8AtOffset:offset];
-			offset += 1;
-			
-//			Card *card = [[Card alloc] initWithSuit:suit value:value];
-//			[array addObject:card];
-		}
-
-		[cards setObject:array forKey:peerID];
-	}
-
-	return cards;
-}
 
 - (NSString *)description
 {

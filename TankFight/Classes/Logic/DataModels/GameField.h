@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "DisplayItem.h"
 
-@interface GameField : LogicDisplayItem
+@interface GameField : LogicDisplayItem<NSCoding>
 
 @property (nonatomic) CGSize fieldSize;
 

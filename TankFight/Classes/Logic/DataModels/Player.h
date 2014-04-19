@@ -1,5 +1,5 @@
 
-@interface Player : NSObject
+@interface Player : NSObject<NSCoding>
 
 //exchangable data
 @property (nonatomic, assign) NSInteger screenPosition;
@@ -8,6 +8,7 @@
 @property (nonatomic, copy) NSString *peerID;
 @property (nonatomic) CGPoint viewPortOrigin;
 @property (nonatomic) NSMutableDictionary * tanks;
+
 
 @property (nonatomic, assign) BOOL receivedResponse;
 @property (nonatomic, assign) int lastPacketNumberReceived;

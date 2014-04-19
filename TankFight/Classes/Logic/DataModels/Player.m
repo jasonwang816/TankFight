@@ -5,15 +5,35 @@
 
 @implementation Player
 
-//@synthesize position = _position;  //SinglePlayer: always 1
-//@synthesize name = _name;
-//@synthesize peerID = _peerID;
-//@synthesize receivedResponse = _receivedResponse;
-//@synthesize lastPacketNumberReceived = _lastPacketNumberReceived;
-//@synthesize gamesWon = _gamesWon;
+-(void)encodeWithCoder:(NSCoder *)encoder{
+    [encoder encodeInteger:self.screenPosition forKey:@"screenPosition"];
+    [encoder encodeInteger:self.team forKey:@"team"];
+    [encoder encodeObject:self.name forKey:@"name"];
+    [encoder encodeObject:self.peerID forKey:@"peerID"];
+    [encoder encodeCGPoint:self.viewPortOrigin forKey:@"viewPortOrigin"];
+    [encoder encodeObject:self.tanks forKey:@"tanks"];
+    //TODO:other properties:
+//    @property (nonatomic, assign) BOOL receivedResponse;
+//    @property (nonatomic, assign) int lastPacketNumberReceived;
+//    @property (nonatomic, assign) int gamesWon;
+}
 
-//@synthesize closedCards = _closedCards;
-//@synthesize openCards = _openCards;
+//[encoder en
+//self. = [decoder de
+//:self. f
+//F
+- (id)initWithCoder:(NSCoder *)decoder {
+    if (self = [super init]) {
+        self.screenPosition = [decoder decodeIntegerForKey:@"screenPosition"];
+        self.team = [decoder decodeIntegerForKey:@"team"];
+        self.name = [decoder decodeObjectForKey:@"name"];
+        self.peerID = [decoder decodeObjectForKey:@"peerID"];
+        self.viewPortOrigin = [decoder decodeCGPointForKey:@"viewPortOrigin"];
+        self.tanks = [decoder decodeObjectForKey:@"tanks"];
+        
+    }
+    return self;
+}
 
 - (id)init
 {
@@ -21,8 +41,7 @@
 	{
 		_lastPacketNumberReceived = -1;
         _tanks = [[NSMutableDictionary alloc] init];
-//		_closedCards = [[Stack alloc] init];
-//		_openCards = [[Stack alloc] init];
+
 	}
 	return self;
 }

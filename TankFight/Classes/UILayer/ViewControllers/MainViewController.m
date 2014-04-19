@@ -151,6 +151,7 @@
 	{
 		[self performExitAnimationWithCompletionBlock:^(BOOL finished)
 		{
+            _gameInfo = [self buildSingleGameInfo];
 			[self startGameWithBlock:^(Game *game)
 			{
 				[game startSinglePlayerGame];
@@ -199,7 +200,7 @@
     
     GameScene * startScene = (GameScene *)[[CCDirector sharedDirector] runningScene];
     Game *game = [[Game alloc] init];
-    game.gameInfo = [self buildSingleGameInfo]; //test
+    game.gameInfo = _gameInfo; //test
     startScene.game = game;
     game.delegate = startScene;
     block(game);
@@ -268,7 +269,7 @@
 	{
         
         player = [[Player alloc] init];
-        player.name = NSLocalizedString(@"other", @"Single player mode, name of other player");
+        player.name = peerID ;
         player.peerID = peerID;
         player.screenPosition = index;
         
@@ -309,7 +310,7 @@
 	[self dismissViewControllerAnimated:NO completion:^
 	{
 		_performAnimations = YES;
-
+        _gameInfo = [self buildServerGameWithSession:session AndClients:clients];
 		[self startGameWithBlock:^(Game *game)
 		{
 			[game startServerGameWithSession:session playerName:name clients:clients];
@@ -349,7 +350,7 @@
 	[self dismissViewControllerAnimated:NO completion:^
 	{
 		_performAnimations = YES;
-
+        _gameInfo = nil;
 		[self startGameWithBlock:^(Game *game)
 		{
 			[game startClientGameWithSession:session playerName:name server:peerID];

@@ -10,6 +10,29 @@
 #import "Constants.h"
 
 @implementation Tank
+-(void)encodeWithCoder:(NSCoder *)encoder{
+
+    [encoder encodeInteger:self.tankID forKey:@"tankID"];
+    [encoder encodeObject:self.tankInfo forKey:@"tankInfo"];
+    
+    //TODO:other properties:
+
+}
+
+//[encoder en
+//self. = [decoder de
+//:self. f
+//F
+- (id)initWithCoder:(NSCoder *)decoder {
+    if (self = [super init]) {
+
+        self.tankID = [decoder decodeIntegerForKey:@"tankID"];
+        self.tankInfo = [decoder decodeObjectForKey:@"tankInfo"];
+        
+    }
+    return self;
+}
+
 
 - (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndInfo:(ExTank *) info{
     

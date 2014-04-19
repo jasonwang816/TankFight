@@ -12,11 +12,9 @@
 
 @class LogicDisplayItem;
 
-@interface Tank :NSObject
-
-//@property (nonatomic) NSString * name;
+@interface Tank :NSObject<NSCoding>
+//exchange data
 @property (nonatomic) NSInteger tankID;
-
 @property (nonatomic) ExTank * tankInfo;
 
 @property (nonatomic) LogicDisplayItem * body;
