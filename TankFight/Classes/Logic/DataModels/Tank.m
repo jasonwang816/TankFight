@@ -11,14 +11,12 @@
 
 @implementation Tank
 
-- (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndName:(NSString *) name{
+- (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndInfo:(ExTank *) info{
     
     self = [super init];
     
     if (self){
-        _level = 0;
-        _health = 100;        
-        self.name = name;
+        self.tankInfo = info;
         
         self.body = [[LogicDisplayItem alloc] initWithPosition:pos AndAngle:angle AndType:CCUnitType_Tank AndOwner:self];
         self.cannon = [[LogicDisplayItem alloc] initWithPosition:pos AndAngle:angle AndType:CCUnitType_Cannon AndOwner:self];
@@ -35,12 +33,12 @@
     //bullet
     if (item.itemType == CCUnitType_Bullet) {
         self.tankInfo.health -= 10;
-        NSLog(@"physicsCollisionWith: %@ hit by bullet. [health:%ld]", self.name, (long)self.tankInfo.health);
+        NSLog(@"physicsCollisionWith: %@ hit by bullet. [health:%ld]", self.tankInfo.name, (long)self.tankInfo.health);
     }
     
     //other tank;
     if (item.itemType == CCUnitType_Tank) {
-        NSLog(@"physicsCollisionWith: %@ Found : %@", self.name, item.owner.name);
+        NSLog(@"physicsCollisionWith: %@ Found : %@", self.tankInfo.name, item.owner.tankInfo.name);
     }
     //update intel
 }

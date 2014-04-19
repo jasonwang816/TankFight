@@ -20,6 +20,7 @@
 	if ((self = [super init]))
 	{
 		_lastPacketNumberReceived = -1;
+        _tanks = [[NSMutableDictionary alloc] init];
 //		_closedCards = [[Stack alloc] init];
 //		_openCards = [[Stack alloc] init];
 	}

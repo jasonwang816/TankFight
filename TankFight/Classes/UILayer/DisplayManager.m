@@ -52,10 +52,14 @@ int testCounter = 0;
         //uitanks
         UITank * uiTank;
         self.ccTanks = [[NSMutableArray alloc] init];
-        for (int i=0; i<_logic.tanks.count; i++) {
-            
-            uiTank = [[UITank alloc] initWithTank:_logic.tanks[i] ByManager:self];
-            [_ccTanks addObject:uiTank];
+        
+        for (id playerID in _logic.gameInfo.players) {
+            Player * player = [_logic.gameInfo.players objectForKey:playerID];
+            for (id tankID in player.tanks) {
+                Tank * tank = [player.tanks objectForKey:tankID];
+                uiTank = [[UITank alloc] initWithTank:tank ByManager:self];
+                [_ccTanks addObject:uiTank];                
+            }
         }
         
         //uiitems
@@ -67,7 +71,7 @@ int testCounter = 0;
 - (void)setupGameFieldSprites{
     
     //game field
-    GameField * field = _logic.gameField;
+    GameField * field = _logic.gameInfo.field;
     _ccGameField = [CCSprite spriteWithImageNamed:@"field.jpg"];
     //_ccGameField = [[CCSprite alloc] init];
     _ccGameField.anchorPoint = CGPointZero;
@@ -90,7 +94,7 @@ int testCounter = 0;
     _physicsWorld.debugDraw = YES;
     _physicsWorld.collisionDelegate = self;
     
-    GameField * field = _logic.gameField;
+    GameField * field = _logic.gameInfo.field;
     UIItem * edge;
     edge = [self buildEdgeAtPoint:CGPointMake(0, 0) WithSize:CGSizeMake(field.fieldSize.width, 0.1)];  //top
     [_ccGameField addChild:edge];
@@ -164,7 +168,7 @@ int testCounter = 0;
     
     for (int i=0; i<self.ccTanks.count; i++) {
         UITank * uiTank = (UITank *)self.ccTanks[i];
-        [uiTank syncToLogicTank:_logic.tanks[i]];
+        [uiTank syncToLogicTank:uiTank.tank];
         [items addObject:uiTank.ccBody.logicItem];
         [items addObject:uiTank.ccCannon.logicItem];
         [items addObject:uiTank.ccLaser.logicItem];

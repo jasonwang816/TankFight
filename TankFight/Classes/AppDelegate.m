@@ -46,10 +46,8 @@
 	[CCDirector sharedDirector].contentScaleFactor = 2;
     
     
-    //    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    //	self.viewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
-    //	self.window.rootViewController = self.viewController;
-    //	[self.window makeKeyAndVisible];
+    //prevent the screen from dimming
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
     
 	return YES;
 }

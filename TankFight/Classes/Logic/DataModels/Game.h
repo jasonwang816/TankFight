@@ -12,6 +12,7 @@
 #import "Tank.h"
 #import "UIFrame.h"
 #import "ExEvent.h"
+#import "ExGameInfo.h"
 
 @class Game;
 @class GameUIData;
@@ -45,14 +46,14 @@ static const CGPoint visitorTankPosition = (CGPoint){350, 200};
 @interface Game : NSObject <GKSessionDelegate>
 
 @property (nonatomic, assign) BOOL isServer;
-//@property (nonatomic) GameLogic * logic;
+
 @property (nonatomic, weak) id <GameDelegate> delegate;
 @property (nonatomic, weak) id <GameLogicDelegate> logicDelegate;
 @property (nonatomic) NSTimeInterval * updateInterval;
 
 @property (nonatomic) GameUIData * gameData;
-@property (nonatomic) GameField * gameField;
-@property (nonatomic) NSMutableArray * tanks;
+@property (nonatomic) ExGameInfo * gameInfo;
+
 @property (nonatomic) NSMutableDictionary * logicDisplayItems;
 
 //Logic

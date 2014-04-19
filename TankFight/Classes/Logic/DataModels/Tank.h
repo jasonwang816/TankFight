@@ -14,8 +14,8 @@
 
 @interface Tank :NSObject
 
-@property (nonatomic) NSString * name;
-@property (nonatomic) NSInteger level;
+//@property (nonatomic) NSString * name;
+@property (nonatomic) NSInteger tankID;
 
 @property (nonatomic) ExTank * tankInfo;
 
@@ -23,7 +23,7 @@
 @property (nonatomic) LogicDisplayItem * cannon;
 @property (nonatomic) LogicDisplayItem * radarLaser;
 
-- (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndName:(NSString *) name;
+- (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndInfo:(ExTank *) info;
 
 - (void)physicsCollisionWith:(LogicDisplayItem *)item;
 

@@ -24,7 +24,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"%@ %@", _tank.name, [self formatTypeToString:_itemType]];
+    return [NSString stringWithFormat:@"%@ %@", _tank.tankInfo.name, [self formatTypeToString:_itemType]];
 }
 
 - (NSString*)formatTypeToString:(CCUnitType)formatType {

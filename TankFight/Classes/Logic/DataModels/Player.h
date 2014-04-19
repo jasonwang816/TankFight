@@ -3,6 +3,7 @@
 
 //exchangable data
 @property (nonatomic, assign) NSInteger screenPosition;
+@property (nonatomic, assign) NSInteger team;  //0 or 1
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *peerID;
 @property (nonatomic) CGPoint viewPortOrigin;

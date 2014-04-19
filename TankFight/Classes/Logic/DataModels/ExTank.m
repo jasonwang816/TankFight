@@ -10,5 +10,22 @@
 
 @implementation ExTank
 
+- (id)initWithName:(NSString *)name
+{
+    self = [super init];
+    
+    if (self){
+        self.name = name;
+        self.health = 100;
+        self.attackLevel = 1;
+        self.defenceLevel = 1;
+        self.speedLevel = 1;
+        self.bulletLevel = 1;
+        self.radarLevel = 1;
+        self.colorID = 0;
+    }
+    
+    return self;
+}
 
 @end

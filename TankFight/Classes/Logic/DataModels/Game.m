@@ -43,8 +43,6 @@ GameState;
 	NSString *_localPlayerName;
 	int _sendPacketNumber;
     
-	NSMutableDictionary *_players;
-    
 	BOOL _firstTime;
     NSDate * timeBaseline;
     long syncedFramesCount;
@@ -61,8 +59,6 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 {
 	if ((self = [super init]))
 	{
-		_players = [NSMutableDictionary dictionaryWithCapacity:4];
-        
         [self resetData];
 	}
 	return self;
@@ -105,19 +101,6 @@ static NSUInteger nextUIItemID = 1; //start with 1.
     timeBaseline = [NSDate dateWithTimeIntervalSinceReferenceDate:419492022];  //millisecons since 2014-4-17
 
     _gameData = [[GameUIData alloc] initWithStartTime:[[NSDate date] timeIntervalSince1970]];
-    
-    //game field
-    _gameField = [[GameField alloc] initWithPosition:CGPointMake(0, 0) AndAngle:0 AndSize:CGSizeMake(480, 320)];
-    
-    //tanks
-    Tank * tank;
-    self.tanks = [[NSMutableArray alloc] init];
-    
-    tank = [[Tank alloc] initWithPosition:homeTankPosition AndAngle:90 AndName:@"Home"];
-    [_tanks addObject:tank];
-    
-    tank = [[Tank alloc] initWithPosition:visitorTankPosition AndAngle:90 AndName:@"visitor"];
-    [_tanks addObject:tank];
     
     //logicDisplayItems - for server;
     _logicDisplayItems = [[NSMutableDictionary alloc] init];
@@ -206,30 +189,6 @@ static NSUInteger nextUIItemID = 1; //start with 1.
     
 	[self.delegate gameWaitingForClientsReady:self];
     
-	// Create the Player object for the server.
-	Player *player = [[Player alloc] init];
-	player.name = name;
-	player.peerID = _session.peerID;
-	player.screenPosition = 1;
-	[_players setObject:player forKey:player.peerID];
-    
-	// Add a Player object for each client.
-	int index = 0;
-	for (NSString *peerID in clients)
-	{
-		Player *player = [[Player alloc] init];
-		player.peerID = peerID;
-		[_players setObject:player forKey:player.peerID];
-        
-//		if (index == 0)
-//			player.position = ([clients count] == 1) ? PlayerPositionTop : PlayerPositionLeft;
-//		else if (index == 1)
-//			player.position = PlayerPositionTop;
-//		else
-//			player.position = PlayerPositionRight;
-        
-		index++;
-	}
     
 	Packet *packet = [Packet packetWithType:PacketTypeSignInRequest];
 	[self sendPacketToAllClients:packet];
@@ -255,19 +214,6 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 - (void)startSinglePlayerGame
 {
 	self.isServer = YES;
-    
-	Player *player = [[Player alloc] init];
-	player.name = NSLocalizedString(@"You", @"Single player mode, name of user (bottom player)");
-	player.peerID = @"1";
-	player.screenPosition = 1;
-	[_players setObject:player forKey:player.peerID];
-    
-	player = [[Player alloc] init];
-	player.name = NSLocalizedString(@"Ray", @"Single player mode, name of left player");
-	player.peerID = @"2";
-	player.screenPosition = 1;
-	[_players setObject:player forKey:player.peerID];
-    
     
 	[self beginGame];
 }
@@ -328,12 +274,6 @@ static NSUInteger nextUIItemID = 1; //start with 1.
     
 	[self.delegate gameDidBeginNewRound:self];
     
-	[_players enumerateKeysAndObjectsUsingBlock:^(id key, Player *player, BOOL *stop)
-     {
-//         [player.closedCards removeAllCards];
-//         [player.openCards removeAllCards];
-     }];
-    
 	if (self.isServer)
 	{
 		[self dealCards];
@@ -380,7 +320,7 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 	if (packet.packetNumber != -1)
 		packet.packetNumber = _sendPacketNumber++;
     
-	[_players enumerateKeysAndObjectsUsingBlock:^(id key, Player *obj, BOOL *stop)
+	[self.gameInfo.players enumerateKeysAndObjectsUsingBlock:^(id key, Player *obj, BOOL *stop)
      {
          obj.receivedResponse = [_session.peerID isEqualToString:obj.peerID];
      }];
@@ -415,12 +355,12 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 
 - (Player *)playerWithPeerID:(NSString *)peerID
 {
-	return [_players objectForKey:peerID];
+	return [self.gameInfo.players objectForKey:peerID];
 }
 
 - (BOOL)receivedResponsesFromAllPlayers
 {
-	for (NSString *peerID in _players)
+	for (NSString *peerID in self.gameInfo.players)
 	{
 		Player *player = [self playerWithPeerID:peerID];
 		if (!player.receivedResponse)
@@ -436,7 +376,7 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 		Player *player = [self playerWithPeerID:peerID];
 		if (player != nil)
 		{
-			[_players removeObjectForKey:peerID];
+			[self.gameInfo.players removeObjectForKey:peerID];
             
 			if (_state != GameStateWaitingForSignIn)
 			{
@@ -554,7 +494,7 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 				{
 					_state = GameStateWaitingForReady;
                     
-					Packet *packet = [PacketServerReady packetWithPlayers:_players];
+					Packet *packet = [PacketServerReady packetWithPlayers:self.gameInfo.players];
 					[self sendPacketToAllClients:packet];
 				}
 			}
@@ -594,7 +534,7 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 		case PacketTypeServerReady:
 			if (_state == GameStateWaitingForReady)
 			{
-				_players = ((PacketServerReady *)packet).players;
+				self.gameInfo.players = ((PacketServerReady *)packet).players;
 //				[self changeRelativePositionsOfPlayers];
                 
 				Packet *packet = [Packet packetWithType:PacketTypeClientReady];

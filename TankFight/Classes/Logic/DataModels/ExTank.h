@@ -13,6 +13,7 @@
 @interface ExTank : NSObject
 
 //exchangable data
+@property (nonatomic) NSString * name;
 @property (nonatomic) NSInteger health;
 @property (nonatomic) CGFloat attackLevel;
 @property (nonatomic) CGFloat defenceLevel;
@@ -21,6 +22,6 @@
 @property (nonatomic) CGFloat radarLevel;
 @property (nonatomic) NSInteger colorID;
 
-//- (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndType:(CCUnitType)type AndOwner:(Tank *)owner;
+- (id)initWithName:(NSString *)name;
 
 @end

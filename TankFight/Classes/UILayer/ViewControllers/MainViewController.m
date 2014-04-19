@@ -199,15 +199,93 @@
     
     GameScene * startScene = (GameScene *)[[CCDirector sharedDirector] runningScene];
     Game *game = [[Game alloc] init];
+    game.gameInfo = [self buildSingleGameInfo]; //test
     startScene.game = game;
     game.delegate = startScene;
     block(game);
 }
 
-- (ExGameInfo *)buildGameInfo{
-    ExGameInfo * info = [[ExGameInfo alloc] init];
-    info.field = 
+- (ExTank *)getTestTankInfo:(NSString *)name{
+    ExTank * tank = [[ExTank alloc] initWithName:name];
+    return tank;
 }
+
+- (ExGameInfo *)buildSingleGameInfo{
+    ExGameInfo * info = [[ExGameInfo alloc] init];
+    
+    info.field = [[GameField alloc] initWithPosition:CGPointMake(0, 0) AndAngle:0 AndSize:CGSizeMake(480, 320)];
+    
+    Player *player = [[Player alloc] init];
+	player.name = NSLocalizedString(@"You", @"Single player mode, name of user");
+	player.peerID = @"1";
+	player.screenPosition = 1;
+    player.team = 0;
+    
+    NSInteger tankID = 0;
+    Tank * tank = [[Tank alloc] initWithPosition:homeTankPosition AndAngle:90 AndInfo:[self getTestTankInfo:[NSString stringWithFormat:@"%@%d", player.name, tankID]]];
+    tank.tankID = tankID;
+    [player.tanks setObject:tank forKey:@(tank.tankID)];
+    
+	[info.players setObject:player forKey:player.peerID];
+    
+	player = [[Player alloc] init];
+	player.name = NSLocalizedString(@"Ray", @"Single player mode, name of other player");
+	player.peerID = @"2";
+	player.screenPosition = 1;
+    
+    tankID = 1;
+    tank = [[Tank alloc] initWithPosition:visitorTankPosition AndAngle:90 AndInfo:[self getTestTankInfo:[NSString stringWithFormat:@"%@%d", player.name, tankID]]];
+    tank.tankID = tankID;
+    [player.tanks setObject:tank forKey:@(tank.tankID)];
+    
+	[info.players setObject:player forKey:player.peerID];
+    
+    return info;
+}
+
+- (ExGameInfo *)buildServerGameWithSession:(GKSession *)session AndClients:(NSArray *)clients
+{
+    ExGameInfo * info = [[ExGameInfo alloc] init];
+    
+    info.field = [[GameField alloc] initWithPosition:CGPointMake(0, 0) AndAngle:0 AndSize:CGSizeMake(480, 320)];
+    
+    Player *player = [[Player alloc] init];
+	player.name = NSLocalizedString(@"You", @"Single player mode, name of user");
+	player.peerID = session.peerID;;
+	player.screenPosition = 1;
+    player.team = 0;
+    
+    NSInteger tankID = 0;
+    Tank * tank = [[Tank alloc] initWithPosition:homeTankPosition AndAngle:90 AndInfo:[self getTestTankInfo:[NSString stringWithFormat:@"%@%d", player.name, tankID]]];
+    tank.tankID = tankID;
+    [player.tanks setObject:tank forKey:@(tank.tankID)];
+    
+	[info.players setObject:player forKey:player.peerID];
+    
+	// Add a Player object for each client.
+	int index = 1;
+	for (NSString *peerID in clients)
+	{
+        
+        player = [[Player alloc] init];
+        player.name = NSLocalizedString(@"other", @"Single player mode, name of other player");
+        player.peerID = peerID;
+        player.screenPosition = index;
+        
+        tankID = index;
+        tank = [[Tank alloc] initWithPosition:visitorTankPosition AndAngle:90 AndInfo:[self getTestTankInfo:[NSString stringWithFormat:@"%@%d", player.name, tankID]]];
+        tank.tankID = tankID;
+        [player.tanks setObject:tank forKey:@(tank.tankID)];
+        
+        [info.players setObject:player forKey:player.peerID];
+        
+		index++;
+	}
+    
+    return info;
+
+}
+
 
 #pragma mark - HostViewControllerDelegate
 

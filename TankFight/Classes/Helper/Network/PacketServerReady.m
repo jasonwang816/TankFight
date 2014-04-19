@@ -5,8 +5,6 @@
 
 @implementation PacketServerReady
 
-@synthesize players = _players;
-
 + (id)packetWithPlayers:(NSMutableDictionary *)players
 {
 	return [[[self class] alloc] initWithPlayers:players];

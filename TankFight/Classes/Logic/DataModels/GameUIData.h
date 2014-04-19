@@ -17,7 +17,6 @@
 @property (nonatomic) NSTimeInterval startTime;
 @property (nonatomic) NSMutableArray * framesData;
 @property (nonatomic) NSMutableArray * eventsData;
-@property (nonatomic) ExGameInfo * gameInfo;
 
 @property (nonatomic) long curDisplayPointer;
 @property (nonatomic) long nextEventPointer;

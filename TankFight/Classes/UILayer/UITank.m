@@ -60,11 +60,11 @@
 - (void)setupPhysics{
     
     _ccBody.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _ccBody.contentSize} cornerRadius:0]; // 1
-    _ccBody.physicsBody.collisionGroup = self.tank.name;
+    _ccBody.physicsBody.collisionGroup = self.tank.tankInfo.name;
     _ccBody.physicsBody.collisionType = CT_TankBody;
 
     _ccLaser.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, _ccLaser.contentSize} cornerRadius:0]; // 1
-    _ccLaser.physicsBody.collisionGroup = self.tank.name;
+    _ccLaser.physicsBody.collisionGroup = self.tank.tankInfo.name;
     _ccLaser.physicsBody.collisionType = CT_RadarBody;
     
 }
@@ -146,7 +146,7 @@
         UIItem * bullet = [UIItemBuilder buildUIItem:logicBullet];
         
         bullet.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, bullet.contentSize} cornerRadius:0]; // 1
-        bullet.physicsBody.collisionGroup = self.tank.name; //TODO: shoot itself?
+        bullet.physicsBody.collisionGroup = self.tank.tankInfo.name; //TODO: shoot itself?
         bullet.physicsBody.collisionType = CT_BulletBody;
         
         [self.manager addUIItem:bullet];

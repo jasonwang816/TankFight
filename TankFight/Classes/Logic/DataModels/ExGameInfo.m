@@ -10,4 +10,15 @@
 
 @implementation ExGameInfo
 
+- (id)init
+{
+    self = [super init];
+    
+    if (self){
+        _players = [[NSMutableDictionary alloc] init];
+    }
+    
+    return self;
+}
+
 @end
