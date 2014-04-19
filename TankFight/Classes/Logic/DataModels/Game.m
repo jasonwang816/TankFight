@@ -376,8 +376,9 @@ static NSUInteger nextUIItemID = 1; //start with 1.
 		Player *player = [self playerWithPeerID:peerID];
 		if (player != nil)
 		{
-			[self.gameInfo.players removeObjectForKey:peerID];
-            //TODO:clientDidDisconnect
+            //TODO:clientDidDisconnect. cannot remove player.!!!!!!!
+			//[self.gameInfo.players removeObjectForKey:peerID];
+            
 			if (_state != GameStateWaitingForSignIn)
 			{
 				// Tell the other clients that this one is now disconnected.

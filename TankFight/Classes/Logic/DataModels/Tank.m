@@ -14,7 +14,10 @@
 
     [encoder encodeInteger:self.tankID forKey:@"tankID"];
     [encoder encodeObject:self.tankInfo forKey:@"tankInfo"];
-    
+    [encoder encodeObject:self.body forKey:@"body"];
+    [encoder encodeObject:self.cannon forKey:@"cannon"];
+    [encoder encodeObject:self.radarLaser forKey:@"radarLaser"];
+
     //TODO:other properties:
 
 }
@@ -28,6 +31,9 @@
 
         self.tankID = [decoder decodeIntegerForKey:@"tankID"];
         self.tankInfo = [decoder decodeObjectForKey:@"tankInfo"];
+        self.body = [decoder decodeObjectForKey:@"body"];
+        self.cannon = [decoder decodeObjectForKey:@"cannon"];
+        self.radarLaser = [decoder decodeObjectForKey:@"radarLaser"];
         
     }
     return self;
