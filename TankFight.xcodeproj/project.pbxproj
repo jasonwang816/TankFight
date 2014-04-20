@@ -311,6 +311,10 @@
 		6ACCF56E18EFF5A70056D9F7 /* cannon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ACCF56B18EFF5A70056D9F7 /* cannon.png */; };
 		6ACCF56F18EFF5A70056D9F7 /* radar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6ACCF56C18EFF5A70056D9F7 /* radar.png */; };
 		A9533B9C18E2B53600DC9B18 /* darkBlue_350_200.png in Resources */ = {isa = PBXBuildFile; fileRef = A9533B9B18E2B53600DC9B18 /* darkBlue_350_200.png */; };
+		A9F3C168190336EC007DD213 /* gameAIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F3C167190336EC007DD213 /* gameAIManager.m */; };
+		A9F3C16D19033A5A007DD213 /* GameIntel.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F3C16C19033A5A007DD213 /* GameIntel.m */; };
+		A9F3C17019033EE2007DD213 /* TankIntel.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F3C16F19033EE2007DD213 /* TankIntel.m */; };
+		A9F3C17319034CA0007DD213 /* TankAction.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F3C17219034CA0007DD213 /* TankAction.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -887,6 +891,14 @@
 		6ACCF56B18EFF5A70056D9F7 /* cannon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cannon.png; sourceTree = "<group>"; };
 		6ACCF56C18EFF5A70056D9F7 /* radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = radar.png; sourceTree = "<group>"; };
 		A9533B9B18E2B53600DC9B18 /* darkBlue_350_200.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = darkBlue_350_200.png; sourceTree = "<group>"; };
+		A9F3C166190336EC007DD213 /* gameAIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gameAIManager.h; path = Classes/AI/gameAIManager.h; sourceTree = "<group>"; };
+		A9F3C167190336EC007DD213 /* gameAIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = gameAIManager.m; path = Classes/AI/gameAIManager.m; sourceTree = "<group>"; };
+		A9F3C16B19033A5A007DD213 /* GameIntel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameIntel.h; path = Classes/AI/GameIntel.h; sourceTree = "<group>"; };
+		A9F3C16C19033A5A007DD213 /* GameIntel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameIntel.m; path = Classes/AI/GameIntel.m; sourceTree = "<group>"; };
+		A9F3C16E19033EE2007DD213 /* TankIntel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TankIntel.h; path = Classes/AI/TankIntel.h; sourceTree = "<group>"; };
+		A9F3C16F19033EE2007DD213 /* TankIntel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TankIntel.m; path = Classes/AI/TankIntel.m; sourceTree = "<group>"; };
+		A9F3C17119034CA0007DD213 /* TankAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TankAction.h; path = Classes/AI/TankAction.h; sourceTree = "<group>"; };
+		A9F3C17219034CA0007DD213 /* TankAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TankAction.m; path = Classes/AI/TankAction.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1874,6 +1886,7 @@
 		2DBE8A8718D25216003701E4 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A9F3C169190336F9007DD213 /* GameAI */,
 				2DBE8AB618D37C3C003701E4 /* UILayer */,
 				2DBE8A9C18D25A02003701E4 /* Helper */,
 				2DBE8A9B18D259F4003701E4 /* Logic */,
@@ -2010,6 +2023,29 @@
 			);
 			name = Network;
 			path = Classes/Helper/Network;
+			sourceTree = "<group>";
+		};
+		A9F3C169190336F9007DD213 /* GameAI */ = {
+			isa = PBXGroup;
+			children = (
+				A9F3C16A190337E7007DD213 /* DataModels */,
+				A9F3C166190336EC007DD213 /* gameAIManager.h */,
+				A9F3C167190336EC007DD213 /* gameAIManager.m */,
+			);
+			name = GameAI;
+			sourceTree = "<group>";
+		};
+		A9F3C16A190337E7007DD213 /* DataModels */ = {
+			isa = PBXGroup;
+			children = (
+				A9F3C16B19033A5A007DD213 /* GameIntel.h */,
+				A9F3C16C19033A5A007DD213 /* GameIntel.m */,
+				A9F3C16E19033EE2007DD213 /* TankIntel.h */,
+				A9F3C16F19033EE2007DD213 /* TankIntel.m */,
+				A9F3C17119034CA0007DD213 /* TankAction.h */,
+				A9F3C17219034CA0007DD213 /* TankAction.m */,
+			);
+			name = DataModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2193,6 +2229,7 @@
 				2DCC5FCB18FDAEC20050C17C /* ExEvent.m in Sources */,
 				2DBE885618D25214003701E4 /* CCDirector.m in Sources */,
 				2DBE89C118D25215003701E4 /* CCScrollView.m in Sources */,
+				A9F3C17319034CA0007DD213 /* TankAction.m in Sources */,
 				2DBE88B418D25214003701E4 /* CCResponder.m in Sources */,
 				2DC4947518F86D8900046B8F /* PeerCell.m in Sources */,
 				6A15AD8A18FE3EC900ED9D72 /* PacketFrames.m in Sources */,
@@ -2201,6 +2238,7 @@
 				2DBE88DE18D25214003701E4 /* CCSpriteBatchNode.m in Sources */,
 				2DBE890218D25214003701E4 /* CCTransition.m in Sources */,
 				2DBE88E118D25214003701E4 /* CCSpriteFrame.m in Sources */,
+				A9F3C168190336EC007DD213 /* gameAIManager.m in Sources */,
 				2DBE887518D25214003701E4 /* CCNodeColor.m in Sources */,
 				2DBE894E18D25215003701E4 /* TransformUtils.m in Sources */,
 				2DBE88EF18D25214003701E4 /* CCTextureCache.m in Sources */,
@@ -2331,6 +2369,8 @@
 				2DBE891718D25214003701E4 /* UITouch+CC.m in Sources */,
 				2DBA6BD718FC8200003D14DE /* ExTank.m in Sources */,
 				2DBE89F518D25215003701E4 /* utility.c in Sources */,
+				A9F3C16D19033A5A007DD213 /* GameIntel.m in Sources */,
+				A9F3C17019033EE2007DD213 /* TankIntel.m in Sources */,
 				2DBE895418D25215003701E4 /* ZipUtils.m in Sources */,
 				2DBE896518D25215003701E4 /* OALUtilityActions.m in Sources */,
 				2DBE891018D25214003701E4 /* CCES2Renderer.m in Sources */,

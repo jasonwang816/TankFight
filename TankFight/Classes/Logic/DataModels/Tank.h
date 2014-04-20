@@ -15,15 +15,20 @@
 @interface Tank :NSObject<NSCoding>
 //exchange data
 @property (nonatomic) NSInteger tankID;
+@property (nonatomic) NSInteger colorID;
 @property (nonatomic) ExTank * tankInfo;
 
 @property (nonatomic) LogicDisplayItem * body;
 @property (nonatomic) LogicDisplayItem * cannon;
 @property (nonatomic) LogicDisplayItem * radarLaser;
 
-- (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndInfo:(ExTank *) info;
+- (id)initWithInfo:(ExTank *) info;
 
 - (void)physicsCollisionWith:(LogicDisplayItem *)item;
+
+//- (LogicDisplayItem *)body;
+//- (LogicDisplayItem *)cannon;
+//- (LogicDisplayItem *)radarLaser;
 
 - (CGFloat)movingSpeed;
 - (CGFloat)turningSpeed;

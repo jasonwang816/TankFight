@@ -15,38 +15,48 @@
 
     [encoder encodeInteger:self.tankID forKey:@"tankID"];
     [encoder encodeObject:self.tankInfo forKey:@"tankInfo"];
-    [encoder encodeObject:self.body forKey:@"body"];
-    [encoder encodeObject:self.cannon forKey:@"cannon"];
-    [encoder encodeObject:self.radarLaser forKey:@"radarLaser"];
+    [encoder encodeInteger:self.colorID forKey:@"colorID"];
+//    [encoder encodeObject:self.body forKey:@"body"];
+//    [encoder encodeObject:self.cannon forKey:@"cannon"];
+//    [encoder encodeObject:self.radarLaser forKey:@"radarLaser"];
 
     //TODO:other properties:
 
 }
 
-//[encoder en
-//self. = [decoder de
-//:self. f
-//F
+
 - (id)initWithCoder:(NSCoder *)decoder {
     if (self = [super init]) {
 
         self.tankID = [decoder decodeIntegerForKey:@"tankID"];
         self.tankInfo = [decoder decodeObjectForKey:@"tankInfo"];
-        self.body = [decoder decodeObjectForKey:@"body"];
-        self.cannon = [decoder decodeObjectForKey:@"cannon"];
-        self.radarLaser = [decoder decodeObjectForKey:@"radarLaser"];
+        self.colorID = [decoder decodeIntegerForKey:@"colorID"];
+//        self.body = [decoder decodeObjectForKey:@"body"];
+//        self.cannon = [decoder decodeObjectForKey:@"cannon"];
+//        self.radarLaser = [decoder decodeObjectForKey:@"radarLaser"];
+        
+        CGPoint pos = self.tankInfo.position;
+        CGFloat angle = self.tankInfo.rotation;
+        
+        self.body = [[LogicDisplayItem alloc] initWithPosition:pos AndAngle:angle AndType:CCUnitType_Tank AndOwner:self];
+        self.cannon = [[LogicDisplayItem alloc] initWithPosition:pos AndAngle:angle AndType:CCUnitType_Cannon AndOwner:self];
+        self.radarLaser = [[LogicDisplayItem alloc] initWithPosition:pos AndAngle:angle AndType:CCUnitType_RadarLaser AndOwner:self];
         
     }
     return self;
 }
 
-
-- (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndInfo:(ExTank *) info{
+//TODO: change to (id)initWithInfo:(ExTank *) info{
+- (id)initWithInfo:(ExTank *) info{
     
     self = [super init];
     
     if (self){
+        //TODO: tankid, colorid;
         self.tankInfo = info;
+        
+        CGPoint pos = self.tankInfo.position;
+        CGFloat angle = self.tankInfo.rotation;
         
         self.body = [[LogicDisplayItem alloc] initWithPosition:pos AndAngle:angle AndType:CCUnitType_Tank AndOwner:self];
         self.cannon = [[LogicDisplayItem alloc] initWithPosition:pos AndAngle:angle AndType:CCUnitType_Cannon AndOwner:self];
@@ -63,7 +73,7 @@
     //bullet
     if (item.itemType == CCUnitType_Bullet) {
         self.tankInfo.health -= 10;
-        NSLog(@"physicsCollisionWith: %@ hit by bullet. [health:%ld]", self.tankInfo.name, (long)self.tankInfo.health);
+        NSLog(@"physicsCollisionWith: %@ hit by bullet. [health:%f]", self.tankInfo.name, self.tankInfo.health);
     }
     
     //other tank;

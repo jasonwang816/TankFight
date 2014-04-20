@@ -12,35 +12,37 @@
 
 -(void)encodeWithCoder:(NSCoder *)encoder{
     [encoder encodeObject:self.name forKey:@"name"];
-    [encoder encodeInteger:self.health forKey:@"health"];
+    [encoder encodeInteger:self.team forKey:@"team"];
+    [encoder encodeFloat:self.health forKey:@"health"];
+    [encoder encodeCGPoint:self.position forKey:@"position"];
+    [encoder encodeDouble:self.rotation forKey:@"rotation"];
     [encoder encodeObject:self.specLevel forKey:@"specLevel"];
-    [encoder encodeInteger:self.colorID forKey:@"colorID"];
     
 }
 
-//[encoder en
-//self. = [decoder de
-//:self. f
-//F
 - (id)initWithCoder:(NSCoder *)decoder {
     if (self = [super init]) {
         self.name = [decoder decodeObjectForKey:@"name"];
-        self.health = [decoder decodeIntegerForKey:@"health"];
+        self.health = [decoder decodeFloatForKey:@"health"];
+        self.team = [decoder decodeIntegerForKey:@"team"];
+        self.position = [decoder decodeCGPointForKey:@"position"];
+        self.rotation = [decoder decodeDoubleForKey:@"rotation"];
         self.specLevel = [decoder decodeObjectForKey:@"specLevel"];
-        self.colorID = [decoder decodeIntegerForKey:@"colorID"];
 
     }
     return self;
 }
 
-- (id)initWithName:(NSString *)name
+- (id)initWithPosition:(CGPoint)pos AndAngle:(float)angle AndName:(NSString *)name AndTeam:(NSInteger)team
 {
     self = [super init];
     
     if (self){
         self.name = name;
+        self.team = team;
         self.health = 100;
-        self.colorID = 0;
+        self.position = pos;
+        self.rotation = angle;
         self.specLevel = [[NSMutableDictionary alloc] init];
     }
     

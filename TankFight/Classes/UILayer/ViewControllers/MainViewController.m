@@ -206,8 +206,9 @@
     block(game);
 }
 
-- (ExTank *)getTestTankInfo:(NSString *)name{
-    ExTank * tank = [[ExTank alloc] initWithName:name];
+- (ExTank *)getTestWithPosition:(CGPoint)pos AndAngle:(float)angle AndName:(NSString *)name AndTeam:(NSInteger)team
+{
+    ExTank * tank = [[ExTank alloc] initWithPosition:pos AndAngle:angle AndName:name AndTeam:team];
     return tank;
 }
 
@@ -223,7 +224,7 @@
     player.team = 0;
     
     NSInteger tankID = 0;
-    Tank * tank = [[Tank alloc] initWithPosition:homeTankPosition AndAngle:90 AndInfo:[self getTestTankInfo:[NSString stringWithFormat:@"%@%d", player.name, tankID]]];
+    Tank * tank = [[Tank alloc] initWithInfo:[self getTestWithPosition:homeTankPosition AndAngle:90 AndName:[NSString stringWithFormat:@"%@%d", player.name, tankID] AndTeam:player.team]];
     tank.tankID = tankID;
     [player.tanks setObject:tank forKey:@(tank.tankID)];
     
@@ -235,7 +236,7 @@
 	player.screenPosition = 1;
     
     tankID = 1;
-    tank = [[Tank alloc] initWithPosition:visitorTankPosition AndAngle:90 AndInfo:[self getTestTankInfo:[NSString stringWithFormat:@"%@%d", player.name, tankID]]];
+    tank = [[Tank alloc] initWithInfo:[self getTestWithPosition:visitorTankPosition AndAngle:90 AndName:[NSString stringWithFormat:@"%@%d", player.name, tankID] AndTeam:player.team]];
     tank.tankID = tankID;
     [player.tanks setObject:tank forKey:@(tank.tankID)];
     
@@ -257,7 +258,7 @@
     player.team = 0;
     
     NSInteger tankID = 0;
-    Tank * tank = [[Tank alloc] initWithPosition:homeTankPosition AndAngle:90 AndInfo:[self getTestTankInfo:[NSString stringWithFormat:@"%@%d", player.name, tankID]]];
+    Tank * tank = [[Tank alloc] initWithInfo:[self getTestWithPosition:homeTankPosition AndAngle:90 AndName:[NSString stringWithFormat:@"%@%d", player.name, tankID] AndTeam:player.team]];
     tank.tankID = tankID;
     [player.tanks setObject:tank forKey:@(tank.tankID)];
     
@@ -274,7 +275,7 @@
         player.screenPosition = index;
         
         tankID = index;
-        tank = [[Tank alloc] initWithPosition:visitorTankPosition AndAngle:90 AndInfo:[self getTestTankInfo:[NSString stringWithFormat:@"%@%d", player.name, tankID]]];
+        tank = [[Tank alloc] initWithInfo:[self getTestWithPosition:visitorTankPosition AndAngle:90 AndName:[NSString stringWithFormat:@"%@%d", player.name, tankID] AndTeam:player.team]];
         tank.tankID = tankID;
         [player.tanks setObject:tank forKey:@(tank.tankID)];
         

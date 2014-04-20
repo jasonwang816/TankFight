@@ -145,9 +145,11 @@
     [self.ccBody syncToLogicDisplayItem];
     [self.ccCannon syncToLogicDisplayItem];
     [self.ccLaser syncToLogicDisplayItem];
+    
+    logicTank.tankInfo.position = self.ccBody.position;
+    logicTank.tankInfo.rotation = self.ccBody.rotation;
    
 }
-
 
 - (void) syncFromLogicTank:(Tank *) logicTank{
     
