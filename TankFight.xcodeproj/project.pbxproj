@@ -11,6 +11,10 @@
 		2D4FECFC1901EB2A003A5DFA /* healthBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D4FECFA1901EB2A003A5DFA /* healthBar@2x.png */; };
 		2D4FECFF19022AAF003A5DFA /* ExGameInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4FECFE19022AAF003A5DFA /* ExGameInfo.m */; };
 		2D4FED021902309B003A5DFA /* StaticData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4FED011902309B003A5DFA /* StaticData.m */; };
+		2D4FED061904E481003A5DFA /* AIResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4FED051904E481003A5DFA /* AIResult.m */; };
+		2D4FED091904E86C003A5DFA /* BasicAI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4FED081904E86C003A5DFA /* BasicAI.m */; };
+		2D4FED0C1904F6CA003A5DFA /* GameAI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4FED0B1904F6CA003A5DFA /* GameAI.m */; };
+		2D4FED0F1904F734003A5DFA /* BasicAIProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4FED0E1904F734003A5DFA /* BasicAIProvider.m */; };
 		2DBA6A7B18F89491003D14DE /* HostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA6A7018F89491003D14DE /* HostViewController.xib */; };
 		2DBA6A7C18F89491003D14DE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA6A7218F89491003D14DE /* InfoPlist.strings */; };
 		2DBA6A7D18F89491003D14DE /* JoinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DBA6A7418F89491003D14DE /* JoinViewController.xib */; };
@@ -334,6 +338,14 @@
 		2D4FECFE19022AAF003A5DFA /* ExGameInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExGameInfo.m; path = Classes/Logic/DataModels/ExGameInfo.m; sourceTree = "<group>"; };
 		2D4FED001902309B003A5DFA /* StaticData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StaticData.h; path = Classes/Logic/DataModels/StaticData.h; sourceTree = "<group>"; };
 		2D4FED011902309B003A5DFA /* StaticData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StaticData.m; path = Classes/Logic/DataModels/StaticData.m; sourceTree = "<group>"; };
+		2D4FED041904E481003A5DFA /* AIResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIResult.h; path = Classes/AI/AIResult.h; sourceTree = "<group>"; };
+		2D4FED051904E481003A5DFA /* AIResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AIResult.m; path = Classes/AI/AIResult.m; sourceTree = "<group>"; };
+		2D4FED071904E86C003A5DFA /* BasicAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BasicAI.h; path = Classes/AI/AIs/BasicAI.h; sourceTree = "<group>"; };
+		2D4FED081904E86C003A5DFA /* BasicAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BasicAI.m; path = Classes/AI/AIs/BasicAI.m; sourceTree = "<group>"; };
+		2D4FED0A1904F6CA003A5DFA /* GameAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameAI.h; path = Classes/AI/GameAI.h; sourceTree = "<group>"; };
+		2D4FED0B1904F6CA003A5DFA /* GameAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameAI.m; path = Classes/AI/GameAI.m; sourceTree = "<group>"; };
+		2D4FED0D1904F734003A5DFA /* BasicAIProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BasicAIProvider.h; path = Classes/AI/AIs/BasicAIProvider.h; sourceTree = "<group>"; };
+		2D4FED0E1904F734003A5DFA /* BasicAIProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BasicAIProvider.m; path = Classes/AI/AIs/BasicAIProvider.m; sourceTree = "<group>"; };
 		2DBA6A7118F89491003D14DE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = TankFight/en.lproj/HostViewController.xib; sourceTree = "<group>"; };
 		2DBA6A7318F89491003D14DE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = TankFight/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2DBA6A7518F89491003D14DE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = TankFight/en.lproj/JoinViewController.xib; sourceTree = "<group>"; };
@@ -923,6 +935,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D4FED031904DFBF003A5DFA /* AIs */ = {
+			isa = PBXGroup;
+			children = (
+				2D4FED071904E86C003A5DFA /* BasicAI.h */,
+				2D4FED081904E86C003A5DFA /* BasicAI.m */,
+				2D4FED0D1904F734003A5DFA /* BasicAIProvider.h */,
+				2D4FED0E1904F734003A5DFA /* BasicAIProvider.m */,
+			);
+			name = AIs;
+			sourceTree = "<group>";
+		};
 		2DBA6A8618F8A978003D14DE /* UIImages */ = {
 			isa = PBXGroup;
 			children = (
@@ -2028,9 +2051,12 @@
 		A9F3C169190336F9007DD213 /* GameAI */ = {
 			isa = PBXGroup;
 			children = (
+				2D4FED031904DFBF003A5DFA /* AIs */,
 				A9F3C16A190337E7007DD213 /* DataModels */,
 				A9F3C166190336EC007DD213 /* gameAIManager.h */,
 				A9F3C167190336EC007DD213 /* gameAIManager.m */,
+				2D4FED0A1904F6CA003A5DFA /* GameAI.h */,
+				2D4FED0B1904F6CA003A5DFA /* GameAI.m */,
 			);
 			name = GameAI;
 			sourceTree = "<group>";
@@ -2044,6 +2070,8 @@
 				A9F3C16F19033EE2007DD213 /* TankIntel.m */,
 				A9F3C17119034CA0007DD213 /* TankAction.h */,
 				A9F3C17219034CA0007DD213 /* TankAction.m */,
+				2D4FED041904E481003A5DFA /* AIResult.h */,
+				2D4FED051904E481003A5DFA /* AIResult.m */,
 			);
 			name = DataModels;
 			sourceTree = "<group>";
@@ -2255,12 +2283,14 @@
 				2DBE889218D25214003701E4 /* CCParticleExamples.m in Sources */,
 				2DBE89C418D25215003701E4 /* CCSlider.m in Sources */,
 				2DF6F09018F8579F0057147D /* ItemInfo.m in Sources */,
+				2D4FED0F1904F734003A5DFA /* BasicAIProvider.m in Sources */,
 				2DBE88FF18D25214003701E4 /* CCTMXXMLParser.m in Sources */,
 				2DBE893F18D25215003701E4 /* CGPointExtension.m in Sources */,
 				2DBE89CA18D25215003701E4 /* CCTextField.m in Sources */,
 				2DBE893518D25215003701E4 /* CCProfiling.m in Sources */,
 				2DBE895C18D25215003701E4 /* OALAction.m in Sources */,
 				2DBE88F218D25214003701E4 /* CCTexturePVR.m in Sources */,
+				2D4FED0C1904F6CA003A5DFA /* GameAI.m in Sources */,
 				2DBE8A0118D25215003701E4 /* CCBAnimationManager.m in Sources */,
 				2DBE89E518D25215003701E4 /* mat4stack.c in Sources */,
 				2DF6F09E18F85F9D0057147D /* MainViewController.m in Sources */,
@@ -2287,6 +2317,7 @@
 				2DBE891418D25214003701E4 /* CCGLView.m in Sources */,
 				2DBE88D718D25214003701E4 /* CCSprite.m in Sources */,
 				2DBE883318D25213003701E4 /* CCActionInterval.m in Sources */,
+				2D4FED061904E481003A5DFA /* AIResult.m in Sources */,
 				2DBA6BCF18FC53A1003D14DE /* GameUIData.m in Sources */,
 				2DBE88A218D25214003701E4 /* CCPhysicsJoint.m in Sources */,
 				2DBE888018D25214003701E4 /* CCMotionStreak.m in Sources */,
@@ -2371,6 +2402,7 @@
 				2DBE89F518D25215003701E4 /* utility.c in Sources */,
 				A9F3C16D19033A5A007DD213 /* GameIntel.m in Sources */,
 				A9F3C17019033EE2007DD213 /* TankIntel.m in Sources */,
+				2D4FED091904E86C003A5DFA /* BasicAI.m in Sources */,
 				2DBE895418D25215003701E4 /* ZipUtils.m in Sources */,
 				2DBE896518D25215003701E4 /* OALUtilityActions.m in Sources */,
 				2DBE891018D25214003701E4 /* CCES2Renderer.m in Sources */,

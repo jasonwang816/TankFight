@@ -129,7 +129,11 @@ int testCounter = 0;
 // -----------------------------------------------------------------------
 //start game
 - (void)start{
-    
+    if (_isPhysicsEnable){ //server
+        for (UITank * tank in self.ccTanks) {
+            [tank runAI];
+        }
+    }
 }
 
 

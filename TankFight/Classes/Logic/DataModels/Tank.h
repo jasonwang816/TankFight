@@ -13,10 +13,12 @@
 @class LogicDisplayItem;
 
 @interface Tank :NSObject<NSCoding>
-//exchange data
+
+//exchangable data
 @property (nonatomic) NSInteger tankID;
 @property (nonatomic) NSInteger colorID;
 @property (nonatomic) ExTank * tankInfo;
+
 
 @property (nonatomic) LogicDisplayItem * body;
 @property (nonatomic) LogicDisplayItem * cannon;
@@ -25,10 +27,6 @@
 - (id)initWithInfo:(ExTank *) info;
 
 - (void)physicsCollisionWith:(LogicDisplayItem *)item;
-
-//- (LogicDisplayItem *)body;
-//- (LogicDisplayItem *)cannon;
-//- (LogicDisplayItem *)radarLaser;
 
 - (CGFloat)movingSpeed;
 - (CGFloat)turningSpeed;

@@ -74,11 +74,11 @@
     CGPoint touchLocation = [touch locationInNode:self];
     
     //scan test
-    //[physicsManager.ccTanks[0] scan:160];
+    //[physicsManager.ccTanks[1] scan:160];
     //Fire test
-    //[physicsManager.ccTanks[0] fireAt:touchLocation]; return;
+    //[physicsManager.ccTanks[1] fireAt:touchLocation]; return;
     //move test
-    [physicsManager.ccTanks[0] moveTo:touchLocation];
+    [physicsManager.ccTanks[1] moveTo:touchLocation];
     
     [NSTimer scheduledTimerWithTimeInterval:0.1 target:self  selector:@selector(fireAT) userInfo:nil repeats:NO];
 
@@ -86,7 +86,7 @@
 }
 
 -(void)fireAT{
-    [physicsManager.ccTanks[0] fireAt:CGPointMake(250, 200)];
+    [physicsManager.ccTanks[1] fireAt:CGPointMake(250, 200)];
 }
 
 // -----------------------------------------------------------------------
@@ -173,7 +173,7 @@
         physicsManager = [[DisplayManager alloc] initWithGameLogic:game AtOrigin:CGPointMake(0, 320) WithPhysics:YES];
         [self addChild:physicsManager.rootNode];        
         //displayOrigin = CGPointMake(500, 0);
-        
+        [physicsManager start];
     }
     
     uiManager = [[DisplayManager alloc] initWithGameLogic:game AtOrigin:displayOrigin WithPhysics:NO];

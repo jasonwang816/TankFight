@@ -17,8 +17,8 @@
 @class Game;
 @class GameUIData;
 
-static const CGPoint homeTankPosition = (CGPoint){100, 200};
-static const CGPoint visitorTankPosition = (CGPoint){350, 200};
+static const CGPoint homeTankPosition = (CGPoint){50, 100};
+static const CGPoint visitorTankPosition = (CGPoint){450, 300};
 
 @protocol GameLogicDelegate <NSObject>
 @optional

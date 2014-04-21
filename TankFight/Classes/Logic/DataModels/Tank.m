@@ -113,4 +113,9 @@
 }
 
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"[Tank : %@]", self.tankInfo];
+}
+
 @end

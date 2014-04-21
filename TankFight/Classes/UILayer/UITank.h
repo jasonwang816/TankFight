@@ -12,10 +12,11 @@
 #import "Tank.h"
 #import "DisplayManager.h"
 #import "UIItem.h"
+#import "gameAIManager.h"
 
 @class DisplayManager;
 
-@interface UITank : NSObject
+@interface UITank : NSObject<GameAIDelegate>
 
 @property (nonatomic, weak) DisplayManager * manager;
 @property (nonatomic, weak) Tank * tank;
@@ -24,6 +25,8 @@
 @property (nonatomic) UIItem * ccBody;
 @property (nonatomic) UIItem * ccCannon;
 @property (nonatomic) UIItem * ccLaser;
+
+@property (nonatomic) GameAI * gameAI;
 
 - (void)adjustRelatedSprites;
 
@@ -39,6 +42,9 @@
 - (void)moveTo:(CGPoint)locationPoint;
 - (void)fireAt:(CGPoint)locationPoint;
 - (void)scan:(CGFloat)angle;
+
+//AI
+- (void)runAI;
 @end
 
 

@@ -7,7 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AIResult.h"
+#import "GameIntel.h"
+#import "GameAI.h"
+#import "TankAction.h"
 
-@interface gameAIManager : NSObject
+@class GameAI;
+
+@interface GameAIManager : NSObject
+
++ (GameAIManager *)sharedInstance;
+
+- (GameAI *)getGameAI;
+
++ (CGPoint)getRandomPointInSize:(CGSize)size;
 
 @end

@@ -16,7 +16,9 @@
 
 //#import "Tank.h"
 
-@implementation UITank
+@implementation UITank{
+    NSTimer * aiTimer;
+}
 
 - (id)init
 {
@@ -29,14 +31,21 @@
 	return self;
 }
 
+- (void)dealloc{
+    [aiTimer invalidate];
+    aiTimer = nil;
+}
+
 - (id)initWithTank:(Tank *)tank ByManager:(DisplayManager *)manager{
     
     self = [super init];
     
     if (self){
         self.manager = manager;
-//        self.physicsWorld = manager.physicsWorld;
         self.tank = tank;
+        
+        self.gameAI = [[GameAIManager sharedInstance] getGameAI];
+        self.gameAI.delegate = self;
         
         _ccBody = [UIItemBuilder buildUIItem:tank.body];
         _ccCannon = [UIItemBuilder buildUIItem:tank.cannon];
@@ -52,6 +61,8 @@
         [ccGameField addChild:_ccCannon];
         [ccGameField addChild:_ccLaser];
         //[_ccBody schedule:@selector(adjustRelatedSprites) ];
+        
+        //[self runAI];
     }
     
     return self;
@@ -73,6 +84,50 @@
 - (void)adjustRelatedSprites{
     _ccCannon.position = _ccBody.position;
     _ccLaser.position = _ccBody.position;
+}
+
+
+- (void)runAI{
+    if (!aiTimer){
+        aiTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(getAIResult) userInfo:nil repeats:YES];
+    }
+}
+
+- (void)getAIResult{
+    if (_gameAI)
+    {
+        //TODO: prepare intel;
+        GameIntel * intel = [[GameIntel alloc] init];
+        intel.fieldSize = self.manager.logic.gameInfo.field.fieldSize;
+        
+        [_gameAI getActions:intel];
+    }
+}
+
+- (void)resultReady:(AIResult *)result{
+    if (result){
+        for (TankAction * action in result.actions) {
+            switch (action.actionType) {
+                case TankActionType_Move:
+                    [self moveTo:action.targetPosition];
+                    break;
+
+                case TankActionType_Scan:
+                    [self scanPosition:action.targetPosition];
+                    break;
+                    
+                case TankActionType_Fire:
+                    [self fireAt:action.targetPosition];
+                    break;
+
+                    
+                default:
+                    break;
+            }
+            NSLog(@"Tank:%@ resultReady :%@", self.tank, action);
+        }        
+    }
+
 }
 
 - (void)moveTo:(CGPoint)locationPoint{
@@ -110,6 +165,11 @@
     [_ccCannon stopAllActions];
     [_ccCannon runAction:[CCActionSequence actionWithArray:@[actionSpin, actionBlock]]];
     
+}
+
+- (void)scanPosition:(CGPoint)targetPoint{
+    CGFloat targetAngle = [self.manager findAngleAtLocation:_ccBody.position ToFacePoint:targetPoint];
+    [self scan:targetAngle];
 }
 
 //angle : degree

@@ -55,4 +55,9 @@
 
 //angle: degree - ccSprite rotation
 - (CGPoint)getPointFromPoint:(CGPoint)location AtAngle:(CGFloat)angle WithDistance:(CGFloat)distance;
+- (CGFloat) findAngleAtLocation:(CGPoint)location ToFacePoint:(CGPoint)target;
+
+
+//Game
+- (void)start;
 @end

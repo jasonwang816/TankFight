@@ -49,4 +49,9 @@
     return self;
 }
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"[Tank: %@; Pos: %@", self.name, NSStringFromCGPoint( self.position)];
+}
+
 @end
